@@ -1,0 +1,20 @@
+.inner {
+    display: flex;
+    height: 59px;
+    align-items: center;
+    padding: 0 20px 0 20px;
+}
+
+.header {
+    background-color: #fff;
+    max-width: 100%;
+}
+
+.logo {
+    margin-right: 40px;
+}
+
+.rightside {
+    display: flex;
+    margin-left: auto;
+}
