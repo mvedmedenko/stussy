@@ -1,0 +1,35 @@
+.topfooter {
+    display: flex;
+    justify-content: space-between;
+    height: 47px;
+    border-top: 1px solid rgb(245, 245, 245);
+    text-align: center;
+    align-items: center;
+    padding: 0 20px 0 20px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 130px 130px 130px;
+}
+
+.item {
+    list-style: none;
+}
+
+.item:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.social_media {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.social_media a:hover {
+    opacity: .5;
+    transition: .3s;
+}

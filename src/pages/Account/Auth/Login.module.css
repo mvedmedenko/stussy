@@ -1,0 +1,5 @@
+.inner {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-gap: 20px; /* Добавьте отступ между блоками, если необходимо */
+  }

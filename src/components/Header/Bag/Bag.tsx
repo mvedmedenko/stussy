@@ -1,10 +1,20 @@
 import { NavLink } from "react-router-dom";
 import s from "./Bag.module.css"
 
-const Bag = () => {
+type SearchPropsType = {
+    setActiveLink: (text: string) => void
+    activeLink: string
+}
+
+const Bag = (props: SearchPropsType) => {
+
+    const onClickHandler = (text: string) => {
+        props.setActiveLink(text)
+    }
+
     return (
-        <div>
-            <NavLink className={({ isActive }) => isActive ? s.active : ""} to="/bag">Bag</NavLink>
+        <div className={s.bag}>
+            <NavLink onClick={() => onClickHandler("bag")} className={props.activeLink === "bag" ? s.active : ""} to="/bag">BAG</NavLink>
         </div>
     )
 }

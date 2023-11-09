@@ -1,0 +1,16 @@
+.home {
+    display: flex;
+    justify-content: center;
+}
+
+.home img {
+    max-width: 1400px;
+    max-height: 100%;
+    padding: 20px;
+}
+
+.home img:hover {
+    opacity: .7;
+    transition: 1s;
+    image-orientation: from-image;
+}

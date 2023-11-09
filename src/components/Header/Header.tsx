@@ -11,30 +11,50 @@ import { useState } from "react";
 const Header = () => {
 
     const [activeLink, setActiveLink] = useState<string>("shop")
+    const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
 
     return (
-        <div className={s.header}>
-            <div className={s.inner}>
-                <div className={s.logo}>
-                    <Logo />
+        <header className={s.header}>
+            <div className={s.container}>
+                <div className={s.inner}>
+                    <div className={s.logo}>
+                        <Logo
+                            setActiveLink={setActiveLink}
+                        />
+                    </div>
+                    <div className={s.navbar}>
+                        <Navbar
+                            activeLink={activeLink}
+                            setActiveLink={setActiveLink}
+                            setMouseOnLink={setMouseOnLink}
+                            mouseOnLink={mouseOnLink}
+                        />
+                    </div>
+                    <div className={s.rightside}>
+                        <Search
+                            setActiveLink={setActiveLink}
+                            activeLink={activeLink}
+                        />
+                        <Bag setActiveLink={setActiveLink}
+                            activeLink={activeLink}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <Navbar setActiveLink={setActiveLink} />
-                </div>
-                <div className={s.rightside}>
-                    <Search />
-                    <Bag />
+                <div className={s.bottom_list}>
+                    {((mouseOnLink === null && activeLink === "shop") || mouseOnLink === "shop") && (
+                        <Shopnav />
+                    )}
+                    {((mouseOnLink === null && activeLink === "features") || mouseOnLink === "features") && (
+                        <Featuresnav />
+                    )}
+                    {((mouseOnLink === null && activeLink === "support") || mouseOnLink === "support") && (
+                        <Supportnav />
+                    )}
                 </div>
             </div>
-            <div>
-                {
-                    activeLink === "shop" ? <Shopnav />
-                        : (activeLink === "features" ? <Featuresnav />
-                            : (activeLink === "support" ? <Supportnav /> : null))
-                }
-            </div>
-        </div>
+        </header>
     );
 };
 
 export default Header;
+

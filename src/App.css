@@ -1,13 +1,21 @@
 body {
-  background-color: #818181;
+  background-color: #ffffff;
+  font-weight: 500;
 }
 
 a {
   text-decoration: none;
   color: black;
+  text-transform: uppercase;
 }
 
 ul {
   margin: 0;
   padding: 0;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0px 20px;
+  margin: auto;
 }
