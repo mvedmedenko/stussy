@@ -71,13 +71,15 @@ const Navbar = (props: ShopnavPropsType) => {
                             >SUPPORT
                             </NavLink>
                             <div>
-                                <img
-                                    className={props.activeLink && props.mouseOnLink === "support" ? s.arrow_active : s.arrow}
+                                {/* <img
+                                    className={((props.mouseOnLink === null && props.activeLink === "shop") || props.mouseOnLink === "shop") && (
+                                        s.arrow
+                                    )}
                                     width="7px"
                                     height="7px"
                                     src={arrow}
                                     alt="arrow"
-                                />
+                                /> */}
                             </div>
                         </li>
                     </ul>

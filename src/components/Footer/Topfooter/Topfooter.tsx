@@ -4,19 +4,23 @@ import instagram from "../../../assets/images/social-media/instagram.svg"
 import wechat from "../../../assets/images/social-media/wechat.svg"
 import weibo from "../../../assets/images/social-media/weibo.svg"
 import vimeo from "../../../assets/images/social-media/vimeo.svg"
-
-
-
+import Newsletter from "./Newsletter/Newsletter";
+import { useState } from "react";
 
 
 const Topfooter = () => {
+
+    const [isNewsLetter, setIsNewsLetter] = useState<boolean>(false)
+
+
     return (
         <div className={s.topfooter}>
+            {isNewsLetter ? <Newsletter setIsNewsLetter={isNewsLetter} /> : null}
             <div>
                 <ul className={s.list}>
-                    <li className={s.item}><div>NEWSLETTER</div></li>
+                    <li onClick={() => setIsNewsLetter(true)} className={s.item}><div>NEWSLETTER</div></li>
                     <li className={s.item}><NavLink to="/pages/customer-support">CONTACT</NavLink></li>
-                    <li className={s.item}><NavLink to="/account/login">ACCOUNT</NavLink></li>
+                    <li className={s.item}><NavLink to="/account">ACCOUNT</NavLink></li>
                 </ul>
             </div>
             <div>

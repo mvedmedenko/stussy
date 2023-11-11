@@ -1,0 +1,68 @@
+.inner {
+    display: grid;
+    /* grid-template-columns: 450px 450px; */
+    grid-template-columns: repeat(11, 1fr);;
+    grid-gap: 100px; /* Добавьте отступ между блоками, если необходимо */
+    padding: 80px 20px;
+}
+
+.login_box {
+  grid-column: span 5;
+}
+
+.register_box {
+  grid-column: span 5;
+}
+
+.form {
+  display: grid;
+}
+
+.title {
+  font-size: 21px;
+}
+
+.subtitle {
+  margin-top: 40px;
+  font-size: 12px;
+}
+
+.text {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.form input {
+  padding: 20px 0 10px;
+  border: none;
+  border-bottom: 1px solid rgb(117, 117, 117);
+  opacity: .7;
+
+}
+
+input::placeholder {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom-width: 0.0625rem;
+  border-color: rgb(117 117 117/var(--tw-border-opacity));
+  transition: border-color .25s cubic-bezier(.215,.61,.355,1);
+  width: 100%;
+}
+
+button {
+  max-width: 100%;
+  height: 45px;
+  font-weight: 700;
+  border: 1px solid #000000;
+}
+
+.register_btn {
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.proceed_btn {
+    margin-top: 40px;
+    cursor: pointer;
+}
