@@ -1,9 +1,11 @@
 .inner {
-    display: grid;
-    /* grid-template-columns: 450px 450px; */
-    grid-template-columns: repeat(11, 1fr);;
-    grid-gap: 100px; /* Добавьте отступ между блоками, если необходимо */
-    padding: 80px 20px;
+  display: grid;
+  /* grid-template-columns: 450px 450px; */
+  grid-template-columns: repeat(12, 1fr);;
+  gap: 138px;
+  padding-top: 31px;
+  min-height: 620px;
+  padding-bottom: 50px;
 }
 
 .login_box {
@@ -14,55 +16,135 @@
   grid-column: span 5;
 }
 
+.title {
+  font-size: 21px;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  font-size: 12px;
+  margin-bottom: 23px;
+}
+
+.text {
+  font-weight: 400;
+  margin-bottom: 23px;
+}
+
+.text span {
+  display: block;
+  margin-top: 2px;
+}
+
 .form {
   display: grid;
 }
 
-.title {
-  font-size: 21px;
-}
-
-.subtitle {
-  margin-top: 40px;
-  font-size: 12px;
-}
-
-.text {
-  margin-top: 20px;
-  font-size: 12px;
-}
-
-.form input {
-  padding: 20px 0 10px;
+.input {
+  padding: 20px 0px 12px;
   border: none;
-  border-bottom: 1px solid rgb(117, 117, 117);
-  opacity: .7;
-
+  border-bottom: 1px solid rgb(117, 117, 117, .9);
+  color: rgb(117, 117, 117, .9);
 }
 
-input::placeholder {
-  font-weight: 700;
-  font-size: 12px;
-  text-transform: uppercase;
-  border-bottom-width: 0.0625rem;
-  border-color: rgb(117 117 117/var(--tw-border-opacity));
-  transition: border-color .25s cubic-bezier(.215,.61,.355,1);
+.input:not(last-child) {
+  margin-bottom: 22px;
+}
+
+.input:hover {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0, 1);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.register button {
   width: 100%;
-}
-
-button {
-  max-width: 100%;
   height: 45px;
+  border: 1px solid #000;
+  font-size: 12px;
   font-weight: 700;
-  border: 1px solid #000000;
-}
-
-.register_btn {
-  margin-top: 40px;
+  background-color: #fff;
   cursor: pointer;
 }
 
+.form button:not(last-child) {
+  margin-bottom: 10px;
+}
+
+.form button:disabled {
+  background-color: rgb(229, 229, 229);
+  border-color: rgb(117, 117, 117);
+  color: rgb(117, 117, 117);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form button:hover {
+  background-color: rgb(117,117,117);
+  color: #fff;
+  border: 1px solid rgb(117,117,117);
+}
+
+.input_container {
+  display: grid;
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: 41%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 0.3s, font-size 0.3s;
+}
+
+input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.checkbox_label {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  position: relative;
+  border: 1px solid #000;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.checkbox::after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-color: transparent;
+}
+
+input[type="checkbox"]:checked + .checkbox::after {
+  background-color: #000;
+}
+
+.register_btn {
+  margin-top: 43px;
+}
+
 .proceed_btn {
-    margin-top: 40px;
-    cursor: pointer;
+  margin-top: 18px;
+}
+
+.proceed_btn:hover {
+  background-color: rgb(117,117,117);
+  color: #fff;
+  border: 1px solid rgb(117,117,117);
 }

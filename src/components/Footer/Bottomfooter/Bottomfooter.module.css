@@ -1,16 +1,21 @@
 .bottomfooter {
     display: flex;
     justify-content: space-between;
-    height: 47px;
-    border-top: 1px solid rgb(245, 245, 245);
-    text-align: center;
+    height: 46px;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0 20px;
+    border-top: 1px solid rgb(245, 245, 245);
 }
 
 .list {
     display: grid;
-    grid-template-columns: 130px 130px 130px;
+    grid-template-columns: 80px 57px 70px;
+    gap: 50px;
+    list-style: none;
+}
+
+.item {
+    list-style: none;
 }
 
 .item {

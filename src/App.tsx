@@ -1,4 +1,4 @@
-import './App.css';
+import s from "./App.module.css"
 import Header from './components/Header/Header';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
@@ -10,31 +10,48 @@ import Login from './pages/Account/Auth/Login/Login';
 import PrivateRoutes from './utils/PrivateRoutes';
 import Account from './pages/Account/Account';
 import Adress from './pages/Account/Adress';
-import { useSelector } from 'react-redux';
 import Register from './pages/Account/Auth/Register/Register';
+import { useSelector } from "react-redux";
+import Search from "./pages/Search/Search";
+import Accessibilitys from "./pages/Support/Accessibilitys/Accessibilitys";
+import Careers from "./pages/Support/Careers/Careers";
+import Legal from "./pages/Support/Legal/Legal";
+import Size from "./pages/Support/Size/Size";
+import Returns from "./pages/Support/Returns/Returns";
 
 
 function App() {
 
-    const isAuth = useSelector(state => state.authReducer.isAuth);
+    const isSearch = useSelector((state) => state.searchReducer.isSearch)
+
 
     return (
         <BrowserRouter>
-            <div>
-                <div>
+            <div className={s.inner}>
+                <div className={s.header}>
                     <Header />
+                </div>
+                <div className={s.main}>
+                    {isSearch ? <Search /> : null}
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/collections" element={<Shop />} />
                         <Route path="/blogs" element={<Features />} />
                         <Route path="/support" element={<Support />} />
                         <Route path="/account/login" element={<Login />} />
-                        <Route path="/account/register" element={<Register/>} />
-                        <Route element={<PrivateRoutes isAuth={isAuth}/>}>
-                            <Route path="/account" element={<Account/>} />
-                            <Route path="/account/adress" element={<Adress/>} />
+                        <Route path="/account/register" element={<Register />} />
+                        <Route path="/pages/accessibilitys" element={<Accessibilitys/>} />
+                        <Route path="/pages/careers" element={<Careers/>} />
+                        <Route path="/pages/legal" element={<Legal/>} />
+                        <Route path="/pages/size-guide" element={<Size/>} />
+                        <Route path="/pages/shipping-returns" element={<Returns/>} />
+                        <Route element={<PrivateRoutes />}>
+                            <Route path="/account" element={<Account />} />
+                            <Route path="/account/adress" element={<Adress />} />
                         </Route>
                     </Routes>
+                </div>
+                <div className={s.footer}>
                     <Footer />
                 </div>
             </div>

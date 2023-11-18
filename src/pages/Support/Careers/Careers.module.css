@@ -1,0 +1,15 @@
+.inner {
+    display: grid;
+    grid-template-columns: 690px;
+    padding-top: 41px;
+    font-weight: 400;
+}
+
+.title {
+    font-size: 21px;
+    margin-bottom: 40px;
+  }
+
+.text {
+    font-style: italic;
+}

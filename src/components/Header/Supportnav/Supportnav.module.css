@@ -6,12 +6,12 @@
     list-style: none;
 }
 
-.item a {
-    opacity: .5;
+.item {
+    color: rgb(0, 0, 0, .5);
 }
 
-.item a:hover {
-    opacity: 1;
+.item:hover {
+    color: rgb(0, 0, 0, 1);
     text-decoration: underline;
     font-weight: 700;
 }
@@ -21,8 +21,7 @@
 }
 
 .active {
-    color: #000000;
+    color: rgb(0, 0, 0, 1);
     font-weight: 700;
     text-decoration: underline;
-    opacity: 1;
 }

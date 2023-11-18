@@ -1,12 +1,13 @@
 .home {
     display: flex;
     justify-content: center;
+    max-height: 614px;
 }
 
 .home img {
     max-width: 1400px;
-    max-height: 100%;
-    padding: 20px;
+    max-height: 574px;
+    padding: 20px 20px 19px 20px;
 }
 
 .home img:hover {

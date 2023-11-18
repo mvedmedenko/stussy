@@ -1,0 +1,48 @@
+.inner {
+    display: grid;
+    grid-template-columns: minmax(0px, 690px);
+    padding-top: 41px;
+    font-weight: 400;
+}
+
+.title {
+    font-size: 21px;
+    margin-bottom: 40px;
+  }
+
+  .text {
+    line-height: 17px;
+  }
+
+  .text:not(:last-child) {
+    margin-bottom: 27px;
+  }
+
+  .download {
+    margin-top: 18px;
+  }
+
+  .download a {
+    text-transform: none;
+    text-decoration: underline;
+  }
+
+  .subtitle {
+    font-weight: 700;
+    margin-top: 19px;
+  }
+
+  .email {
+    text-transform: none;
+    text-decoration: underline;
+  }
+
+  .email_box {
+    margin-top: 12px;
+    line-height: 16px;
+  }
+
+  .address {
+    margin-top: 29px;
+    line-height: 17px;
+  }

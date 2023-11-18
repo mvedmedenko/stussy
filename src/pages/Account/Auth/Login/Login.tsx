@@ -44,22 +44,29 @@ const Login = () => {
                         </div>
                         <div>
                             <p className={s.text}>
-                                Please provide the email address and password associated with the account. If you're having trouble,
-                                please use the prompt below to reset your password.
+                                Please provide the email address and password associated with the account. If you're having trouble, <br />
+                                <span>please use the prompt below to reset your password.</span>
                             </p>
                         </div>
 
                         <form className={s.form}>
-                            <input type="email" placeholder="Email Adress" value={email} onChange={e => setEmail(e.target.value)} />
-                            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                            <div className={s.input_container}>
+                                <label className={s.label}>EMAIL ADDRESS</label>
+                                <input className={s.input} type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                            </div>
+                            <div className={s.input_container}>
+                                <label className={s.label}>PASSWORD</label>
+                                <input className={s.input} type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                            </div>
+                            <div className={s.btn_box}>
+                                <button disabled={false} className={s.signin_btn} type="button" onClick={handleLogin}>
+                                    SIGN IN
+                                </button>
 
-                            <button className={s.signin_btn } type="button" onClick={handleLogin}>
-                                SIGN IN
-                            </button>
-
-                            <button className={s.forgot_btn} type="button">
-                                FORGOT PASSWORD
-                            </button>
+                                <button className={s.forgot_btn} type="button">
+                                    FORGOT PASSWORD
+                                </button>
+                            </div>
 
 
                         </form>
@@ -78,7 +85,7 @@ const Login = () => {
                         <div>
                             <p className={s.text}>
                                 By creating an account with our store, you will be able to move through the checkout process faster,
-                                store multiple shipping addresses, view and track your orders in your account, and more.
+                                <span>store multiple shipping addresses, view and track your orders in your account, and more.</span>
                             </p>
                         </div>
                         <div>

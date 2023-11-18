@@ -30,7 +30,7 @@ const Navbar = (props: ShopnavPropsType) => {
     return (
         <div>
             <nav className={s.nav}>
-                <div>
+                <div className={s.inner}>
                     <ul className={s.list}>
                         <li className={s.item}>
                             <NavLink
@@ -54,7 +54,7 @@ const Navbar = (props: ShopnavPropsType) => {
                         <li className={s.item}>
                             <NavLink
                                 onClick={() => onClickHandler("features")}
-                                className={props.activeLink === "features" ? s.active : ""}
+                                className={props.activeLink === "features" ? s.active_features : ""}
                                 to="/blogs/all"
                                 onMouseLeave={onMouseLeaveHandler}
                                 onMouseOver={onMouseOverHandler}

@@ -1,9 +1,4 @@
-.inner {
-    display: flex;
-    height: 59px;
-    align-items: center;
-    border-bottom: 1px solid rgb(245, 245, 245);
-}
+
 
 .header {
     background-color: #fff;
@@ -13,27 +8,84 @@
 .logo {
     position: absolute;
     left: 20px;
+    top: 1px;
 }
 
 .rightside {
     position: absolute;
-    right: 15px;
+    right: 19px;
+    top: 23px;
     display: flex;
 }
 
-.bottom_list {
-    height: 49px;
+.navbar_wrapper {
+    height: 58px;
     border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.navbar {
+    display: flex;
     text-align: center;
     align-items: center;
 }
 
-.container {
-    max-width: 1440px;
-    padding: 0px 20px;
-    margin: auto;
+.bottom_list {
+    height: 49px;
+    display: flex;
+    text-align: center;
+    align-items: center;
 }
 
-.navbar {
-    margin-left: 80px;
+.bottom_list_wrapper {
+    border-bottom: 1px solid rgb(245, 245, 245);
 }
+
+.container {
+    max-width: 1357px;
+    height: 100%;
+    padding: 0px 20px;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.bag a:hover {
+    font-weight: 700;
+}
+
+.search {
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.search:hover {
+    font-weight: 700;
+}
+
+.active {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.login button {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #000;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .form button:not(last-child) {
+    margin-bottom: 10px;
+  }
+  
+  .form button:disabled {
+    background-color: rgb(229, 229, 229);
+    border-color: rgb(117, 117, 117);
+    color: rgb(117, 117, 117);
+    cursor: not-allowed;
+    pointer-events: none;
+  }

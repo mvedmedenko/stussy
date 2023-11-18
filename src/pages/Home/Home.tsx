@@ -1,7 +1,6 @@
-import React from 'react';
 import s from "./Home.module.css"
 import { NavLink } from 'react-router-dom';
-import main from "../../assets/images/main.png"
+import main from "../../assets/images/main.webp"
 
 const Home = () => {
     return (

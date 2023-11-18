@@ -1,0 +1,66 @@
+.inner {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    font-weight: 400;
+    gap: 20px;
+}
+
+.shipping_box {
+  grid-column: span 6;
+}
+
+.return_box {
+  grid-column: span 6;
+}
+
+.title {
+    font-size: 21px;
+    margin-bottom: 40px;
+}
+
+.list {
+    padding: 10px 0px 10px 30px;
+    line-height: 17px;
+}
+
+.text {
+    margin-top: 10px;
+    line-height: 18px;
+}
+
+.subtitle {
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.email {
+    text-transform: none;
+    text-decoration: underline;
+}
+
+.contact {
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.international_subtitle {
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+.link {
+    text-decoration: underline;
+}
+
+.disclaimer_subtitle {
+    font-size: 12px;
+}
+
+.disclaimer_text {
+    display: block;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
