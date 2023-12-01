@@ -33,22 +33,26 @@ const Navbar = (props: ShopnavPropsType) => {
                 <div className={s.inner}>
                     <ul className={s.list}>
                         <li className={s.item}>
-                            <NavLink
-                                onClick={() => onClickHandler("shop")}
-                                className={props.activeLink === "shop" ? s.active : ""}
-                                to="/collections/all"
-                                onMouseLeave={onMouseLeaveHandler}
-                                onMouseOver={onMouseOverHandler}
-                            >SHOP
-                            </NavLink>
-                            <div>
-                                <img
-                                    className={props.activeLink && props.mouseOnLink === "shop" ? s.arrow_active : s.arrow}
-                                    width="7px"
-                                    height="7px"
-                                    src={arrow}
-                                    alt="arrow"
-                                />
+                            <div className={s.item_box}>
+                                <div>
+                                    <NavLink
+                                        onClick={() => onClickHandler("shop")}
+                                        className={props.activeLink === "shop" ? s.active : ""}
+                                        to="/collections/all"
+                                        onMouseLeave={onMouseLeaveHandler}
+                                        onMouseOver={onMouseOverHandler}
+                                    >SHOP
+                                    </NavLink>
+                                </div>
+                                <span>
+                                    <img
+                                        className={props.activeLink === "shop" ? s.arrow_active : s.arrow}
+                                        width="7px"
+                                        height="8px"
+                                        src={arrow}
+                                        alt="arrow"
+                                    />
+                                </span>
                             </div>
                         </li>
                         <li className={s.item}>
@@ -62,24 +66,26 @@ const Navbar = (props: ShopnavPropsType) => {
                             </NavLink>
                         </li>
                         <li className={s.item}>
-                            <NavLink
-                                onClick={() => onClickHandler("support")}
-                                className={props.activeLink === "support" ? s.active : ""}
-                                to="/pages/customer-support"
-                                onMouseLeave={onMouseLeaveHandler}
-                                onMouseOver={onMouseOverHandler}
-                            >SUPPORT
-                            </NavLink>
-                            <div>
-                                {/* <img
-                                    className={((props.mouseOnLink === null && props.activeLink === "shop") || props.mouseOnLink === "shop") && (
-                                        s.arrow
-                                    )}
-                                    width="7px"
-                                    height="7px"
-                                    src={arrow}
-                                    alt="arrow"
-                                /> */}
+                            <div className={s.item_box}>
+                                <div>
+                                    <NavLink
+                                        onClick={() => onClickHandler("support")}
+                                        className={props.activeLink === "support" ? s.active : ""}
+                                        to="/pages/customer-support"
+                                        onMouseLeave={onMouseLeaveHandler}
+                                        onMouseOver={onMouseOverHandler}
+                                    >SUPPORT
+                                    </NavLink>
+                                </div>
+                                <span>
+                                    <img
+                                        className={props.activeLink === "support" ? s.arrow_active : s.arrow}
+                                        width="7px"
+                                        height="7px"
+                                        src={arrow}
+                                        alt="arrow"
+                                    />
+                                </span>
                             </div>
                         </li>
                     </ul>

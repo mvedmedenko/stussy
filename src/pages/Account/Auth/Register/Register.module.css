@@ -68,6 +68,7 @@
   font-weight: 700;
   background-color: #fff;
   cursor: pointer;
+  transition: .2s;
 }
 
 .form button:not(last-child) {
@@ -86,6 +87,7 @@
   background-color: rgb(117,117,117);
   color: #fff;
   border: 1px solid rgb(117,117,117);
+  transition: .2s;
 }
 
 .input_container {
@@ -111,6 +113,10 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   margin-top: 6px;
+}
+
+.checkbox_label a {
+  text-decoration: underline;
 }
 
 .checkbox {
@@ -147,4 +153,12 @@ input[type="checkbox"]:checked + .checkbox::after {
   background-color: rgb(117,117,117);
   color: #fff;
   border: 1px solid rgb(117,117,117);
+}
+
+.error_border {
+  border-bottom: 1px solid red;
+}
+
+.btn_box { 
+  margin-top: 42px;
 }

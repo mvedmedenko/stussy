@@ -2,7 +2,8 @@
 
 .header {
     background-color: #fff;
-    max-width: 100%;
+    width: 100%;
+    position: fixed;
 }
 
 .logo {
@@ -88,4 +89,8 @@
     color: rgb(117, 117, 117);
     cursor: not-allowed;
     pointer-events: none;
+  }
+
+  .bottom_list_wrapper {
+    background-color: #fff;
   }

@@ -1,3 +1,5 @@
+
+
 @font-face {
   font-family: 'Helvetica Neue';
   src: url('./assets/fonts/HelveticaNeueBold.ttf') format('ttf');
@@ -35,7 +37,6 @@ a {
   padding: 0;
   text-decoration: none;
   color: black;
-  text-transform: uppercase;
 }
 
 ul {
@@ -48,9 +49,16 @@ li {
   margin: 0;
 }
 
-.container {
+.container_images {
+    max-width: 1400px;
+    height: 100%;
+    padding: 0px 20px;
+    margin: auto;
+  }
+
+ .container {
   max-width: 1357px;
   height: 100%;
   padding: 0px 20px;
   margin: auto;
-}
+ } 

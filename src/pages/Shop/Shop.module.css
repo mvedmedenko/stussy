@@ -1,0 +1,25 @@
+.shop {
+    padding-top: 20px;
+    padding-bottom: 80px;
+}
+
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 40px;
+    column-gap: 20px;
+}
+
+.img_container {
+    max-width: 350px;
+    height: 418.75px;
+}
+
+.img_container img {
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    margin-top: 10px;
+}

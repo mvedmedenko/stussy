@@ -1,13 +1,17 @@
 interface State {
     loading: boolean;
     error: string | null;
-    isAuth: boolean
+    resetError: string | null
+    isAuth: boolean;
+    user: any
 }
 
 const initialState: State = {
     loading: false,
     error: null,
+    resetError: null,
     isAuth: false,
+    user: []
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -17,6 +21,27 @@ const authReducer = (state = initialState, action: any) => {
                 ...state,
                 loading: true,
                 error: null,
+            };
+
+        case 'START_RESET_PASSWORD':
+            return {
+                ...state,
+                loading: true,
+                resetError: null,
+            };
+
+        case 'RESET_PASSWORD_SUCCESS':
+            return {
+                ...state,
+                loading: false,
+                resetError: null,
+            };
+
+        case 'RESET_PASSWORD_FAILURE':
+            return {
+                ...state,
+                loading: false,
+                resetError: action.payload,
             };
 
         case 'LOGIN_START':
@@ -60,6 +85,11 @@ const authReducer = (state = initialState, action: any) => {
                 isAuth: false,
             };
 
+        case 'SET_USER':
+            return {
+                ...state,
+                user: action.payload,
+            };
 
         default:
             return state;

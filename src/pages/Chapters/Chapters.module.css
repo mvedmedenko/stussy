@@ -1,0 +1,28 @@
+.inner {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+}
+
+.title_box {
+    height: 100%;
+    grid-column: span 2;
+}
+
+.city_box {
+    grid-column: span 22;
+}
+
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.city_title_box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text_box {
+    display: flex;
+    justify-content: space-between;
+}

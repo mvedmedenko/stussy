@@ -34,7 +34,7 @@ const Accessibilitys = () => {
                         <div className={s.email_box}>
                             Regardless of your location, any questions, comments,
                             and requests regarding accessibility are welcome and should be addressed to our legal department at&nbsp;
-                            <a className={s.email} href="mailto:support@stussy.com">support@stussy.com</a>.
+                            <a className={s.email} href="mailto:support@stussy.com">support@stussy.com</a>
                         </div>
                         <div className={s.address}>
                             Communication can also be addressed to: <br />

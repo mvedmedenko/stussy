@@ -4,16 +4,50 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../../../redux/actions/authActions";
 
-const Register = () => {
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import { FormikHelpers } from "formik"
+
+interface FormData {
+    firstName: string,
+    lastName: string,
+    email: string;
+    password: string;
+    checkbox: boolean;
+}
+
+const initialValues: FormData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    checkbox: false,
+};
+
+const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .required('Enter a valid First Name'),
+
+    lastName: Yup.string()
+        .required('Enter a valid Last Name'),
+
+    email: Yup.string()
+        .email('Enter a valid email address')
+        .required('Enter a valid email address'),
+
+    password: Yup.string()
+        .min(8, 'Must be 15 characters or less')
+        .max(20, 'Must be 20 characters or less')
+        .required('Enter a valid password'),
+});
+
+const Register: React.FC = () => {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.authReducer.isAuth);
     const navigate = useNavigate()
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isCheckbox, setIsCheckBox] = useState(false)
+    const [isValidForm, setIsValidForm] = useState<boolean>(false);
+    const [formValues, setFormValues] = useState<FormData>(initialValues);
 
     useEffect(() => {
         if (user) {
@@ -21,13 +55,21 @@ const Register = () => {
         }
     }, [user])
 
-    const handleRegister = () => {
-        const name = firstName + " " + lastName
-        dispatch(registerUser(email, password, name))
-        setEmail("")
-        setPassword("")
-        setFirstName("")
-        setLastName("")
+
+
+    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+        setFormValues({ ...formValues, [name]: checked });
+    };
+
+    const handleFormValidity = (isValid: boolean) => {
+        setIsValidForm(isValid);
+    };
+
+    const handleRegister = (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
+        const name = values.firstName + " " + values.lastName
+        dispatch(registerUser(values.email, values.password, name))
+        setSubmitting(false)
     };
 
     return (
@@ -51,35 +93,78 @@ const Register = () => {
                                 <span>store multiple shipping addresses, view and track your orders in your account and more.</span>
                             </p>
                         </div>
-
-                        <form className={s.form}>
-                            <div className={s.input_container}>
-                                <label className={s.label}>FIRST NAME</label>
-                                <input className={s.input} type="text" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                            </div>
-                            <div className={s.input_container}>
-                                <label className={s.label}>LAST NAME</label>
-                                <input className={s.input} type="text" value={lastName} onChange={e => setLastName(e.target.value)} />
-                            </div>
-                            <div className={s.input_container}>
-                                <label className={s.label}>EMAIL ADDRESS</label>
-                                <input className={s.input} type="email" value={email} onChange={e => setEmail(e.target.value)} />
-                            </div>
-                            <div className={s.input_container}>
-                                <label className={s.label}>PASSWORD</label>
-                                <input className={s.input} type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                            </div>
-                            <label className={s.checkbox_label}>
-                                <input onChange={() => setIsCheckBox(!isCheckbox)} type="checkbox"/>
-                                    <span className={s.checkbox}></span>
-                                    AGREE TO PRIVACY POLICY AND TERMS & CONDITIONS
-                            </label>
-
-                            <button disabled={true} className={s.register_btn} type="button" onClick={handleRegister}>
-                                SIGN UP
-                            </button>
-
-                        </form>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={handleRegister}
+                            validateOnChange={true}
+                            validateOnBlur={true}
+                            validate={(values: FormData) => {
+                                validationSchema
+                                    .validate(values, { abortEarly: false })
+                                    .then(() => {
+                                        handleFormValidity(true);
+                                    })
+                                    .catch(() => {
+                                        handleFormValidity(false);
+                                    });
+                            }}
+                        >
+                            {({ isSubmitting, errors, touched }) => (
+                                <Form className={s.form}>
+                                    <div className={s.input_container}>
+                                        <label className={s.label}>FIRST NAME</label>
+                                        <Field
+                                            className={`${s.input} ${errors.firstName && touched.firstName ? s.error_border : ''}`}
+                                            type="text"
+                                            name="firstName"
+                                        />
+                                    </div>
+                                    <div className={s.input_container}>
+                                        <label className={s.label}>LAST NAME</label>
+                                        <Field
+                                            className={`${s.input} ${errors.lastName && touched.lastName ? s.error_border : ''}`}
+                                            type="text"
+                                            name="lastName"
+                                        />
+                                    </div>
+                                    <div className={s.input_container}>
+                                        <label className={s.label}>EMAIL ADDRESS</label>
+                                        <Field
+                                            className={`${s.input} ${errors.email && touched.email ? s.error_border : ''}`}
+                                            type="email"
+                                            name="email"
+                                        />
+                                    </div>
+                                    <div className={s.input_container}>
+                                        <label className={s.label}>PASSWORD</label>
+                                        <Field
+                                            className={`${s.input} ${errors.password && touched.password ? s.error_border : ''}`}
+                                            type="password"
+                                            name="password"
+                                        />
+                                    </div>
+                                    <label className={s.checkbox_label}>
+                                        <Field
+                                            type="checkbox"
+                                            name="checkbox"
+                                            onChange={handleCheckboxChange}
+                                            checked={formValues.checkbox}
+                                        />
+                                        <span className={s.checkbox}></span>
+                                        AGREE TO&nbsp; <NavLink to="/pages/legal">PRIVACY POLICY</NavLink>&nbsp;AND&nbsp; <NavLink to="/pages/legal">TERMS & CONDITIONS</NavLink>
+                                    </label>
+                                    <div className={s.btn_box}>
+                                        <button
+                                            type="submit"
+                                            className={s.signin_btn}
+                                            disabled={isSubmitting || !isValidForm || !formValues.checkbox}>
+                                            SIGN UP
+                                        </button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                     <div className={s.login_box}>
                         <div>
