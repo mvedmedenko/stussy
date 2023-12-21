@@ -3,6 +3,7 @@ import { featuresData } from './featuresData';
 import { NavLink } from 'react-router-dom';
 
 const Features = () => {
+    
     return (
         <div className={s.features}>
             <div className='container_images'>

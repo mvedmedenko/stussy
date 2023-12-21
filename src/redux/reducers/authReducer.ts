@@ -3,7 +3,7 @@ interface State {
     error: string | null;
     resetError: string | null
     isAuth: boolean;
-    user: any
+    user: []
 }
 
 const initialState: State = {
@@ -57,6 +57,12 @@ const authReducer = (state = initialState, action: any) => {
                 error: null,
             };
 
+            case 'SET_USER':
+                return {
+                    ...state,
+                    user: action.payload,
+                };
+
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
@@ -85,11 +91,18 @@ const authReducer = (state = initialState, action: any) => {
                 isAuth: false,
             };
 
-        case 'SET_USER':
+        case 'LOGIN_CHECK_FAILURE':
             return {
                 ...state,
-                user: action.payload,
-            };
+                isAuth: false,
+            }
+
+            case 'SIGN_OUT_SUCCESS_ACTION':
+                return {
+                    ...state,
+                    isAuth: false,
+                    user: [],
+                }
 
         default:
             return state;

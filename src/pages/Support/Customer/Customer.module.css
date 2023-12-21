@@ -1,7 +1,6 @@
 .inner {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    ;
     gap: 138px;
     padding-top: 40px;
     padding-bottom: 80px;
@@ -233,4 +232,8 @@
     opacity: .7;
     color: #fff;
     transition: .2s;
+}
+
+.errorSelect {
+    border: 1px solid red;
 }

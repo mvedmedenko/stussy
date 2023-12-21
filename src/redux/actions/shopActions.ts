@@ -34,8 +34,6 @@ export const setProductsAction = (products: any) => ({
       });
       dispatch(setProductsAction(products));
       dispatch(getProductsSuccessAction());
-      dispatch(setProductsAction(products));
-      dispatch(getProductsSuccessAction());
     } catch (error: any) {
       dispatch(getProductsDataFailure(error.message));
     }

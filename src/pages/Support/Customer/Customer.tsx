@@ -2,10 +2,10 @@ import s from "./Customer.module.css"
 import { useState } from "react"
 import arrow from "../../../assets/images/arrow.svg"
 import { customerData } from "./customerData"
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from "react-redux";
-import { openChat } from "../../../redux/actions/chatActions";
+import { useDispatch, useSelector } from "react-redux";
+import { openChat, closeChat } from "../../../redux/actions/chatActions";
 
 interface FormData {
     name: string;
@@ -27,17 +27,23 @@ const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     orderNumber: Yup.string().required('Order Number is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
+    selectedOption: Yup.string().oneOf(["ORDER STATUS", "RETURN AN ORDER", "ADDRESS UPDATE REQUEST", "SHIPPING/TRACKIN", "REPORT AN ISSUE", "OTHER"]).required(''),
     message: Yup.string().required('Message is required'),
 });
 
 const Customer: React.FC = () => {
 
+    const isChat = useSelector((state) => state.chatReducer.isChat)
     const dispatch = useDispatch()
     const [open, setOpen] = useState<string>("")
     const [isSubmited, setIsSubmited] = useState<boolean>(false)
 
-    const onClickHandler = () => {
-        dispatch(openChat())
+    const chatHandle = () => {
+        if (isChat) {
+            dispatch(closeChat())
+        } else {
+            dispatch(openChat())
+        }
     }
 
     const handleSubmit = () => {
@@ -101,16 +107,15 @@ const Customer: React.FC = () => {
                                             name="email" />
 
                                         <div className={s.select_container}>
-                                            <Field as="select" className={s.select} name="selectedOption">
+                                            <Field as="select" className={`${s.select} ${errors.selectedOption && touched.selectedOption ? s.errorSelect : ''}`} name="selectedOption">
                                                 <option value="PLEASE SELECT">PLEASE SELECT</option>
                                                 <option value="ORDER STATUS">ORDER STATUS</option>
                                                 <option value="RETURN AN ORDER">RETURN AN ORDER</option>
                                                 <option value="ADDRESS UPDATE REQUEST">ADDRESS UPDATE REQUEST</option>
-                                                <option value="SHIPPING/TRACKING">SHIPPING/TRACKING</option>
+                                                <option value="SHIPPING/TRACKIN">SHIPPING/TRACKING</option>
                                                 <option value="REPORT AN ISSUE">REPORT AN ISSUE</option>
                                                 <option value="OTHER">OTHER</option>
                                             </Field>
-                                            <ErrorMessage name="selectedOption" component="div" className="error" />
                                         </div>
 
                                         <Field
@@ -124,8 +129,8 @@ const Customer: React.FC = () => {
                                                 SUBMIT
                                             </button>
 
-                                            <button onClick={onClickHandler} className={s.chat_btn} type="button">
-                                                CHAT
+                                            <button onClick={chatHandle} className={s.chat_btn} type="button">
+                                                {isChat ? "CLOSE" : "CHAT"}
                                             </button>
                                         </div>
                                     </Form>

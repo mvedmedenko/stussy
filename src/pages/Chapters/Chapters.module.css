@@ -5,16 +5,26 @@
 
 .title_box {
     height: 100%;
-    grid-column: span 2;
+    grid-column: span 4;
+    font-size: 14px;
+    font-size: 400;
+    border-right: 1px solid rgb(245, 245, 245);
+    margin-right: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .city_box {
-    grid-column: span 22;
+    grid-column: span 20;
+    padding-top: 41px;
+    padding-bottom: 40px;
 }
 
 .grid_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 98px;
+    row-gap: 80px;
 }
 
 .city_title_box {
@@ -25,4 +35,46 @@
 .text_box {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    line-height: 17px;
+}
+
+.text {
+    max-width: 200.72px;
+    font-weight: 400;
+}
+
+.map_text {
+    display: flex;
+    color: rgb(0, 0, 0, .7);
+}
+
+.map_text:hover {
+    color: rgb(0, 0, 0, 1);
+    font-weight: 700;
+}
+
+.map_text img {
+    margin-left: 5px;
+    opacity: .7;
+    z-index: 5;
+}
+
+.more_info {
+    color: rgb(0, 0, 0, .7);
+}
+
+.mavp_link {
+    display: block;
+}
+
+.schedule {
+    font-weight: 400;
+    margin-top: 10px;
+    line-height: 17px;
+}
+
+.section:not(:last-child) {
+    border-bottom: 1px solid rgb(245, 245, 245);
 }

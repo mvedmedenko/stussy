@@ -9,6 +9,19 @@ export const startResetPasswordAction = () => ({
   type: 'START_RESET_PASSWORD',
 });
 
+export const signOutSuccessAction = () => ({
+  type: 'SIGN_OUT_SUCCESS_ACTION',
+});
+
+export const setUserAction = (user) => ({
+  type: 'SET_USER',
+  payload: user,
+});
+
+export const loginCheckFailureAction = () => ({
+  type: 'LOGIN_CHECK_FAILURE',
+});
+
 export const resetPasswordSuccessAction = () => ({
   type: 'RESET_PASSWORD_SUCCESS',
 });
@@ -55,10 +68,16 @@ export const getAccountDataFailureAction = (error: string) => ({
   payload: error,
 });
 
-export const setUserAction = (user: any) => ({
-  type: 'SET_USER',
-  payload: user,
-});
+export const checkAuthStatus = () => async (dispatch: any) => {
+  auth.onAuthStateChanged((user) => {
+    if(user) {
+      dispatch(setUserAction(user))
+      dispatch(loginSuccessAction())
+    } else {
+      dispatch(loginCheckFailureAction())
+    }
+  })
+}
 
 export const registerUser = (email: string, password: string, name: string) => async (dispatch: any) => {
   try {
@@ -101,12 +120,10 @@ export const registerUser = (email: string, password: string, name: string) => a
 
   export const logoutUser = () => async (dispatch: any) => {
     try {
-      await account.deleteSession('current');
-
-      // Опционально: очистите локальное хранилище или куки, используемые для хранения токена доступа
-
-      dispatch({ type: 'LOGOUT_SUCCESS' });
+      auth.signOut()
+      // localStorage.removeItem("user")
+      dispatch(signOutSuccessAction())
     } catch (error) {
-      // Обработка ошибок при логауте, если необходимо
+      console.log(error)
     }
   };

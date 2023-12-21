@@ -8,15 +8,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 15;
 
 }
 
-.inner {
+.newsletter_inner {
     display: grid;
     width: 453px;
     height: 136px;
     background-color: #fff;
     padding: 17px 20px 20px 20px;
+}
+
+.submited_inner {
+    width: 455px;
+    height: 20px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.submited_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .text_box {
@@ -62,4 +76,12 @@
 
 .close_btn {
     cursor: pointer;
+}
+
+.errorBorder {
+    border-bottom: 1px solid red;
+}
+
+.button_box {
+    margin-top: 20px;
 }

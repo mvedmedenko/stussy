@@ -48,6 +48,15 @@ const Register: React.FC = () => {
     const navigate = useNavigate()
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
     const [formValues, setFormValues] = useState<FormData>(initialValues);
+    const [fieldFocus, setFieldFocus] = useState<string>("");
+
+    const handleFocus = (fieldName:string) => {
+      setFieldFocus(fieldName)
+    };
+  
+    const handleBlur = (fieldName: string) => {
+      setFieldFocus(fieldName);
+    };
 
     useEffect(() => {
         if (user) {
@@ -110,39 +119,47 @@ const Register: React.FC = () => {
                                     });
                             }}
                         >
-                            {({ isSubmitting, errors, touched }) => (
+                            {({ isSubmitting, errors, touched, values }) => (
                                 <Form className={s.form}>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>FIRST NAME</label>
                                         <Field
                                             className={`${s.input} ${errors.firstName && touched.firstName ? s.error_border : ''}`}
                                             type="text"
                                             name="firstName"
+                                            onFocus={() => handleFocus("firstName")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "firstName" && values.firstName.length > 0 ? s.label_animated : ''} ${fieldFocus === 'firstName' ? s.only_focus : ''}`}>FIRST NAME</label>
                                     </div>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>LAST NAME</label>
                                         <Field
                                             className={`${s.input} ${errors.lastName && touched.lastName ? s.error_border : ''}`}
                                             type="text"
                                             name="lastName"
+                                            onFocus={() => handleFocus("lastName")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "lastName" && values.lastName.length > 0 ? s.label_animated : ''} ${fieldFocus === 'lastName' ? s.only_focus : ''}`}>LAST NAME</label>
                                     </div>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>EMAIL ADDRESS</label>
                                         <Field
                                             className={`${s.input} ${errors.email && touched.email ? s.error_border : ''}`}
                                             type="email"
                                             name="email"
+                                            onFocus={() => handleFocus("email")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "email" && values.email.length > 0 ? s.label_animated : ''} ${fieldFocus === 'email' ? s.only_focus : ''}`}>EMAIL ADDRESS</label>
                                     </div>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>PASSWORD</label>
                                         <Field
                                             className={`${s.input} ${errors.password && touched.password ? s.error_border : ''}`}
                                             type="password"
                                             name="password"
+                                            onFocus={() => handleFocus("password")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "password" && values.password.length > 0 ? s.label_animated : ''} ${fieldFocus === 'password' ? s.only_focus : ''}`}>PASSWORD</label>
                                     </div>
                                     <label className={s.checkbox_label}>
                                         <Field

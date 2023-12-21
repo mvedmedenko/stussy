@@ -23,3 +23,22 @@
 .title {
     margin-top: 10px;
 }
+
+.sizes {
+    height: 15px; 
+    margin-top: 5px;
+}
+
+.size_list {
+    display: flex;
+    list-style-type: none;
+}
+
+.size_list li {
+    margin-right: 10px;
+    font-weight: 400;
+}
+
+.size_list li:hover {
+    font-weight: 700;
+}

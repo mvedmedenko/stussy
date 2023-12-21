@@ -41,7 +41,8 @@
   padding: 20px 0px 12px;
   border: none;
   border-bottom: 1px solid rgb(117, 117, 117, .9);
-  color: rgb(117, 117, 117, .9);
+  color: rgb(0, 0, 0, 1);
+  font-size: 16px;
 }
 
 .input:not(last-child) {
@@ -102,17 +103,26 @@
 
 .label {
   position: absolute;
-  top: 41%;
-  transform: translateY(-50%);
+  transition: transform 0.3s, font-size 0.3s;
+  color: rgb(117, 117, 117, .9);
+}
+
+.input:hover + .label {
+  color: rgb(0, 0, 0, 1)
+}
+
+.only_focus {
+  transform: translateY(-150%);
+}
+
+.label_animated {
+  position: absolute;
   pointer-events: none;
   transition: transform 0.3s, font-size 0.3s;
+  transform: translateY(-150%);
 }
 
-.input:focus + label {
-  transform: translateY(-100%);
-}
-
-.input:valid + label {
+.input + .label {
   top: 30%;
 }
 

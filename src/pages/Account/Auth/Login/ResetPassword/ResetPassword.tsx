@@ -30,6 +30,15 @@ const ResetPassword = (props: ResetPasswordProps) => {
 
     const dispatch = useDispatch();
     const [isSent, setIsSent] = useState<boolean>(false)
+    const [fieldFocus, setFieldFocus] = useState<string>("");
+
+    const handleFocus = (fieldName:string) => {
+      setFieldFocus(fieldName)
+    };
+  
+    const handleBlur = (fieldName: string) => {
+      setFieldFocus(fieldName);
+    };
 
     const handleReset = (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
         dispatch(resetPassword(values.email))
@@ -70,15 +79,17 @@ const ResetPassword = (props: ResetPasswordProps) => {
                     validationSchema={validationSchema}
                     onSubmit={handleReset}
                 >
-                    {({ isSubmitting, errors, touched }) => (
+                    {({ errors, touched, values }) => (
                         <Form className={s.form}>
                             <div className={s.input_container}>
-                                <label className={s.label}>EMAIL ADDRESS</label>
                                 <Field
                                     className={`${s.input} ${errors.email && touched.email ? s.error_border : ''}`}
                                     type="email"
                                     name="email"
+                                    onFocus={() => handleFocus("email")}
+                                    onBlur={() => handleBlur("")}
                                 />
+                                <label className={`${s.label} ${fieldFocus !== "email" && values.email.length > 0 ? s.label_animated : ''} ${fieldFocus === 'email' ? s.only_focus : ''}`}>EMAIL ADDRESS</label>
                             </div>
                             <div className={s.btn_box}>
                                 <button type="submit" className={s.reset_btn}>

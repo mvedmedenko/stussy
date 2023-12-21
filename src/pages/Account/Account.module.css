@@ -1,0 +1,127 @@
+.inner {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 17px;
+    padding-top: 84px;
+    padding-bottom: 80px;
+    line-height: 17px;
+}
+
+a:hover {
+    font-weight: 700;
+}
+
+.account_details {
+    grid-column: span 4;
+}
+
+.order_history {
+    grid-column: span 4;
+    grid-column-start: 7;
+    grid-column-end: 10;
+}
+
+.title {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.order_text {
+    margin-top: 33px;
+    font-weight: 400;
+}
+
+.user_name {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 14px;
+}
+
+.user_email {
+    text-transform: lowercase;
+    font-weight: 400;
+}
+
+.manage_addresses {
+    margin-top: 19px;
+    padding: 10px 0px;
+    border-top: 1px solid rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.manage_addresses:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.customer_support {
+    margin-top: 84px;
+}
+
+.email_subtitle {
+    margin-top: 14px;
+    font-weight: 700;
+}
+
+.support_email {
+    font-weight: 400;
+    text-decoration: underline;
+    margin-top: 10;
+}
+
+.support_email a:hover {
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.hours_subtitle {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.work_hours {
+    font-weight: 400;
+}
+
+.contact {
+    margin-top: 20px;
+    padding: 10px 0px;
+    border-top: 1px solid rgb(245, 245, 245);
+}
+
+.contact:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.faq {
+    padding: 10px 0px;
+    border-top: 1px solid rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.faq:hover {
+    font-weight: 700;
+}
+
+.chat {
+    padding: 10px 0px;
+    border-top: 1px solid rgb(245, 245, 245);
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chat:hover {
+    font-weight: 700;
+}
+
+.shipping_returns {
+    padding: 10px 0px;
+    border-top: 1px solid rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.shipping_returns:hover {
+    font-weight: 700;
+}

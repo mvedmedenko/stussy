@@ -1,6 +1,6 @@
 import { useEffect, useState, } from 'react';
 import s from "./Login.module.css"
-import { loginUser } from '../../../../redux/actions/authActions';
+import { checkAuthStatus, loginUser } from '../../../../redux/actions/authActions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -37,7 +37,15 @@ const Login: React.FC = () => {
     const dispatch = useDispatch();
     const [isForgetPassword, setIsForgetPassword] = useState<boolean>(false)
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
+    const [fieldFocus, setFieldFocus] = useState<string>("");
 
+    const handleFocus = (fieldName:string) => {
+      setFieldFocus(fieldName)
+    };
+  
+    const handleBlur = (fieldName: string) => {
+      setFieldFocus(fieldName);
+    };
 
     const handleLogin = (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
         const { email, password } = values;
@@ -99,23 +107,27 @@ const Login: React.FC = () => {
                                     });
                             }}
                         >
-                            {({ isSubmitting, errors, touched }) => (
+                            {({ isSubmitting, errors, touched, values, }) => (
                                 <Form className={s.form}>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>EMAIL ADDRESS</label>
                                         <Field
                                             className={`${s.input} ${errors.email && touched.email ? s.error_border : ''}`}
                                             type="email"
                                             name="email"
+                                            onFocus={() => handleFocus("email")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "email" && values.email.length > 0 ? s.label_animated : ''} ${fieldFocus === 'email' ? s.only_focus : ''}`}>EMAIL</label>
                                     </div>
                                     <div className={s.input_container}>
-                                        <label className={s.label}>PASSWORD</label>
                                         <Field
                                             className={`${s.input} ${errors.password && touched.password ? s.error_border : ''}`}
                                             type="password"
                                             name="password"
+                                            onFocus={() => handleFocus("password")}
+                                            onBlur={() => handleBlur("")}
                                         />
+                                        <label className={`${s.label} ${fieldFocus !== "password" && values.password.length > 0 ? s.label_animated : ''} ${fieldFocus === 'password' ? s.only_focus : ''}`}>PASSWORD</label>
                                     </div>
                                     <div className={s.btn_box}>
                                         <button 

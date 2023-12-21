@@ -7,7 +7,7 @@ import s from "./Footer.module.css"
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className={s.footer}>
             <Topfooter/>
             <Bottomfooter/>
         </footer>

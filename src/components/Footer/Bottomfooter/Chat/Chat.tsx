@@ -1,7 +1,7 @@
 import s from "./Chat.module.css"
 import { closeChat } from "../../../../redux/actions/chatActions"
 import { useDispatch, } from "react-redux"
-import { useState } from "react"
+import React, { useState } from "react"
 import chat from "../../../../assets/images/chat.svg"
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -27,19 +27,19 @@ const validationSchema = Yup.object().shape({
 });
 
 
-const Chat = () => {
+const Chat: React.FC = () => {
 
     const [isSubmited, setIsSubmited] = useState<boolean>(false)
     const dispatch = useDispatch()
 
-    const onClickHandler = () => {
+    const closeChatHandle = () => {
         dispatch(closeChat())
     }
 
     const handleSubmit = async (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
         console.log(values)
         setIsSubmited(true);
-        setSubmitting(false); 
+        setSubmitting(false);
     };
 
 
@@ -50,7 +50,7 @@ const Chat = () => {
                 <div className={s.inner}>
                     <div className={s.title_box}>
                         <div className={s.title}>Stüssy Support</div>
-                        <div className={s.close_box} onClick={onClickHandler}>
+                        <div className={s.close_box} onClick={closeChatHandle}>
                             <span className={s.close}></span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ const Chat = () => {
                             <p>Thanks for reaching out</p>
                             <p>Someone will get back to you soon</p>
                         </div>
-                        <div className={s.done} onClick={onClickHandler}>
+                        <div className={s.done} onClick={closeChatHandle}>
                             <p>Done</p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ const Chat = () => {
                 <div className={s.inner}>
                     <div className={s.title_box}>
                         <div className={s.title}>Stüssy Support</div>
-                        <div className={s.close_box} onClick={onClickHandler}>
+                        <div className={s.close_box} onClick={closeChatHandle}>
                             <span className={s.close}></span>
                         </div>
                     </div>
@@ -136,8 +136,3 @@ const Chat = () => {
 }
 
 export default Chat;
-
-
-
-
-

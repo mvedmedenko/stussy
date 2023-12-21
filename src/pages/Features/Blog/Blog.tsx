@@ -4,6 +4,21 @@ import { featuresData } from "../featuresData";
 import { MouseEventHandler } from "react";
 import Error from "../../Error/Error";
 import { NavLink } from "react-router-dom";
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import { useState } from "react";
+
+interface FormData {
+    email: string;
+}
+
+const initialValues: FormData = {
+    email: '',
+};
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+});
 
 
 
@@ -12,10 +27,22 @@ const Blog = () => {
     const { id } = useParams();
     const item = featuresData.find((item) => item.id === id);
     const recommendation = featuresData.filter((item) => item.id !== id).slice(0, 4);
+    const [isSubmited, setIsSubmited] = useState<boolean>(false)
 
     const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
     };
+
+    const handleSubmit = (value: FormData) => {
+        console.log(value)
+        setIsSubmited(true)
+    };
+
+
+    <div>
+        THANK YOU FOR SUBSCRIBING TO STÜSSY.
+    </div>
+
 
     return (
         <div>
@@ -59,21 +86,48 @@ const Blog = () => {
                         </div>
                     </div>
                     <div className={s.email_wrapper}>
-                        <div className={s.email_container}>
-                            <div>
-                                <p className={s.email_text}>SUBSCRIBE FOR NEW PRODUCT ARRIVALS & EARLY RELEASE INFO</p>
-                            </div>
-                            <form>
-                                <div className={s.input_box}>
-                                    <input className={s.input} type="email" placeholder="E-MAIL" />
+                        {
+                            isSubmited
+                                ?
+                                <div className={s.submited_message}>
+                                    THANK YOU FOR SUBSCRIBING TO STÜSSY.
                                 </div>
-                                <button onClick={onClickHandler} className={s.button}>SUBSCRIBE</button>
-                            </form>
-                        </div>
+                                :
+
+                                <div className={s.email_wrapper}>
+                                    <div className={s.email_container}>
+                                        <div>
+                                            <p className={s.email_text}>SUBSCRIBE FOR NEW PRODUCT ARRIVALS & EARLY RELEASE INFO</p>
+                                        </div>
+                                        <Formik
+                                            initialValues={initialValues}
+                                            validationSchema={validationSchema}
+                                            onSubmit={handleSubmit}
+                                        >
+                                            {({ errors, touched }) => (
+                                                <Form className={s.form}>
+                                                    <div className={s.input_box}>
+                                                        <Field
+                                                            placeholder="E-MAIL"
+                                                            className={`${s.input} ${errors.email && touched.email ? s.errorBorder : ''}`}
+                                                            type="email"
+                                                            name="email"
+                                                        />
+                                                        <button className={s.button} type="submit">
+                                                            SUBSCRIBE
+                                                        </button>
+                                                    </div>
+                                                </Form>
+                                            )}
+                                        </Formik>
+                                    </div>
+                                </div>
+
+                        }
                     </div>
                     <div className={s.recommendation}>
                         <div className={s.recommendation_text}>
-                        <p>YOU MIGHT ALSO LIKE</p>
+                            <p>YOU MIGHT ALSO LIKE</p>
                         </div>
                         <div className="container_images">
                             <div className={s.recommendation_container}>

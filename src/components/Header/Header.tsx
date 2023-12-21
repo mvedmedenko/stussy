@@ -6,13 +6,17 @@ import Featuresnav from "./Featuresnav/Featuresnav";
 import Supportnav from "./Supportnav/Supportnav";
 import { useState } from "react";
 import Searchnav from "./Searchnav/Searchnav";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { openSearch } from "../../redux/actions/searchActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Accountnav from "./Accountnav/Accountnav";
 
 const Header = () => {
 
+    const isAuth = useSelector((state) => state.authReducer.isAuth)
     const dispatch = useDispatch()
+    const {pathname} = useLocation()
+    const pathSplit = pathname.split("/")
     const [activeLink, setActiveLink] = useState<string>("shop")
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
 
@@ -53,17 +57,20 @@ const Header = () => {
             <div className={s.bottom_list_wrapper}>
                 <div className={s.container}>
                     <div className={s.bottom_list}>
-                        {((mouseOnLink === null && activeLink === "shop") || mouseOnLink === "shop") && (
+                        {((mouseOnLink === null && pathSplit[1] === "collections") || mouseOnLink === "shop") && (
                             <Shopnav />
                         )}
-                        {((mouseOnLink === null && activeLink === "features") || mouseOnLink === "features") && (
+                        {((mouseOnLink === null && pathSplit[1] === "blogs") || mouseOnLink === "features") && (
                             <Featuresnav />
                         )}
-                        {((mouseOnLink === null && activeLink === "support") || mouseOnLink === "support") && (
+                        {((mouseOnLink === null && pathSplit[1] === "pages") || mouseOnLink === "support") && (
                             <Supportnav />
                         )}
                         {((mouseOnLink === null && activeLink === "search") || mouseOnLink === "search") && (
                             <Searchnav />
+                        )}
+                        {((pathSplit[1] === "account" && isAuth === true)) && (
+                            <Accountnav />
                         )}
                     </div>
                 </div>

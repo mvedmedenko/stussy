@@ -1,7 +1,7 @@
 export const featuresData = [
     {
         id: '1',
-        title: "TEST",
+        title: "STÜSSY & CONVERSE",
         data: "03 / 21 / 2023",
         description: "Stüssy and Converse are back with two versions of the iconic Chuck 70 hi.",
         text: "Stüssy and Converse are back with two versions of the iconic Chuck 70 hi. Made from 100% hemp, the black colorway features a “blank” hemp Chuck patch at the exterior, while the pearl colorway features the Stüssy ‘Double S’ design in pearlized studs. Both feature a hidden interior patch and a custom Stüssy “ALL STAR” woven label on the tongue.",

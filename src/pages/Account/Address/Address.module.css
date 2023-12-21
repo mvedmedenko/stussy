@@ -1,0 +1,253 @@
+.inner {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    padding-top: 84px;
+    padding-bottom: 80px;
+    line-height: 17px;
+}
+
+.addresses_box {
+    grid-column: span 4;
+}
+
+.new_addresses_box {
+    grid-column: span 4;
+    grid-column-start: 7;
+    grid-column-end: 11;
+}
+
+.title {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 40px;
+    font-weight: 700;
+}
+
+.text {
+    margin-top: 20px;
+    font-weight: 400;
+}
+
+.saved_addresses {
+    margin-top: 20px;
+    padding: 20px 0px;
+    border-top: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.button {
+    margin-top: 50px;
+}
+
+.button button {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #000;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 0;
+    color: #000;
+    transition: .2s;
+}
+
+.button button:hover {
+    background-color: rgb(117, 117, 117);
+    color: #fff;
+    border: 1px solid rgb(117, 117, 117);
+}
+
+.form {
+    display: grid;
+    margin-top: 33px;
+}
+
+.input {
+    padding: 20px 0px 10px;
+    border: none;
+    border-bottom: 1px solid rgb(117, 117, 117, .9);
+    margin-top: 11px;
+    font-size: 16px;
+}
+
+.input::placeholder {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgb(117, 117, 117, .9);
+}
+
+.input:not(last-child) {
+    margin-bottom: 10px;
+}
+
+.input:hover {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0, 1);
+    transition: .2s;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.form button:not(last-child) {
+    margin-bottom: 10px;
+}
+
+.form button:disabled {
+    background-color: rgb(229, 229, 229);
+    border-color: rgb(117, 117, 117);
+    color: rgb(117, 117, 117);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.select {
+    width: 100%;
+    padding: 18px 0px 10px;
+    height: 45px;
+    border: none;
+    border-bottom: 1px solid rgb(117, 117, 117);
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 14px;
+    margin-bottom: 10px;
+}
+
+.select:hover {
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.select:first-child {
+    margin-top: 7px;
+}
+
+.select:focus {
+    outline: none;
+}
+
+.input_container {
+    display: grid;
+    position: relative;
+}
+
+.label {
+    position: absolute;
+    transition: transform 0.3s, font-size 0.3s;
+    transform: translateY(10px);
+    color: rgb(117, 117, 117, .9);
+}
+
+.select_label {
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s, font-size 0.3s;
+    transform: translateY(8px);
+    color: rgb(117, 117, 117, .9);
+}
+
+.input:hover+.label {
+    color: rgb(0, 0, 0, 1)
+}
+
+.only_focus {
+    transform: translateY(-78%);
+}
+
+.label_animated {
+    position: absolute;
+    pointer-events: none;
+    transition: transform 0.3s, font-size 0.3s;
+    transform: translateY(-78%);
+}
+
+.input+.label {
+    top: 30%;
+}
+
+.error_border {
+    border-bottom: 1px solid red;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.checkbox_label {
+    display: flex;
+    align-items: center;
+    margin-top: 13px;
+}
+
+.checkbox_label a {
+    text-decoration: underline;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    position: relative;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.checkbox::after {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+}
+
+input[type="checkbox"]:checked+.checkbox::after {
+    background-color: #000;
+}
+
+.btn_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.save_btn {
+    height: 45px;
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin-top: 40px;
+    padding: 0px;
+}
+
+.save_btn:hover {
+    background-color: rgb(0, 0, 0, .6);
+    border: none;
+}
+
+
+.discard_btn {
+    height: 45px;
+    background-color: #fff;
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid #000;
+    cursor: pointer;
+    color: #000;
+    padding: 0px;
+}
+
+.discard_btn:hover {
+    background-color: rgb(117, 117, 117);
+    color: #fff;
+    border: 1px solid rgb(117, 117, 117);
+}

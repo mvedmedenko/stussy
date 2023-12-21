@@ -8,9 +8,8 @@ import Footer from './components/Footer/Footer';
 import Login from './pages/Account/Auth/Login/Login';
 import PrivateRoutes from './utils/PrivateRoutes';
 import Account from './pages/Account/Account';
-import Adress from './pages/Account/Adress';
 import Register from './pages/Account/Auth/Register/Register';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "./pages/Search/Search";
 import Accessibilitys from "./pages/Support/Accessibilitys/Accessibilitys";
 import Careers from "./pages/Support/Careers/Careers";
@@ -20,11 +19,19 @@ import Returns from "./pages/Support/Returns/Returns";
 import Customer from "./pages/Support/Customer/Customer";
 import Blog from "./pages/Features/Blog/Blog";
 import Chapters from "./pages/Chapters/Chapters";
+import Product from "./pages/Product/Product";
+import { useEffect } from "react";
+import { checkAuthStatus } from "./redux/actions/authActions";
+import Address from "./pages/Account/Address/Address";
 
 
 function App() {
-
+    const dispatch = useDispatch()
     const isSearch = useSelector((state) => state.searchReducer.isSearch)
+
+    useEffect(() => {
+        dispatch(checkAuthStatus())
+    }, [])
 
 
     return (
@@ -53,10 +60,11 @@ function App() {
                         <Route path="/blogs/features/tagged/Features" element={<Features/>} />
                         <Route path="/blogs/features/tagged/Lookbooks" element={<Features/>} />
                         <Route path="/blogs/features/:id" element={<Blog/>} />
+                        <Route path="/collections/all/products/:id" element={<Product/>} />
                         <Route path="/blogs/chapters" element={<Chapters/>} />
                         <Route element={<PrivateRoutes />}>
                             <Route path="/account" element={<Account />} />
-                            <Route path="/account/adress" element={<Adress />} />
+                            <Route path="/account/addresses" element={<Address />} />
                         </Route>
                     </Routes>
                 </div>
