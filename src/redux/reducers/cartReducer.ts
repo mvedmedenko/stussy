@@ -1,9 +1,13 @@
 interface State {
     selectedSize: string,
+    isBag: boolean
+    items: any
 }
 
 const initialState: State = {
-    selectedSize: ""
+    selectedSize: "",
+    isBag: false,
+    items: []
 };
 
 const cartReducer = (state = initialState, action: any) => {
@@ -12,6 +16,25 @@ const cartReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 selectedSize: action.payload,
+            };
+
+        case 'OPEN_BAG':
+            return {
+                ...state,
+                isBag: true,
+            };
+
+        case 'CLOSE_BAG':
+            return {
+                ...state,
+                isBag: false,
+            };
+
+
+        case 'SET_CART_DATA_FROM_FIREBASE':
+            return {
+                ...state,
+                items: action.payload
             };
 
         default:

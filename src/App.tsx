@@ -31,7 +31,8 @@ function App() {
 
     useEffect(() => {
         dispatch(checkAuthStatus())
-    }, [])
+        
+    }, [dispatch])
 
 
     return (

@@ -4,7 +4,7 @@
     background-color: #fff;
     width: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 14;
 }
 
 .logo {
@@ -52,8 +52,16 @@
     align-items: center;
 }
 
-.bag a:hover {
+.bag {
+    cursor: pointer;
+}
+
+.bag:hover {
     font-weight: 700;
+}
+
+.bag .active {
+    text-decoration: none;
 }
 
 .search {

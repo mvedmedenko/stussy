@@ -4,25 +4,36 @@ import Navbar from "./Navbar/Navbar";
 import Shopnav from "./Shopnav/Shopnav";
 import Featuresnav from "./Featuresnav/Featuresnav";
 import Supportnav from "./Supportnav/Supportnav";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Searchnav from "./Searchnav/Searchnav";
-import { NavLink, useLocation } from "react-router-dom";
-import { openSearch } from "../../redux/actions/searchActions";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Accountnav from "./Accountnav/Accountnav";
+import { getFirebaseCart, openBag } from "../../redux/actions/cartAction";
+import Bag from "./Bag/Bag";
 
 const Header = () => {
 
     const isAuth = useSelector((state) => state.authReducer.isAuth)
+    const isBag = useSelector((state) => state.cartReducer.isBag)
+    const cartItems = useSelector((state) => state.cartReducer.items)
+    const userId = useSelector((state) => state.authReducer.user.uid)
     const dispatch = useDispatch()
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
     const pathSplit = pathname.split("/")
     const [activeLink, setActiveLink] = useState<string>("shop")
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
 
-    const onClickHandler = (text: string) => {
-        setActiveLink(text)
-        dispatch(openSearch())
+    useEffect(() => {
+        if(userId) {
+            dispatch(getFirebaseCart(userId))
+        }
+    }, [userId])
+
+    const bagHandler = () => {
+        if (!isBag) {
+            dispatch(openBag())
+        }
     }
 
     return (
@@ -50,7 +61,7 @@ const Header = () => {
                         <div onClick={() => onClickHandler("search")} className={activeLink === "search" ? s.active : ""}>SEARCH</div>
                     </div>
                     <div className={s.bag}>
-                        <NavLink onClick={() => onClickHandler("bag")} className={activeLink === "bag" ? s.active : ""} to="/bag">BAG</NavLink>
+                        <div onClick={bagHandler} className={s.bag}>BAG ({cartItems.length})</div>
                     </div>
                 </div>
             </div>
@@ -75,6 +86,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+            {isBag ? <Bag /> : null}
         </header>
     );
 };

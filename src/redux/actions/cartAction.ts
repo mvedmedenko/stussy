@@ -1,11 +1,26 @@
-import { ref, child, get, push, update } from 'firebase/database';
-import { database } from '../../lib/firebase/firebase'; // Подключите вашу конфигурацию Firebase
-
+import { child, get, push, update } from 'firebase/database';
+import { database } from '../../lib/firebase/firebase';
+import { ref } from "firebase/database";
 
 export const setSelectedSizeAction = (size: string) => ({
   type: 'SET_SELECTED_SIZE',
   payload: size,
 });
+
+export const openBagAction = () => ({
+  type: 'OPEN_BAG',
+});
+
+export const closeBagAction = () => ({
+  type: 'CLOSE_BAG',
+});
+
+export const setCartDataAction = (data: any) => ({
+  type: 'SET_CART_DATA_FROM_FIREBASE',
+  payload: data,
+});
+
+
 
 
 export const setSelectedSize = (size: string) => async (dispatch: any) => {
@@ -39,12 +54,10 @@ export const addToFirebaseCart = async (selectedSize: string, newObj: any, userI
     const cartRef = ref(database, `carts/${userId}`);
     const cartSnapshot = await get(child(cartRef, 'items'));
 
-    // Get data of the cart from Firebase
     const cartData = cartSnapshot.val() || {};
 
-    const newItem = { userId: userId, size: selectedSize, amount: 1, ...newObj };
+    const newItem = {size: selectedSize, amount: 1, ...newObj };
 
-    // Check if the item with the same product ID and size already exists in the cart
     const existingItemKey = Object.keys(cartData).find(
       (key) => cartData[key].productId === newItem.productId && cartData[key].size === newItem.size
     );
@@ -59,6 +72,32 @@ export const addToFirebaseCart = async (selectedSize: string, newObj: any, userI
     console.log('Product added to Firebase cart.');
   } catch (error) {
     console.error('Error adding product to Firebase cart:', error);
+  }
+};
+
+export const openBag = () => async (dispatch: any) => {
+  dispatch(openBagAction())
+}
+
+export const closeBag = () => async (dispatch: any) => {
+  dispatch(closeBagAction())
+}
+
+
+export const getFirebaseCart = (userId: string) => async (dispatch: any) => {
+  try {
+    const cartsRef = ref(database, `carts/${userId}`);
+
+    const snapshot = await get(cartsRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const objectsArray = Object.values(data.items);
+      dispatch(setCartDataAction(objectsArray))
+    } else {
+      console.log('Data is not found');
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
 };
 

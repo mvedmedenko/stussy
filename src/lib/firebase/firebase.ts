@@ -12,7 +12,8 @@ const firebaseConfig = {
   storageBucket: "stussy-fc5f0.appspot.com",
   messagingSenderId: "356576828789",
   appId: "1:356576828789:web:61dc32f6f0455f8b0d473c",
-  measurementId: "G-SL74FQZDNM"
+  measurementId: "G-SL74FQZDNM",
+  databaseURL: "https://stussy-fc5f0-default-rtdb.firebaseio.com/",
 };
 
 // Initialize Firebase
