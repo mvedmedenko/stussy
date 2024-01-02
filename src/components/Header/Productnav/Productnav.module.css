@@ -1,0 +1,26 @@
+.inner {
+    display: flex;
+    align-items: center;
+}
+
+.back {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    cursor: pointer;
+}
+
+.back:hover {
+    font-weight: 700;
+}
+
+.next {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.next:hover {
+    font-weight: 700;
+}

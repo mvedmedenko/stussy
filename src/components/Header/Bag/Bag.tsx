@@ -1,20 +1,24 @@
 import s from "./Bag.module.css"
 import close from "../../../assets/images/close.svg"
 import { useDispatch, useSelector } from "react-redux"
-import { closeBag } from "../../../redux/actions/cartAction"
+import { closeBag, decrementFirebaseCartItem, decrementLocalStorageCartItem, incrementFirebaseCartItem, incrementLocalStorageCartItem } from "../../../redux/actions/cartAction"
 import { useEffect, useRef, useState } from "react"
+import { NavLink } from "react-router-dom"
 
 const Bag = () => {
 
     const dispatch = useDispatch()
     const cartItems = useSelector((state) => state.cartReducer.items)
+    const isAuth = useSelector((state) => state.authReducer.isAuth)
+    const userId = useSelector((state) => state.authReducer.user.uid)
+    const isRequesting = useSelector((state) => state.cartReducer.isRequesting)
     const ref = useRef(null)
     const [subtotalPrice, setSubtotalPrice] = useState<any>(0)
     const objectsArray = Object.values(cartItems);
 
     useEffect(() => {
         const countSubtotal = () => {
-            const totalPrice = objectsArray.reduce((acc: any, item: any) => {
+            const totalPrice = objectsArray.reduce((acc: number, item: any) => {
                 const sum = item.price * item.amount;
                 return acc + sum;
             }, 0);
@@ -22,7 +26,7 @@ const Bag = () => {
         };
 
         countSubtotal()
-    }, [subtotalPrice])
+    }, [subtotalPrice, objectsArray])
 
     const closeHandler = () => {
         dispatch(closeBag())
@@ -38,6 +42,28 @@ const Bag = () => {
         }
     };
 
+    const incrementHandler = (itemId: string, itemSize: string) => {
+        if (isAuth) {
+            dispatch(incrementFirebaseCartItem(userId, itemId, itemSize))
+        } else {
+            dispatch(incrementLocalStorageCartItem(itemId, itemSize))
+        }
+    }
+
+    const decrementHandler = (itemId: string, itemSize: string) => {
+        if(isAuth) {
+            dispatch(decrementFirebaseCartItem(userId, itemId, itemSize))
+        } else {
+            dispatch(decrementLocalStorageCartItem(itemId, itemSize))
+        }
+    }
+
+    const itemHandler = (id: string, item: any) => {
+        const { amount, ...newItem } = item;
+        const itemString = JSON.stringify(newItem);
+        localStorage.setItem('selectedItem', itemString);
+    };
+
     return (
         <div onClick={onBagListener} className={s.bag}>
             <div ref={ref} className={s.inner}>
@@ -51,7 +77,7 @@ const Bag = () => {
                 </div>
                 <div className={s.items_box}>
                     {objectsArray.map((item: any) => {
-                        return <div className={s.item}>
+                        return <div onClick={() => itemHandler(item.id, item)} className={isRequesting ? s.item_disabled : s.item}>
                             <div className={s.img}>
                                 <img width="175px" height="218px" src={item.firstImg} alt="" />
                             </div>
@@ -66,35 +92,50 @@ const Bag = () => {
                                     $ {item.price}
                                 </div>
                                 <div className={s.amount_box}>
-                                    <button className={s.decrement}>-</button>
+                                    <button disabled={isRequesting} onClick={() => decrementHandler(item.id, item.size)} className={s.decrement}>-</button>
                                     <div className={s.amount}>{item.amount}</div>
-                                    <button className={s.increment}>+</button>
+                                    <button disabled={isRequesting} onClick={() => incrementHandler(item.id, item.size)} className={s.increment}>+</button>
                                 </div>
                             </div>
                         </div>
                     })}
                     <div className={s.shipping_info}>
-                        <div className={s.taxes_info}>
+                        <div className={cartItems.length > 0 ? s.taxes_info : s.taxes_empty_cart}>
                             <div className={s.taxes_inner}>
+                                {cartItems.length > 0 
+                                ?
                                 <p>TAXES AND SHIPPING CALCULATED AT CHECKOUT.</p>
+                                :
+                                <p>YOU HAVE NO ITEMS IN YOUR SHOPPING BAG.</p>
+                            }
                                 <p>FREE SHIPPING IN CANADA ON ORDERS OVER CA$200.</p>
                             </div>
                         </div>
-                        <div className={s.subtotal_box}>
-                            <div className={s.subtotal_inner}>
-                                <div>SUBTOTAL</div>
-                                <div>${subtotalPrice}</div>
+                        {cartItems.length > 0
+                            ?
+                            <div className={s.subtotal_box}>
+                                <div className={s.subtotal_inner}>
+                                    <div>SUBTOTAL</div>
+                                    <div>${subtotalPrice}</div>
+                                </div>
                             </div>
-                        </div>
+                            :
+                            null
+
+                        }
                     </div>
                 </div>
                 <div className={s.button_box}>
                     <div>
-                        <button onClick={continueShippingHandler} className={s.continue_btn}>CONTINUE SHOPPING</button>
+                        <button onClick={continueShippingHandler} className={cartItems.length! > 0 ? s.continue_btn : s.continue_btn_black}>CONTINUE SHOPPING</button>
                     </div>
-                    <div>
-                        <button className={s.checkout_btn}>CHECKOUT</button>
-                    </div>
+                    {cartItems.length > 0
+                        ?
+                        <div>
+                            <NavLink to="/checkout"><button className={s.checkout_btn}>CHECKOUT</button></NavLink>
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
         </div>

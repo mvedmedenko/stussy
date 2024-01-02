@@ -19,8 +19,24 @@ export const setProductsAction = (products: any) => ({
     type: 'GET_PRODUCTS_FAILURE',
     payload: error,
   });
+
+  export const setSelectedSizeAction = (size: string) => ({
+    type: 'SET_SELECTED_SIZE',
+    payload: size,
+  });
+
+  export const getSelectedItemAction = (item: any) => ({
+    type: 'GET_SELECTED_ITEM',
+    payload: item,
+  });
   
   
+
+  export const setSelectedSize = (size: string) => async (dispatch: any) => {
+    dispatch(setSelectedSizeAction(size))
+  };
+
+
   export const getProducts = () => async (dispatch: any) => {
     try {
       dispatch(startGetProductsAction());
@@ -38,3 +54,7 @@ export const setProductsAction = (products: any) => ({
       dispatch(getProductsDataFailure(error.message));
     }
   };
+
+  export const getSelectedItem = (item: any) => (dispatch: any) => {
+    dispatch(getSelectedItemAction(item))
+  }

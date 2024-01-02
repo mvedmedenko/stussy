@@ -9,8 +9,9 @@ import Searchnav from "./Searchnav/Searchnav";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Accountnav from "./Accountnav/Accountnav";
-import { getFirebaseCart, openBag } from "../../redux/actions/cartAction";
+import { getFirebaseCart, getLocalStorageCart, openBag } from "../../redux/actions/cartAction";
 import Bag from "./Bag/Bag";
+import Productnav from "./Productnav/Productnav";
 
 const Header = () => {
 
@@ -23,12 +24,31 @@ const Header = () => {
     const pathSplit = pathname.split("/")
     const [activeLink, setActiveLink] = useState<string>("shop")
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
+    const [subtotalCartItems, setSubtotalCartItems] = useState<number>(0)
+
 
     useEffect(() => {
-        if(userId) {
+        if (userId) {
             dispatch(getFirebaseCart(userId))
+        } else {
+            dispatch(getLocalStorageCart())
         }
     }, [userId])
+
+    useEffect(() => {
+        const countCartItems = () => {
+            if (cartItems.length > 0) {
+                const subtotal = cartItems.reduce((acc, item) => {
+                    return acc + item.amount
+                }, 0)
+                setSubtotalCartItems(subtotal)
+            } else {
+                setSubtotalCartItems(0)
+            }
+        }
+        countCartItems()
+    }, [cartItems])
+
 
     const bagHandler = () => {
         if (!isBag) {
@@ -61,14 +81,14 @@ const Header = () => {
                         <div onClick={() => onClickHandler("search")} className={activeLink === "search" ? s.active : ""}>SEARCH</div>
                     </div>
                     <div className={s.bag}>
-                        <div onClick={bagHandler} className={s.bag}>BAG ({cartItems.length})</div>
+                        <div onClick={bagHandler} className={s.bag}>{subtotalCartItems > 0 ? `BAG (${subtotalCartItems})` : "BAG"}</div>
                     </div>
                 </div>
             </div>
             <div className={s.bottom_list_wrapper}>
                 <div className={s.container}>
                     <div className={s.bottom_list}>
-                        {((mouseOnLink === null && pathSplit[1] === "collections") || mouseOnLink === "shop") && (
+                        {((mouseOnLink === null && pathSplit[1] === "collections" && pathSplit[3] !== "products") || mouseOnLink === "shop") && (
                             <Shopnav />
                         )}
                         {((mouseOnLink === null && pathSplit[1] === "blogs") || mouseOnLink === "features") && (
@@ -82,6 +102,9 @@ const Header = () => {
                         )}
                         {((pathSplit[1] === "account" && isAuth === true)) && (
                             <Accountnav />
+                        )}
+                        {((pathSplit[3] === "products")) && (
+                            <Productnav/> 
                         )}
                     </div>
                 </div>

@@ -1,11 +1,6 @@
-import { child, get, push, update } from 'firebase/database';
+import { child, get, push, update, set, remove } from 'firebase/database';
 import { database } from '../../lib/firebase/firebase';
 import { ref } from "firebase/database";
-
-export const setSelectedSizeAction = (size: string) => ({
-  type: 'SET_SELECTED_SIZE',
-  payload: size,
-});
 
 export const openBagAction = () => ({
   type: 'OPEN_BAG',
@@ -20,12 +15,25 @@ export const setCartDataAction = (data: any) => ({
   payload: data,
 });
 
+export const clearStoreCartAction = () => ({
+  type: 'CLEAR_STORE_CART',
+});
+
+export const setCartDataFromLocalStorage = (data: any) => ({
+  type: 'SET_CART_FROM_LOCAL_STORAGE',
+  payload: data,
+})
+
+export const startRequestingStatusAction = () => ({
+  type: 'START_REQUESTING_STATUS',
+})
+
+export const stopRequestingStatusAction = () => ({
+  type: 'STOP_REQUESTING_STATUS',
+})
 
 
 
-export const setSelectedSize = (size: string) => async (dispatch: any) => {
-  dispatch(setSelectedSizeAction(size))
-};
 
 export const addToLocalStorageCart = (selectedSize: string, newObj: any) => async (dispatch: any) => {
   let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -45,18 +53,19 @@ export const addToLocalStorageCart = (selectedSize: string, newObj: any) => asyn
   }
 
   localStorage.setItem("cart", JSON.stringify(existingCart));
-  console.log(JSON.parse(localStorage.getItem("cart")));
+  dispatch(getLocalStorageCart())
 }
 
 
-export const addToFirebaseCart = async (selectedSize: string, newObj: any, userId: string) => {
+export const addToFirebaseCart = (selectedSize: string, newObj: any, userId: string) => async (dispatch: any) => {
   try {
+    dispatch(startRequestingStatusAction())
     const cartRef = ref(database, `carts/${userId}`);
     const cartSnapshot = await get(child(cartRef, 'items'));
 
     const cartData = cartSnapshot.val() || {};
 
-    const newItem = {size: selectedSize, amount: 1, ...newObj };
+    const newItem = { size: selectedSize, amount: 1, ...newObj };
 
     const existingItemKey = Object.keys(cartData).find(
       (key) => cartData[key].productId === newItem.productId && cartData[key].size === newItem.size
@@ -70,10 +79,15 @@ export const addToFirebaseCart = async (selectedSize: string, newObj: any, userI
     }
 
     console.log('Product added to Firebase cart.');
+    const getUpdatedFirebaseCart = dispatch(getFirebaseCart(userId))
+    dispatch(setCartDataAction(getUpdatedFirebaseCart))
+    dispatch(stopRequestingStatusAction())
+
+
   } catch (error) {
     console.error('Error adding product to Firebase cart:', error);
   }
-};
+}
 
 export const openBag = () => async (dispatch: any) => {
   dispatch(openBagAction())
@@ -94,12 +108,114 @@ export const getFirebaseCart = (userId: string) => async (dispatch: any) => {
       const objectsArray = Object.values(data.items);
       dispatch(setCartDataAction(objectsArray))
     } else {
+      dispatch(clearStoreCartAction())
       console.log('Data is not found');
     }
   } catch (error) {
     console.error('Error:', error);
   }
 };
+
+export const incrementFirebaseCartItem = (userId: string, itemId: string, itemSize: string) => async (dispatch: any) => {
+  try {
+    dispatch(startRequestingStatusAction())
+    const cartItemRef = ref(database, `carts/${userId}/items`);
+    const cartItemSnapshot = await get(cartItemRef);
+    const currentAmount = cartItemSnapshot.val();
+
+    if (currentAmount !== null) {
+      const itemKeys = Object.keys(currentAmount);
+
+      const itemToUpdateKey = itemKeys.find(key => currentAmount[key].id === itemId && currentAmount[key].size === itemSize);
+
+      if (itemToUpdateKey) {
+        const itemToUpdateRef = ref(database, `carts/${userId}/items/${itemToUpdateKey}/amount`);
+        const currentItemAmount = currentAmount[itemToUpdateKey].amount || 0;
+
+        await set(itemToUpdateRef, currentItemAmount + 1);
+        dispatch(getFirebaseCart(userId));
+        console.log('Item found in Firebase cart. Incrementing amount.');
+      } else {
+        console.log('Item not found in Firebase cart.');
+      }
+      dispatch(stopRequestingStatusAction())
+    }
+  } catch (error) {
+    console.error('Error incrementing item amount in Firebase cart:', error);
+  }
+};
+
+export const decrementFirebaseCartItem = (userId: string, itemId: string, itemSize: string) => async (dispatch: any) => {
+  try {
+    dispatch(startRequestingStatusAction())
+    const cartItemRef = ref(database, `carts/${userId}/items`);
+    const cartItemSnapshot = await get(cartItemRef);
+    const currentAmount = cartItemSnapshot.val();
+    console.log(currentAmount);
+    console.log(itemId);
+
+    if (currentAmount !== null) {
+      const itemKeys = Object.keys(currentAmount);
+
+      const itemToUpdateKey = itemKeys.find(key => currentAmount[key].id === itemId && currentAmount[key].size === itemSize);
+
+      if (itemToUpdateKey) {
+        const itemToUpdateRef = ref(database, `carts/${userId}/items/${itemToUpdateKey}`);
+        const currentItemAmount = currentAmount[itemToUpdateKey].amount || 0;
+
+        if (currentItemAmount > 1) {
+          await set(itemToUpdateRef, { ...currentAmount[itemToUpdateKey], amount: currentItemAmount - 1 });
+          dispatch(getFirebaseCart(userId));
+          console.log('Item found in Firebase cart. Decrementing amount.');
+        } else {
+          await remove(itemToUpdateRef);
+          dispatch(getFirebaseCart(userId));
+          console.log('Item amount is less than 1. Removing item from Firebase cart.');
+        }
+      } else {
+        console.log('Item not found in Firebase cart.');
+      }
+      dispatch(stopRequestingStatusAction())
+    }
+  } catch (error) {
+    console.error('Error decrementing item amount in Firebase cart:', error);
+  }
+};
+
+export const getLocalStorageCart = () => (dispatch: any) => {
+  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  dispatch(setCartDataFromLocalStorage(existingCart))
+}
+
+export const incrementLocalStorageCartItem = (itemId: string, itemSize: string) => (dispatch: any) => {
+  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existingItem = existingCart.find((i) => i.id === itemId && i.size === itemSize);
+
+  if (existingItem) {
+    existingItem.amount += 1;
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    dispatch(getLocalStorageCart());
+  }
+};
+
+export const decrementLocalStorageCartItem = (itemId: string, itemSize: string) => (dispatch: any) => {
+  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existingItem = existingCart.find((i) => i.id === itemId && i.size === itemSize);
+
+  if (existingItem) {
+    if(existingItem.amount > 1) {
+      existingItem.amount -= 1;
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      dispatch(getLocalStorageCart());
+    } else {
+      const filteredCart = existingCart.filter((i) => i !== existingItem)
+      localStorage.setItem("cart", JSON.stringify(filteredCart));
+      dispatch(getLocalStorageCart());
+    }
+  }
+};
+
+
 
 
 

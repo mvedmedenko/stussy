@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from "./Shop.module.css"
 import { NavLink, useLocation } from 'react-router-dom';
-import { getProducts } from '../../redux/actions/shopActions';
+import { getProducts, getSelectedItem } from '../../redux/actions/shopActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedSize } from '../../redux/actions/cartAction';
+import { setSelectedSize } from '../../redux/actions/shopActions';
 
 const Shop = () => {
 
@@ -35,6 +35,9 @@ const Shop = () => {
         const selectedItem = products.find((i) => i.id === id)
         const itemStr = JSON.stringify(selectedItem);
         localStorage.setItem('selectedItem', itemStr);
+        localStorage.setItem('prevCollection', pathSplit[2].toUpperCase())
+        dispatch(getSelectedItem(selectedItem))
+
     };
 
     const onMouseLeaveHandle = () => {

@@ -18,10 +18,18 @@
 
 .info_box {
     padding: 80px 0px;
+    position: relative;
 }
 
 .title {
     font-size: 24px;
+}
+
+.info_fix {
+    position: fixed;
+    background-color: #fff;
+    max-height: 800px;
+    z-index: 4;
 }
 
 .grid_info {
@@ -29,10 +37,11 @@
     grid-template-columns: repeat(7, 1fr);
 }
 
+
 .info_inner {
     grid-column: span 4;
-    grid-column-start: 2; 
-    grid-column-end: span 4; 
+    grid-column-start: 2;
+    grid-column-end: span 4;
 }
 
 .sizes {
@@ -97,7 +106,7 @@
 
 .arrow_active {
     transform: rotate(180deg);
-    transition: .2s;   
+    transition: .2s;
     margin-left: 5px;
 }
 
@@ -144,7 +153,7 @@
     padding: 20px 0px;
     background-color: #fff;
     position: absolute;
-    bottom: 0;
+    bottom: -100px;
 }
 
 .add_button {
@@ -180,11 +189,17 @@
     border: 1px solid #000;
     font-size: 12px;
     font-weight: 700;
-    background-color: #000;
+    background-color: #fff;
     cursor: pointer;
     padding: 0;
+    color: #000;
+    transition: .2s;
+}
+
+.checkout_button button:hover {
+    background-color: rgb(117, 117, 117);
     color: #fff;
-    transition: .2s; 
+    border: 1px solid rgb(117, 117, 117);
 }
 
 .selected_size {

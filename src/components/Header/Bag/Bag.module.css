@@ -207,6 +207,35 @@
     justify-content: space-between;
 }
 
+.continue_btn_black {
+    width: 665px;
+    height: 45px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 12px;
+    transition: .2s;
+}
+
+.continue_btn_black:hover {
+    opacity: .7;
+    color: #fff;
+    transition: .2s;
+}
+
+.taxes_empty_cart p:first-child {
+    margin-bottom: 10px;
+}
+
+.item_disabled {
+    display: flex;
+    padding: 0px 20px;
+    opacity: .5;
+}
+
 
 
 

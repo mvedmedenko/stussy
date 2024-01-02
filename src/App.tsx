@@ -23,6 +23,8 @@ import Product from "./pages/Product/Product";
 import { useEffect } from "react";
 import { checkAuthStatus } from "./redux/actions/authActions";
 import Address from "./pages/Account/Address/Address";
+import Checkout from "./pages/Checkout/Checkout";
+import ScrollToTopOnRouteChange from "./utils/ScrollToTopOnRouteChange";
 
 
 function App() {
@@ -31,7 +33,7 @@ function App() {
 
     useEffect(() => {
         dispatch(checkAuthStatus())
-        
+
     }, [dispatch])
 
 
@@ -55,14 +57,15 @@ function App() {
                         <Route path="/pages/size-guide" element={<Size />} />
                         <Route path="/pages/shipping-returns" element={<Returns />} />
                         <Route path="/pages/customer-support" element={<Customer />} />
-                        <Route path="/blogs/all" element={<Features/>} />
-                        <Route path="/blogs/features/tagged/Collaborations" element={<Features/>} />
-                        <Route path="/blogs/features/tagged/Collections" element={<Features/>} />
-                        <Route path="/blogs/features/tagged/Features" element={<Features/>} />
-                        <Route path="/blogs/features/tagged/Lookbooks" element={<Features/>} />
-                        <Route path="/blogs/features/:id" element={<Blog/>} />
-                        <Route path="/collections/all/products/:id" element={<Product/>} />
-                        <Route path="/blogs/chapters" element={<Chapters/>} />
+                        <Route path="/blogs/all" element={<Features />} />
+                        <Route path="/blogs/features/tagged/Collaborations" element={<Features />} />
+                        <Route path="/blogs/features/tagged/Collections" element={<Features />} />
+                        <Route path="/blogs/features/tagged/Features" element={<Features />} />
+                        <Route path="/blogs/features/tagged/Lookbooks" element={<Features />} />
+                        <Route path="/blogs/features/:id" element={<Blog />} />
+                        <Route path="/collections/all/products/:id" element={<Product />} />
+                        <Route path="/blogs/chapters" element={<Chapters />} />
+                        <Route path="/checkout" element={<Checkout />} />
                         <Route element={<PrivateRoutes />}>
                             <Route path="/account" element={<Account />} />
                             <Route path="/account/addresses" element={<Address />} />

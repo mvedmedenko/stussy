@@ -1,5 +1,6 @@
 import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../lib/firebase/firebase";
+import { getFirebaseCart } from "./cartAction";
 
 export const registerStartAction = () => ({
   type: 'REGISTER_START',
