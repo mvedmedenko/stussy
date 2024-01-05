@@ -6,10 +6,12 @@ const Filter = () => {
     return (
         <div className={s.filter}>
             <div className={s.filter_box}>
-                <div className={s.product_type}>
-                    <div className={s.title}>PRODUCT TYPE</div>
+                <div className={s.category}>
+                    <div className={s.title}>CATEGORY</div>
                     <div className={s.grid_container}>
-
+                        <div>
+                            
+                        </div>
                     </div>
                 </div>
                 <div className={s.size}>

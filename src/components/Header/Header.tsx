@@ -12,11 +12,13 @@ import Accountnav from "./Accountnav/Accountnav";
 import { getFirebaseCart, getLocalStorageCart, openBag } from "../../redux/actions/cartAction";
 import Bag from "./Bag/Bag";
 import Productnav from "./Productnav/Productnav";
+import { closeSearch, openSearch } from "../../redux/actions/searchActions";
 
 const Header = () => {
 
     const isAuth = useSelector((state) => state.authReducer.isAuth)
     const isBag = useSelector((state) => state.cartReducer.isBag)
+    const isSearch = useSelector((state) => state.searchReducer.isSearch)
     const cartItems = useSelector((state) => state.cartReducer.items)
     const userId = useSelector((state) => state.authReducer.user.uid)
     const dispatch = useDispatch()
@@ -25,6 +27,7 @@ const Header = () => {
     const [activeLink, setActiveLink] = useState<string>("shop")
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
     const [subtotalCartItems, setSubtotalCartItems] = useState<number>(0)
+
 
 
     useEffect(() => {
@@ -56,10 +59,21 @@ const Header = () => {
         }
     }
 
+    const searchHandler = (text: string) => {
+        setActiveLink(text)
+        dispatch(openSearch())
+    }
+
+    const logoHandler = () => {
+        if(isSearch) {
+            dispatch(closeSearch())
+        }
+    }
+
     return (
         <header className={s.header}>
             <div className={s.inner}>
-                <div className={s.logo}>
+                <div onClick={logoHandler} className={s.logo}>
                     <Logo
                         setActiveLink={setActiveLink}
                     />
@@ -78,7 +92,7 @@ const Header = () => {
                 </div>
                 <div className={s.rightside}>
                     <div className={s.search}>
-                        <div onClick={() => onClickHandler("search")} className={activeLink === "search" ? s.active : ""}>SEARCH</div>
+                        <div onClick={() => searchHandler("search")} className={isSearch ? s.active : ""}>SEARCH</div>
                     </div>
                     <div className={s.bag}>
                         <div onClick={bagHandler} className={s.bag}>{subtotalCartItems > 0 ? `BAG (${subtotalCartItems})` : "BAG"}</div>
@@ -88,22 +102,22 @@ const Header = () => {
             <div className={s.bottom_list_wrapper}>
                 <div className={s.container}>
                     <div className={s.bottom_list}>
-                        {((mouseOnLink === null && pathSplit[1] === "collections" && pathSplit[3] !== "products") || mouseOnLink === "shop") && (
+                        {((mouseOnLink === null && pathSplit[1]  === "collections" && pathSplit[3] !== "products" && !isSearch) || mouseOnLink === "shop") && (
                             <Shopnav />
                         )}
-                        {((mouseOnLink === null && pathSplit[1] === "blogs") || mouseOnLink === "features") && (
+                        {((mouseOnLink === null && pathSplit[1] === "blogs" && !isSearch) || mouseOnLink === "features") && (
                             <Featuresnav />
                         )}
-                        {((mouseOnLink === null && pathSplit[1] === "pages") || mouseOnLink === "support") && (
+                        {((mouseOnLink === null && pathSplit[1] === "pages" && !isSearch) || mouseOnLink === "support") && (
                             <Supportnav />
                         )}
                         {((mouseOnLink === null && activeLink === "search") || mouseOnLink === "search") && (
                             <Searchnav />
                         )}
-                        {((pathSplit[1] === "account" && isAuth === true)) && (
+                        {((pathSplit[1] === "account" && isAuth === true && !isSearch)) && (
                             <Accountnav />
                         )}
-                        {((pathSplit[3] === "products")) && (
+                        {((pathSplit[3] === "products" && !isSearch)) && (
                             <Productnav/> 
                         )}
                     </div>

@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css"
 import React from "react";
 import arrow from "../../../assets/images/arrow.svg"
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { closeSearch } from "../../../redux/actions/searchActions";
 
 type ShopnavPropsType = {
     setActiveLink: (text: string) => void
@@ -14,8 +17,16 @@ type ShopnavPropsType = {
 
 const Navbar = (props: ShopnavPropsType) => {
 
+    const dispatch = useDispatch()
+    const isSearch = useSelector((state) => state.searchReducer.isSearch)
+
     const onClickHandler = (text: string) => {
-        props.setActiveLink(text)
+        if(!isSearch) {
+            props.setActiveLink(text)
+        } else {
+            dispatch(closeSearch())
+            props.setActiveLink(text)
+        }
     }
 
     const onMouseOverHandler = (event: React.MouseEvent) => {
