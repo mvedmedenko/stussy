@@ -4,10 +4,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { getProducts, getSelectedItem } from '../../redux/actions/shopActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedSize } from '../../redux/actions/shopActions';
+import Filter from '../../components/Header/Shopnav/Filter/Filter';
 
 const Shop = () => {
 
     const dispatch = useDispatch()
+    const isFilter = useSelector((state) => state.filterReducer.isFilter)
     const [itemHower, setItemHower] = useState<string>("")
     const { pathname } = useLocation()
     const pathSplit = pathname.split("/")
@@ -46,6 +48,9 @@ const Shop = () => {
 
     return (
         <div className={s.shop}>
+            <div>
+                {isFilter && <Filter/>}
+            </div>
             <div className="container_images">
                 <div className={s.grid_container}>
                     {products.map((i) => {

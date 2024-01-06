@@ -24,8 +24,6 @@ import { useEffect } from "react";
 import { checkAuthStatus } from "./redux/actions/authActions";
 import Address from "./pages/Account/Address/Address";
 import Checkout from "./pages/Checkout/Checkout";
-import ScrollToTopOnRouteChange from "./utils/ScrollToTopOnRouteChange";
-
 
 function App() {
     const dispatch = useDispatch()

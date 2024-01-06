@@ -5,6 +5,7 @@ import searchReducer from "./reducers/searchReducer";
 import chatReducer from "./reducers/chatReducer";
 import shopReducer from "./reducers/shopReducer";
 import cartReducer from "./reducers/cartReducer";
+import filterReducer from "./reducers/filterReducer";
 
 const reducers = combineReducers({
     authReducer: authReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
     chatReducer: chatReducer,
     shopReducer: shopReducer,
     cartReducer: cartReducer,
+    filterReducer: filterReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunk));

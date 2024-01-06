@@ -41,7 +41,7 @@
 .items_box {
     display: grid;
     row-gap: 20px;
-    max-height: 668px;
+    max-height: 100%;
     overflow: auto;
 }
 
@@ -130,6 +130,7 @@
 
 .shipping_info {
     margin-top: 20px;
+    margin-bottom: 150px;
 }
 
 .taxes_info {

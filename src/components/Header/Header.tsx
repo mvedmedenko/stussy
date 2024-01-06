@@ -13,12 +13,14 @@ import { getFirebaseCart, getLocalStorageCart, openBag } from "../../redux/actio
 import Bag from "./Bag/Bag";
 import Productnav from "./Productnav/Productnav";
 import { closeSearch, openSearch } from "../../redux/actions/searchActions";
+import { closeFilter } from "../../redux/actions/filterAction";
 
 const Header = () => {
 
     const isAuth = useSelector((state) => state.authReducer.isAuth)
     const isBag = useSelector((state) => state.cartReducer.isBag)
     const isSearch = useSelector((state) => state.searchReducer.isSearch)
+    const isFilter = useSelector((state) => state.filterReducer.isFilter)
     const cartItems = useSelector((state) => state.cartReducer.items)
     const userId = useSelector((state) => state.authReducer.user.uid)
     const dispatch = useDispatch()
@@ -62,6 +64,10 @@ const Header = () => {
     const searchHandler = (text: string) => {
         setActiveLink(text)
         dispatch(openSearch())
+
+        if(isFilter) {
+            dispatch(closeFilter())
+        }
     }
 
     const logoHandler = () => {
