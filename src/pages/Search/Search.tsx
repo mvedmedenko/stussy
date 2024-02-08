@@ -1,11 +1,11 @@
 import { closeSearch } from "../../redux/actions/searchActions";
 import s from "./Search.module.css"
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks/hooks";
 
 
 const Search = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onBagListener = (e: React.MouseEvent<HTMLDivElement>) => {
         dispatch(closeSearch());

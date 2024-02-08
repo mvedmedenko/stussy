@@ -1,44 +1,47 @@
 import { useEffect, useState } from 'react';
 import s from "./Shop.module.css"
 import { NavLink, useLocation } from 'react-router-dom';
-import { getProducts, getSelectedItem } from '../../redux/actions/shopActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/actions/shopActions';
 import { setSelectedSize } from '../../redux/actions/shopActions';
 import Filter from '../../components/Header/Shopnav/Filter/Filter';
+import Loader from '../../utils/Loader/Loader';
+import { setNavigationActiveList } from '../../redux/actions/headerActions';
+import { setSelectedItem } from '../../redux/actions/shopActions';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 const Shop = () => {
 
-    const dispatch = useDispatch()
-    const isFilter = useSelector((state) => state.filterReducer.isFilter)
+    const dispatch = useAppDispatch()
+    const isFilter = useAppSelector((state) => state.filterReducer.isFilter)
+    const isFetching = useAppSelector((state) => state.shopReducer.isFetching)
+    const selectedItem = useAppSelector((state) => state.shopReducer.selectedItem)
+    const products = useAppSelector((state) => state.shopReducer.products)
     const [itemHower, setItemHower] = useState<string>("")
     const { pathname } = useLocation()
     const pathSplit = pathname.split("/")
 
-    const products = (useSelector((state) => {
-        return state.shopReducer.products
-    }))
 
     useEffect(() => {
         dispatch(getProducts())
+        dispatch(setNavigationActiveList("shop"))
     }, [])
+
 
     const setSelectedSizeHandle = (e: React.MouseEvent<HTMLLIElement>) => {
         const size = e.currentTarget.innerText;
         dispatch(setSelectedSize(size))
     }
 
-    const setSelectedItem = (e: React.MouseEvent<HTMLLIElement>, id: string) => {
+    const setSelectedItemHandle = (e: React.MouseEvent<HTMLLIElement>, item) => {
 
         const element = e.target;
         if (!(element instanceof HTMLLIElement)) {
             dispatch(setSelectedSize('')); 
         }
 
-        const selectedItem = products.find((i) => i.id === id)
-        const itemStr = JSON.stringify(selectedItem);
-        localStorage.setItem('selectedItem', itemStr);
         localStorage.setItem('prevCollection', pathSplit[2].toUpperCase())
-        dispatch(getSelectedItem(selectedItem))
+        dispatch(setSelectedItem(item))
+        dispatch(setNavigationActiveList("product"))
 
     };
 
@@ -48,6 +51,9 @@ const Shop = () => {
 
     return (
         <div className={s.shop}>
+            <div>
+                {isFetching && <Loader/>}
+            </div>
             <div>
                 {isFilter && <Filter/>}
             </div>
@@ -61,7 +67,7 @@ const Shop = () => {
                                 key={i.id}
                                 to={`/collections/all/products/${i.id}`}
                                 className="link"
-                                onClick={() => setSelectedItem(event, i.id)}
+                                onClick={() => setSelectedItemHandle(event, i)}
                                 >
                                 <div>
                                     <div className={s.img_container}>

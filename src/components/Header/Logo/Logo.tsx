@@ -1,20 +1,20 @@
 import {NavLink} from "react-router-dom";
 import logo from "../../../assets/images/logo.svg"
 import s from "./Logo.module.css"
+import { setNavigationActiveList } from "../../../redux/actions/headerActions";
+import { useAppDispatch } from "../../../hooks/hooks";
 
-type LogoPropsType = {
-    setActiveLink: (text: string) => void
-}
+const Logo = () => {
 
-const Logo = (props: LogoPropsType) => {
+    const dispatch = useAppDispatch()
 
     const onClickHandler = (text: string) => {
-        props.setActiveLink(text)
+        dispatch(setNavigationActiveList(text))
     }
 
     return (
-        <div className={s.logo}>
-            <NavLink onClick={() => onClickHandler("shop")} to="/"><img alt="LOGO" src={logo} width="56px" height="56px"/></NavLink>
+        <div onClick={() => onClickHandler("main")} className={s.logo}>
+            <NavLink to="/"><img alt="LOGO" src={logo} width="56px" height="56px"/></NavLink>
         </div>
     );
 };

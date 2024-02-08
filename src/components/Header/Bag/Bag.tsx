@@ -1,17 +1,18 @@
 import s from "./Bag.module.css"
 import close from "../../../assets/images/close.svg"
-import { useDispatch, useSelector } from "react-redux"
-import { closeBag, decrementFirebaseCartItem, decrementLocalStorageCartItem, incrementFirebaseCartItem, incrementLocalStorageCartItem } from "../../../redux/actions/cartAction"
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
+import { closeBag, decrementFirebaseCartItem, decrementLocalStorageCartItem, incrementFirebaseCartItem, incrementLocalStorageCartItem } from "../../../redux/actions/cartActions"
 import { useEffect, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
+import { setSelectedItem } from "../../../redux/actions/shopActions"
 
 const Bag = () => {
 
-    const dispatch = useDispatch()
-    const cartItems = useSelector((state) => state.cartReducer.items)
-    const isAuth = useSelector((state) => state.authReducer.isAuth)
-    const userId = useSelector((state) => state.authReducer.user.uid)
-    const isRequesting = useSelector((state) => state.cartReducer.isRequesting)
+    const dispatch = useAppDispatch()
+    const cartItems = useAppSelector((state) => state.cartReducer.items)
+    const isAuth = useAppSelector((state) => state.authReducer.isAuth)
+    const userId = useAppSelector((state) => state.authReducer.user.uid)
+    const isRequesting = useAppSelector((state) => state.cartReducer.isRequesting)
     const ref = useRef(null)
     const [subtotalPrice, setSubtotalPrice] = useState<any>(0)
     const objectsArray = Object.values(cartItems);
@@ -58,10 +59,10 @@ const Bag = () => {
         }
     }
 
-    const itemHandler = (id: string, item: any) => {
+    const itemHandler = (item: any) => {
         const { amount, ...newItem } = item;
-        const itemString = JSON.stringify(newItem);
-        localStorage.setItem('selectedItem', itemString);
+        dispatch(setSelectedItem(newItem))
+
     };
 
     return (

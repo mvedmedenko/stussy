@@ -1,5 +1,5 @@
 interface State {
-    loading: boolean;
+    isFetching: boolean;
     error: string | null;
     resetError: string | null
     isAuth: boolean;
@@ -7,7 +7,7 @@ interface State {
 }
 
 const initialState: State = {
-    loading: false,
+    isFetching: false,
     error: null,
     resetError: null,
     isAuth: false,
@@ -19,41 +19,41 @@ const authReducer = (state = initialState, action: any) => {
         case 'REGISTER_START':
             return {
                 ...state,
-                loading: true,
+                isFetching: true,
                 error: null,
             };
 
         case 'START_RESET_PASSWORD':
             return {
                 ...state,
-                loading: true,
+                isFetching: true,
                 resetError: null,
             };
 
         case 'RESET_PASSWORD_SUCCESS':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 resetError: null,
             };
 
         case 'RESET_PASSWORD_FAILURE':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 resetError: action.payload,
             };
 
         case 'LOGIN_START':
             return {
                 ...state,
-                loading: true,
+                isFetching: true,
                 error: null,
             };
         case 'REGISTER_SUCCESS':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: null,
             };
 
@@ -66,7 +66,7 @@ const authReducer = (state = initialState, action: any) => {
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: null,
                 isAuth: true,
             };
@@ -74,14 +74,14 @@ const authReducer = (state = initialState, action: any) => {
         case 'REGISTER_FAILURE':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: action.payload,
             };
 
         case 'LOGIN_FAILURE':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: action.payload,
             };
 

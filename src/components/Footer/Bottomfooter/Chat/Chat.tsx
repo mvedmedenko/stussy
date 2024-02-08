@@ -1,12 +1,13 @@
 import s from "./Chat.module.css"
 import { closeChat } from "../../../../redux/actions/chatActions"
-import { useDispatch, } from "react-redux"
+useAppDispatch
 import React, { useState } from "react"
 import chat from "../../../../assets/images/chat.svg"
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FormikHelpers } from "formik"
 import error from "../../../../assets/images/error-chat.png"
+import { useAppDispatch } from "../../../../hooks/hooks"
 
 interface FormData {
     name: string;
@@ -30,7 +31,7 @@ const validationSchema = Yup.object().shape({
 const Chat: React.FC = () => {
 
     const [isSubmited, setIsSubmited] = useState<boolean>(false)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const closeChatHandle = () => {
         dispatch(closeChat())

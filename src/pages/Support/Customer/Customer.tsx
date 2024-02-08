@@ -4,8 +4,10 @@ import arrow from "../../../assets/images/arrow.svg"
 import { customerData } from "./customerData"
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from "react-redux";
 import { openChat, closeChat } from "../../../redux/actions/chatActions";
+import { useEffect } from "react";
+import { setNavigationActiveList } from "../../../redux/actions/headerActions";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
 interface FormData {
     name: string;
@@ -33,10 +35,14 @@ const validationSchema = Yup.object().shape({
 
 const Customer: React.FC = () => {
 
-    const isChat = useSelector((state) => state.chatReducer.isChat)
-    const dispatch = useDispatch()
+    const isChat = useAppSelector((state) => state.chatReducer.isChat)
+    const dispatch = useAppDispatch()
     const [open, setOpen] = useState<string>("")
     const [isSubmited, setIsSubmited] = useState<boolean>(false)
+
+    useEffect(() => {
+        dispatch(setNavigationActiveList("support"))
+    }, [])
 
     const chatHandle = () => {
         if (isChat) {

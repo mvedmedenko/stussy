@@ -80,7 +80,8 @@ export const addToFirebaseCart = (selectedSize: string, newObj: any, userId: str
 
     console.log('Product added to Firebase cart.');
     const getUpdatedFirebaseCart = dispatch(getFirebaseCart(userId))
-    dispatch(setCartDataAction(getUpdatedFirebaseCart))
+    console.log(getUpdatedFirebaseCart)
+    // dispatch(setCartDataAction(getUpdatedFirebaseCart))
     dispatch(stopRequestingStatusAction())
 
 

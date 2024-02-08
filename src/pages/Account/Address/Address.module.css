@@ -251,3 +251,84 @@ input[type="checkbox"]:checked+.checkbox::after {
     color: #fff;
     border: 1px solid rgb(117, 117, 117);
 }
+
+.address {
+    padding: 20px 0px;
+}
+
+.address:not(:last-child) {
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.name {
+    text-transform: uppercase;
+}
+
+.name_box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.manage_box {
+    display: flex;
+}
+
+.manage_box div:first-child {
+    margin-right: 20px;
+}
+
+.city span:not(:last-child) {
+    margin-right: 5px;
+}
+
+.edit_btn button {
+    border: none;
+    background: none;
+    font-weight: 500;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: rgb(0, 0, 0, .7);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit_btn button:hover {
+    color: rgb(0, 0, 0, 1);
+}
+
+.delete_btn button {
+    border: none;
+    background: none;
+    font-weight: 500;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: rgb(0, 0, 0, .7);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete_btn button:hover {
+    color: rgb(0, 0, 0, 1);
+}
+
+.country_box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.country_box button {
+    border: none;
+    background: none;
+    font-weight: 500;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: rgb(0, 0, 0, .7);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.country_box button:hover {
+    color: rgb(0, 0, 0, 1);
+}
+
+.default_text {
+    color: rgb(0, 0, 0, .3);
+}

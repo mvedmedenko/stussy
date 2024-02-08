@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
-import { closeFilter } from "../../../../redux/actions/filterAction"
+import { closeFilter } from "../../../../redux/actions/filterActions"
 import s from "./Filter.module.css"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../../../../hooks/hooks"
 import { useState } from "react"
 import { Formik, Field, Form } from 'formik';
 
@@ -54,7 +54,7 @@ const initialValues: FormData = {
 
 const Filter = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const ref = useRef(null)
     const [formValues, setFormValues] = useState<FormData>(initialValues);
 
@@ -85,7 +85,7 @@ const Filter = () => {
         }
     };
 
-    const handleFilter = (values: FormDaata) => {
+    const handleFilter = (values: FormData) => {
         console.log(values)
     }
 

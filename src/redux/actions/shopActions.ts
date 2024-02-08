@@ -29,11 +29,20 @@ export const setProductsAction = (products: any) => ({
     type: 'GET_SELECTED_ITEM',
     payload: item,
   });
-  
+  export const setSelectedItemAction = (item: any) => ({
+    type: 'SET_SELECTED_ITEM',
+    payload: item,
+  });
   
 
   export const setSelectedSize = (size: string) => async (dispatch: any) => {
     dispatch(setSelectedSizeAction(size))
+  };
+
+  export const setSelectedItem = (item) => async (dispatch: any) => {
+    const itemString = JSON.stringify(item)
+    sessionStorage.setItem("selectedItem", itemString)
+    dispatch(setSelectedItemAction(item))
   };
 
 
@@ -55,6 +64,9 @@ export const setProductsAction = (products: any) => ({
     }
   };
 
-  export const getSelectedItem = (item: any) => (dispatch: any) => {
-    dispatch(getSelectedItemAction(item))
+  export const getSelectedItem = () => async (dispatch: any) => {
+    const stringItem = sessionStorage.getItem("selectedItem")
+    const item = JSON.parse(stringItem)
+    console.log("works in actions")
+    dispatch(setSelectedItem(item))
   }

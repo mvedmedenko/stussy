@@ -1,11 +1,11 @@
 import s from "./Bottomfooter.module.css"
 import { NavLink } from "react-router-dom";
 import Chat from "./Chat/Chat";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import { useState } from "react";
 import Country from "./Country/Country";
 import { closeChat, openChat} from "../../../redux/actions/chatActions";
+import { setNavigationActiveList } from "../../../redux/actions/headerActions";
 
 
 
@@ -13,8 +13,8 @@ import { closeChat, openChat} from "../../../redux/actions/chatActions";
 const Bottomfooter = () => {
 
     const [isCountry, setIsCountry] = useState<boolean>(false)
-    const isChat = useSelector(state => state.chatReducer.isChat)
-    const dispatch = useDispatch()
+    const isChat = useAppSelector(state => state.chatReducer.isChat)
+    const dispatch = useAppDispatch()
 
     const chatHandle = () => {
         if(isChat) {
@@ -28,6 +28,11 @@ const Bottomfooter = () => {
         setIsCountry(true)
     }
 
+    const onClickHandler = (text: string) => {
+        dispatch(setNavigationActiveList(text))
+    }
+
+
 
     
     return (
@@ -38,7 +43,7 @@ const Bottomfooter = () => {
 
             <div>
                 <ul className={s.list}>
-                    <li className={s.item}><NavLink to="/blogs/chapters">CHAPTERS</NavLink></li>
+                    <li onClick={() => onClickHandler("chapters")} className={s.item}><NavLink to="/blogs/chapters">CHAPTERS</NavLink></li>
                     <li className={s.item} onClick={handleCountry}>COUNTRY</li>
                     <li className={s.item} onClick={chatHandle}>{isChat ? "CLOSE" : "CHAT"}</li>
                 </ul>

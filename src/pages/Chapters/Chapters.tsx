@@ -1,9 +1,18 @@
 import s from "./Chapters.module.css"
 import arrow from "../../assets/images/map-arrow.svg"
 import { NavLink } from "react-router-dom"
+import { useEffect } from "react"
+import { setNavigationActiveList } from "../../redux/actions/headerActions"
+import { useAppDispatch } from "../../hooks/hooks"
 
 
 const Chapters: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(setNavigationActiveList("chapters"))
+    }, [])
 
     const asiaRegionAmounts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     const europeRegionAmounts = [1, 2, 3, 4, 5]
@@ -11,9 +20,10 @@ const Chapters: React.FC = () => {
     const oceaniaRegionAmounts = [1, 2]
     const doverRegionAmounts = [1, 2, 3, 4, 5]
 
+
     return (
         <div className={s.chapters}>
-            <section className={s.section} id="asia_section">
+            <section className={s.section} id="Asia">
                 <div className="container_images">
                     <div className={s.inner}>
                         <div className={s.title_box}>
@@ -62,7 +72,7 @@ const Chapters: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className={s.section} id="europe_section">
+            <section className={s.section} id="UnitedKingdom">
                 <div className="container_images">
                     <div className={s.inner}>
                         <div className={s.title_box}>
@@ -111,7 +121,7 @@ const Chapters: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className={s.section} id="america_section">
+            <section className={s.section} id="NorthAmerica">
                 <div className="container_images">
                     <div className={s.inner}>
                         <div className={s.title_box}>
@@ -158,7 +168,7 @@ const Chapters: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className={s.section} id="oceania_section">
+            <section className={s.section} id="Oceania">
                 <div className="container_images">
                     <div className={s.inner}>
                         <div className={s.title_box}>
@@ -207,7 +217,7 @@ const Chapters: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className={s.section} id="dover_section">
+            <section className={s.section} id="StreetMarket">
                 <div className="container_images">
                     <div className={s.inner}>
                         <div className={s.title_box}>

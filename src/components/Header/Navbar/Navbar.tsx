@@ -2,30 +2,29 @@ import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css"
 import React from "react";
 import arrow from "../../../assets/images/arrow.svg"
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import { closeSearch } from "../../../redux/actions/searchActions";
+import { setNavigationActiveList } from "../../../redux/actions/headerActions";
 
 type ShopnavPropsType = {
-    setActiveLink: (text: string) => void
     setMouseOnLink: (text: string | null) => void
-    activeLink: string
     mouseOnLink: string | null
+    navigationActiveList: string
 
 }
 
 
 const Navbar = (props: ShopnavPropsType) => {
 
-    const dispatch = useDispatch()
-    const isSearch = useSelector((state) => state.searchReducer.isSearch)
+    const dispatch = useAppDispatch()
+    const isSearch = useAppSelector((state) => state.searchReducer.isSearch)
 
     const onClickHandler = (text: string) => {
         if(!isSearch) {
-            props.setActiveLink(text)
+            dispatch(setNavigationActiveList(text))
         } else {
             dispatch(closeSearch())
-            props.setActiveLink(text)
+            dispatch(setNavigationActiveList(text))
         }
     }
 
@@ -48,7 +47,7 @@ const Navbar = (props: ShopnavPropsType) => {
                                 <div>
                                     <NavLink
                                         onClick={() => onClickHandler("shop")}
-                                        className={props.activeLink === "shop" ? s.active : ""}
+                                        className={props.navigationActiveList === "shop" ? s.active : ""}
                                         to="/collections/all"
                                         onMouseLeave={onMouseLeaveHandler}
                                         onMouseOver={onMouseOverHandler}
@@ -57,7 +56,7 @@ const Navbar = (props: ShopnavPropsType) => {
                                 </div>
                                 <span>
                                     <img
-                                        className={props.activeLink === "shop" ? s.arrow_active : s.arrow}
+                                        className={props.navigationActiveList === "shop" ? s.arrow_active : s.arrow}
                                         width="7px"
                                         height="8px"
                                         src={arrow}
@@ -69,7 +68,7 @@ const Navbar = (props: ShopnavPropsType) => {
                         <li className={s.item}>
                             <NavLink
                                 onClick={() => onClickHandler("features")}
-                                className={props.activeLink === "features" ? s.active_features : ""}
+                                className={props.navigationActiveList === "features" ? s.active_features : ""}
                                 to="/blogs/all"
                                 onMouseLeave={onMouseLeaveHandler}
                                 onMouseOver={onMouseOverHandler}
@@ -81,7 +80,7 @@ const Navbar = (props: ShopnavPropsType) => {
                                 <div>
                                     <NavLink
                                         onClick={() => onClickHandler("support")}
-                                        className={props.activeLink === "support" ? s.active : ""}
+                                        className={props.navigationActiveList === "support" ? s.active : ""}
                                         to="/pages/customer-support"
                                         onMouseLeave={onMouseLeaveHandler}
                                         onMouseOver={onMouseOverHandler}
@@ -90,7 +89,7 @@ const Navbar = (props: ShopnavPropsType) => {
                                 </div>
                                 <span>
                                     <img
-                                        className={props.activeLink === "support" ? s.arrow_active : s.arrow}
+                                        className={props.navigationActiveList === "support" ? s.arrow_active : s.arrow}
                                         width="7px"
                                         height="7px"
                                         src={arrow}

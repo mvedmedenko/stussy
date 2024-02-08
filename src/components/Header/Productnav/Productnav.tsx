@@ -1,17 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 import s from './Productnav.module.css'
-import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
+import { setNavigationActiveList } from '../../../redux/actions/headerActions'
 
 
 const Productnav = () => {
 
-    const allProducts = useSelector((state) => state.shopReducer.products)
+    const dispatch = useAppDispatch()
+    const allProducts = useAppSelector((state) => state.shopReducer.products)
     const selectedItem = JSON.parse(localStorage.getItem('selectedItem'))
     const prevCollectionName = localStorage.getItem('prevCollection')
     const navigate = useNavigate()
 
     const prevPageHandler = () => {
         navigate(-1)
+        dispatch(setNavigationActiveList("shop"))
     }
 
     const nextProductHandler = () => {

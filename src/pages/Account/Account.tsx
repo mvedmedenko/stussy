@@ -1,21 +1,35 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import s from "./Account.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { closeChat, openChat } from "../../redux/actions/chatActions"
+import { setAccountNavigationActiveList } from "../../redux/actions/headerActions"
+import { useEffect } from "react"
+import { setNavigationActiveList } from "../../redux/actions/headerActions"
 
 const Account = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const isChat = useSelector((state) => state.chatReducer.isChat)
     const user = useSelector((state) => state.authReducer.user)
 
+    useEffect(() => {
+        dispatch(setNavigationActiveList("account"))
+    }, [])
+
     const openChatHandle = () => {
-        if(isChat) {
+        if (isChat) {
             dispatch(closeChat())
         } else {
             dispatch(openChat())
         }
     }
+
+    const accountNavigationActiveListHandler = () => {
+        dispatch(setAccountNavigationActiveList("address"))
+        navigate("/account/addresses")
+    }
+
 
 
     return (
@@ -32,8 +46,8 @@ const Account = () => {
                         <div className={s.user_email}>
                             {user.email}
                         </div>
-                        <div className={s.manage_addresses}>
-                            <NavLink to={"/account/addresses"}>MANAGE ADDRESSES</NavLink>
+                        <div onClick={accountNavigationActiveListHandler} className={s.manage_addresses}>
+                            MANAGE ADDRESSES
                         </div>
                         <div className={s.customer_support}>
                             <div>
@@ -71,7 +85,7 @@ const Account = () => {
                             <h2 className={s.title}>ORDER HISTORY</h2>
                         </div>
                         <div className={s.order_text}>
-                            <p>You haven't placed any orders yet.</p>
+                            You haven't placed any orders yet.
                         </div>
                     </div>
                 </div>

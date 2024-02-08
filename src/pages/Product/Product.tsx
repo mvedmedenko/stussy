@@ -1,36 +1,30 @@
 import s from "./Product.module.css"
 import arrow from "../../assets/images/arrow.svg"
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { openChat, closeChat } from "../../redux/actions/chatActions";
-import { addToLocalStorageCart } from "../../redux/actions/cartAction";
-import { setSelectedSize } from "../../redux/actions/shopActions";
+import { addToLocalStorageCart } from "../../redux/actions/cartActions";
+import { setSelectedSize, getSelectedItem } from "../../redux/actions/shopActions";
 import { useEffect } from "react";
-import { addToFirebaseCart } from "../../redux/actions/cartAction";
+import { addToFirebaseCart } from "../../redux/actions/cartActions";
 import { NavLink } from "react-router-dom";
-import { getSelectedItem } from "../../redux/actions/shopActions";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 
 
 const Product = () => {
 
-    const dispatch = useDispatch()
-    const isAuth = useSelector((state) => state.authReducer.isAuth)
-    const isChat = useSelector((state) => state.chatReducer.isChat)
-    const userId = useSelector((state) => state.authReducer.user.uid)
-    const selectedItem = useSelector((state) => state.shopReducer.selectedItem)
-    const selectedSize = useSelector((state) => state.shopReducer.selectedSize)
+    const dispatch = useAppDispatch()
+    const isAuth = useAppSelector((state) => state.authReducer.isAuth)
+    const isChat = useAppSelector((state) => state.chatReducer.isChat)
+    const userId = useAppSelector((state) => state.authReducer.user.uid)
+    const selectedItem = useAppSelector((state) => state.shopReducer.selectedItem)
+    const selectedSize = useAppSelector((state) => state.shopReducer.selectedSize)
     const [isSelectedSizeEmpty, setIsSelectedSizeEmpty] = useState<boolean | null>(null)
     const [open, setOpen] = useState<string>("")
-    console.log(selectedItem)
 
     useEffect(() => {
-        if(!selectedItem) {
-            const item = JSON.parse(localStorage.getItem("selectedItem"))
-            console.log(item)
-            dispatch(getSelectedItem(item));
-        }
-      }, [selectedItem]);
+        dispatch(getSelectedItem());
+    }, []);
 
     useEffect(() => {
         if (selectedSize.trim().length > 0) {
@@ -94,7 +88,11 @@ const Product = () => {
                                     <div className={s.sizes}>
                                         <ul className={s.size_list}>
                                             {selectedItem.sizes.map((i, index) => {
-                                                return <li onClick={setSelectedSizeHandle} className={i === selectedSize ? s.selected_size : null} key={index}>
+                                                return <li 
+                                                onClick={setSelectedSizeHandle} 
+                                                className={i === selectedSize ? s.selected_size : null} 
+                                                key={index}
+                                                >
                                                     {i}
                                                 </li>
                                             })}

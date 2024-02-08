@@ -23,9 +23,36 @@
 .active {
     color: #000000;
     font-weight: 700;
+    text-decoration: underline;
 }
 
 .filter {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.filter:hover {
+    font-weight: 700;
+}
+
+
+.filter_box {
+    display: flex;
     position: absolute;
     right: 20px;
+}
+
+.arrow {
+    transition: .2s;
+    transform: rotate(90deg);
+}
+
+.filter:hover + .arrow {
+    transition: .2s;
+    transform: rotate(180deg);
+}
+
+.arrow_active {
+    transition: .2s;
+    transform: rotate(180deg);
 }

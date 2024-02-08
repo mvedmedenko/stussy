@@ -6,11 +6,21 @@ import weibo from "../../../assets/images/social-media/weibo.svg"
 import vimeo from "../../../assets/images/social-media/vimeo.svg"
 import Newsletter from "./Newsletter/Newsletter";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setNavigationActiveList } from "../../../redux/actions/headerActions";
+import { setAccountNavigationActiveList } from "../../../redux/actions/headerActions";
 
 
 const Topfooter = () => {
 
     const [isNewsLetter, setIsNewsLetter] = useState<boolean>(false)
+    const dispatch = useDispatch()
+
+    const onClickHandler = (text: string) => {
+        dispatch(setNavigationActiveList(text))
+        dispatch(setAccountNavigationActiveList(text))
+    }
+
 
     return (
         <div>
@@ -20,7 +30,7 @@ const Topfooter = () => {
                     <ul className={s.list}>
                         <li onClick={() => setIsNewsLetter(true)} className={s.item}>NEWSLETTER</li>
                         <li className={s.item}><NavLink to="/pages/customer-support">CONTACT</NavLink></li>
-                        <li className={s.item}><NavLink to="/account">ACCOUNT</NavLink></li>
+                        <li onClick={() => onClickHandler("account")} className={s.item}><NavLink to="/account">ACCOUNT</NavLink></li>
                     </ul>
                 </div>
                 <div>

@@ -6,6 +6,11 @@ import chatReducer from "./reducers/chatReducer";
 import shopReducer from "./reducers/shopReducer";
 import cartReducer from "./reducers/cartReducer";
 import filterReducer from "./reducers/filterReducer";
+import accountReducer from "./reducers/accountReducer";
+import headerReducer from "./reducers/headerReducer";
+import persistConfig from "../lib/persist/persistConfig";
+import persistReducer from "redux-persist/lib/persistReducer";
+import persistStore from "redux-persist/lib/persistStore";
 
 const reducers = combineReducers({
     authReducer: authReducer,
@@ -14,11 +19,22 @@ const reducers = combineReducers({
     shopReducer: shopReducer,
     cartReducer: cartReducer,
     filterReducer: filterReducer,
+    accountReducer: accountReducer,
+    headerReducer: headerReducer,
 })
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+const store = createStore(
+    persistedReducer,
+    applyMiddleware(thunk)
+  );
+
+const persistor = persistStore(store);
 
 window.store = store;
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export { store, persistor };

@@ -1,8 +1,17 @@
 import s from "./Features.module.css"
 import { featuresData } from './featuresData';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from "react";
+import { setNavigationActiveList } from "../../redux/actions/headerActions";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const Features = () => {
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(setNavigationActiveList("features"))
+    }, [])
     
     return (
         <div className={s.features}>

@@ -1,6 +1,5 @@
 import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../lib/firebase/firebase";
-import { getFirebaseCart } from "./cartAction";
 
 export const registerStartAction = () => ({
   type: 'REGISTER_START',
@@ -122,7 +121,6 @@ export const registerUser = (email: string, password: string, name: string) => a
   export const logoutUser = () => async (dispatch: any) => {
     try {
       auth.signOut()
-      // localStorage.removeItem("user")
       dispatch(signOutSuccessAction())
     } catch (error) {
       console.log(error)

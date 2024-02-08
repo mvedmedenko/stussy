@@ -1,6 +1,6 @@
 interface State {
     products: [],
-    loading: boolean;
+    isFetching: boolean;
     error: string | null;
     selectedSize: string,
     selectedItem: any
@@ -8,7 +8,7 @@ interface State {
 
 const initialState: State = {
     products: [],
-    loading: false,
+    isFetching: false,
     error: null,
     selectedSize: "",
     selectedItem: {},
@@ -20,27 +20,27 @@ const shopReducer = (state = initialState, action: any) => {
         case 'GET_PRODUCTS_START':
             return {
                 ...state,
-                loading: true,
+                isFetching: true,
                 error: null,
             };
 
         case 'GET_PRODUCTS_SUCCESS':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: null,
             };
 
         case 'SET_PRODUCTS':
             return {
                 ...state,
-                products: action.payload,
+                products: [...action.payload],
             };
 
         case 'GET_PRODUCTS_FAILURE':
             return {
                 ...state,
-                loading: false,
+                isFetching: false,
                 error: action.payload,
             };
 
@@ -53,7 +53,13 @@ const shopReducer = (state = initialState, action: any) => {
             case 'GET_SELECTED_ITEM':
                 return {
                     ...state,
-                    selectedItem: action.payload,
+                    selectedItem: {...action.payload},
+                };
+
+            case 'SET_SELECTED_ITEM':
+                return {
+                    ...state,
+                    selectedItem: {...action.payload},
                 };
 
         default:

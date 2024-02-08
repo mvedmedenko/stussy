@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
 import s from "./Searchnav.module.css"
 import { closeSearch } from "../../../redux/actions/searchActions"
 import search from "../../../assets/images/search.svg"
@@ -21,10 +21,10 @@ const validationSchema = Yup.object().shape({
 
 const Searchnav = () => {
 
-    const dispatch = useDispatch()
-    const isSearch = useSelector((state) => state.searchReducer.isSearch)
+    const dispatch = useAppDispatch()
+    const isSearch = useAppSelector((state) => state.searchReducer.isSearch)
 
-    const onClickHandler = () => {
+    const searchHandler = () => {
         dispatch(closeSearch())
     }
 
@@ -62,7 +62,7 @@ const Searchnav = () => {
                                 </Formik>
                             </div>
                         </div>
-                        <div onClick={onClickHandler} className={s.close}>
+                        <div onClick={searchHandler} className={s.close}>
                             <img width="15px" height="15px" src={close} alt="" />
                         </div>
                     </div>
