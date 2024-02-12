@@ -239,9 +239,6 @@
 
 
 
-
-
-
 @keyframes slidein {
     from {
         right: -1000px;
@@ -250,4 +247,15 @@
     to {
         right: 0px;
     }
+}
+
+@media only screen and (max-width: 1024px) {
+    .inner {
+        width: 100%;
+    }
+
+    .button_box {
+        width: 100%;
+    }
+
 }

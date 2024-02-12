@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { FormikHelpers } from "formik"
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../../../hooks/hooks";
 import { resetPassword } from "../../../../../redux/actions/authActions";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 
 const ResetPassword = (props: ResetPasswordProps) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [isSent, setIsSent] = useState<boolean>(false)
     const [fieldFocus, setFieldFocus] = useState<string>("");
 

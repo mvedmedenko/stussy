@@ -167,3 +167,25 @@
   border: 1px solid #000;
   transition: .2s;
 }
+
+
+
+@media only screen and (max-width: 1024px) {
+  .inner {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 84px;
+    padding-bottom: 40px;
+  }
+
+  .login_box {
+    grid-column: auto;
+  }
+  
+  .register_box {
+    grid-column: auto;
+  }
+
+  .forgot_password {
+    grid-column: auto;
+  }
+}

@@ -62,7 +62,7 @@ const Filter = () => {
         console.log(formValues)
     }, [formValues])
 
-    const handleClear = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleClear = () => {
         setFormValues(initialValues);
     };    
 
@@ -78,9 +78,9 @@ const Filter = () => {
 
         const labelElement = e.target.closest('label');
         if (labelElement) {
-            const categorySpan = labelElement.querySelector('span:last-of-type');
-            if (categorySpan) {
-                categorySpan.style.opacity = checked ? '1' : '0.5'; 
+            const categorySpan = labelElement?.querySelector('span:last-of-type');
+            if (categorySpan && categorySpan instanceof HTMLSpanElement) {
+                categorySpan.style.opacity = checked ? '1' : '0.5';
             }
         }
     };

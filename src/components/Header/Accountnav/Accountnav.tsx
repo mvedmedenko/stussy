@@ -15,7 +15,7 @@ const Accountnav = () => {
         dispatch(logoutUser())
     }
 
-    const accountNavigationActiveListHandler = (text) => {
+    const accountNavigationActiveListHandler = (text: string) => {
         dispatch(setAccountNavigationActiveList(text))
     }
 
@@ -63,7 +63,7 @@ const Accountnav = () => {
                     <div className={s.email}>
                         {userEmail}
                     </div>
-                    <div>
+                    <div className={s.signout}>
                         <button className={s.button} onClick={signOutHandle}>SIGN OUT</button>
                     </div>
                 </div>

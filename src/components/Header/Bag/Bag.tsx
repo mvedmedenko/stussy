@@ -4,16 +4,15 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
 import { closeBag, decrementFirebaseCartItem, decrementLocalStorageCartItem, incrementFirebaseCartItem, incrementLocalStorageCartItem } from "../../../redux/actions/cartActions"
 import { useEffect, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { setSelectedItem } from "../../../redux/actions/shopActions"
 
 const Bag = () => {
 
     const dispatch = useAppDispatch()
+    const ref = useRef<HTMLDivElement>(null)
     const cartItems = useAppSelector((state) => state.cartReducer.items)
     const isAuth = useAppSelector((state) => state.authReducer.isAuth)
     const userId = useAppSelector((state) => state.authReducer.user.uid)
     const isRequesting = useAppSelector((state) => state.cartReducer.isRequesting)
-    const ref = useRef(null)
     const [subtotalPrice, setSubtotalPrice] = useState<any>(0)
     const objectsArray = Object.values(cartItems);
 
@@ -38,10 +37,11 @@ const Bag = () => {
     }
 
     const onBagListener = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current?.contains(e.target as Node)) {
+        if (ref.current && !ref.current.contains(e.target as Node)) {
             dispatch(closeBag());
         }
     };
+    
 
     const incrementHandler = (itemId: string, itemSize: string) => {
         if (isAuth) {
@@ -59,12 +59,6 @@ const Bag = () => {
         }
     }
 
-    const itemHandler = (item: any) => {
-        const { amount, ...newItem } = item;
-        dispatch(setSelectedItem(newItem))
-
-    };
-
     return (
         <div onClick={onBagListener} className={s.bag}>
             <div ref={ref} className={s.inner}>
@@ -78,7 +72,7 @@ const Bag = () => {
                 </div>
                 <div className={s.items_box}>
                     {objectsArray.map((item: any) => {
-                        return <div onClick={() => itemHandler(item.id, item)} className={isRequesting ? s.item_disabled : s.item}>
+                        return <div className={isRequesting ? s.item_disabled : s.item}>
                             <div className={s.img}>
                                 <img width="175px" height="218px" src={item.firstImg} alt="" />
                             </div>

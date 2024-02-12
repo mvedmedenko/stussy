@@ -1,10 +1,10 @@
 .home {
-    max-height: 614px;
+    max-height: 100%;
     padding: 20px 0px;
 }
 
 .inner {
-    max-height: 614px;
+    max-height: 100%;
 }
 
 .inner a {
@@ -18,9 +18,27 @@
 
 .image_container {
     width: 100%;
-    height: 570px;
+    height: 680px;
+    object-fit: cover;
     background-image: url("../../assets/images/main.webp");
     background-size: cover;
     background-position: center center;
     background-position-y: inherit;
 }
+
+@media only screen and (min-height: 1200px) {
+    .image_container {
+        height: 1640px;
+    }
+
+}
+
+@media only screen and (min-height: 1000px) {
+    .image_container {
+        height: 980px;
+    }
+}
+
+
+
+

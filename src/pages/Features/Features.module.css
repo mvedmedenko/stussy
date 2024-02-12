@@ -49,3 +49,29 @@
 .tag {
     text-transform: uppercase;
 }
+
+@media only screen and (max-width: 1024px) {
+    .grid_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .img_container {
+        max-width: 475px;
+        height: 275px;
+    }
+
+    .features {
+        padding: 40px 0px 40px 0px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .grid_container {
+        grid-template-columns: auto;
+    }
+
+    .features {
+        padding: 40px 0px 40px 0px;
+    }
+}
+

@@ -13,7 +13,7 @@ export const signOutSuccessAction = () => ({
   type: 'SIGN_OUT_SUCCESS_ACTION',
 });
 
-export const setUserAction = (user) => ({
+export const setUserAction = (user: any) => ({
   type: 'SET_USER',
   payload: user,
 });

@@ -49,3 +49,12 @@
     color: #fff;
     transition: .2s;
 }
+
+
+@media only screen and (max-width: 1024px) {
+
+    .back_btn button {
+        width: 300px;
+    }
+
+}

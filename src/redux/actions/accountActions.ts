@@ -1,5 +1,6 @@
 import { database } from "../../lib/firebase/firebase"
 import { ref, push, get, remove, set, update } from "firebase/database";
+import { addressData } from "../../types/types";
 
 const getUserAddressesSuccessAction = (addresses: any[]) => ({
     type: "GET_USER_ADDRESSES_SUCCESS",
@@ -11,22 +12,22 @@ const getUserAddressesFailureAction = (error: any) => ({
     payload: error,
 });
 
-export const addNewUserAddressSuccessAction = (addresses) => ({
+export const addNewUserAddressSuccessAction = (addresses: any) => ({
     type: 'UPDATE_USER_ADDRESSES_SUCCESS',
     payload: addresses,
 });
 
-export const addNewUserAddressFailureAction = (error) => ({
+export const addNewUserAddressFailureAction = (error: any) => ({
     type: 'UPDATE_USER_ADDRESSES_FAILURE',
     payload: error,
 });
 
-const deleteUserAddressSuccessAction = (addressToDeleteInfo) => ({
+const deleteUserAddressSuccessAction = (addressToDeleteInfo: any) => ({
     type: "DELETE_USER_ADDRESS_SUCCESS",
     payload: addressToDeleteInfo,
 });
 
-const deleteUserAddressFailureAction = (error) => ({
+const deleteUserAddressFailureAction = (error: any) => ({
     type: "DELETE_USER_ADDRESS_FAILURE",
     payload: error,
 });
@@ -48,7 +49,7 @@ export const setAddressAsDefaultSuccessAction = (shouldChangeAddresId: string, n
     
 });
 
-export const setAddressAsDefaultFailureAction = (error) => ({
+export const setAddressAsDefaultFailureAction = (error: any) => ({
     type: 'SET_ADDRESS_AS_DEFAULT_FAILURE',
     payload: error,
 });
@@ -86,9 +87,9 @@ export const addNewUserAddress = (userId: string, newAddress: any) => async (dis
             if (newAddress.isDefault === true) {
                 const existingAddressDefaultTrue = Object.values(addressesData).find((address: any) => {
                     return (
-                        address.isDefault === true
+                        (address as addressData).isDefault === true
                     )
-                })
+                }) as addressData | undefined;
 
                 if (existingAddressDefaultTrue) {
                     const addressToUpdateRef = ref(database, `addresses/${userId}/items/${existingAddressDefaultTrue.id}`);
@@ -153,14 +154,14 @@ export const getUserAddresses = (userId: string) => async (dispatch: any) => {
     }
 };
 
-export const deleteUserAddress = (userId: string, addressToDelete: any) => async (dispatch: any) => {
+export const deleteUserAddress = (userId: string, addressToDelete: addressData) => async (dispatch: any) => {
     try {
         const addressesRef = ref(database, `addresses/${userId}/items`);
         const addressesSnapshot = await get(addressesRef);
         const addressesData = addressesSnapshot.val() || {};
 
-        const addressesArray = Object.values(addressesData);
-        const addressIndexToDelete = addressesArray.findIndex((address) => {
+        const addressesArray = Object.values(addressesData) as addressData[];
+        const addressIndexToDelete = addressesArray.findIndex((address: addressData) => {
             return (
                 address.firstAddress === addressToDelete.firstAddress &&
                 address.secondAddress === addressToDelete.secondAddress
@@ -183,7 +184,6 @@ export const deleteUserAddress = (userId: string, addressToDelete: any) => async
                 const nextAddressKey = Object.keys(addressesData)[nextAddressIndex];
                 const nextAddressRef = ref(database, `addresses/${userId}/items/${nextAddressKey}`);
 
-                // Устанавливаем isDefault: true для следующего адреса
                 await update(nextAddressRef, { ...addressesArray[nextAddressIndex], isDefault: true });
                 console.log('Next address set as default');
                 dispatch(updateIsDefaultSuccessAction(nextAddressKey));
@@ -227,20 +227,17 @@ export const saveAddressChanges = (userId: string, updatedAddress: any) => async
     }
 };
 
-export const setAddressAsDefault = (userId, addressId) => async (dispatch) => {
+export const setAddressAsDefault = (userId: string, addressId: string) => async (dispatch: any) => {
     try {
-
         const addressesRef = ref(database, `addresses/${userId}/items`);
         const addressesSnapshot = await get(addressesRef);
         const addressesData = addressesSnapshot.val() || {};
-        console.log(addressesData)
 
         const existingAddressDefaultTrue = Object.values(addressesData).find((address: any) => {
             return (
-                address.isDefault === true
+                (address as addressData).isDefault === true
             )
-        })
-        console.log(existingAddressDefaultTrue)
+        }) as addressData | undefined;
 
         if(existingAddressDefaultTrue) {
             const addressToUpdateRef = ref(database, `addresses/${userId}/items/${existingAddressDefaultTrue.id}`);
@@ -252,19 +249,15 @@ export const setAddressAsDefault = (userId, addressId) => async (dispatch) => {
             console.log('Address updated in Firebase');
             dispatch(setAddressAsDefaultSuccessAction(existingAddressDefaultTrue.id, addressId));
         } else {
-            const newAddressToUpdateRef = ref(database, `addresses/${userId}/items/${addressId}`);
-            await update(newAddressToUpdateRef, { isDefault: true });
-            console.log('Address updated in Firebase');
-            dispatch(setAddressAsDefaultSuccessAction(existingAddressDefaultTrue.id, addressId));
+            console.log('Existing default address not found');
+            // ...
         }
-
-
-
     } catch (error) {
         console.error('Error setting address as default:', error);
         dispatch(setAddressAsDefaultFailureAction(error));
     }
 };
+
 
 
 

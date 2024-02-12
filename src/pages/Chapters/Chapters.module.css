@@ -78,3 +78,27 @@
 .section:not(:last-child) {
     border-bottom: 1px solid rgb(245, 245, 245);
 }
+
+
+
+@media only screen and (max-width: 1024px) {
+    .inner {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid_container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 40px;
+        row-gap: 80px;
+    }
+
+    .title_box {
+        height: 100%;
+        grid-column: 0;
+        border: 0;
+    }
+
+    .city_box {
+        grid-column: auto;
+    }
+}

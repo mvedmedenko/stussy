@@ -1,6 +1,6 @@
 .inner {
     display: grid;
-    grid-template-columns: 690px;
+    grid-template-columns: auto;
     padding-top: 41px;
     font-weight: 400;
 }

@@ -76,3 +76,15 @@
 .size_gide:not(last-child) {
     margin-bottom: 28px;
 }
+
+
+/* @media only screen and (max-width: 1024px) {
+  .inner {
+    padding-bottom: 40px;
+  }
+
+  .size_gide_inner {
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+} */

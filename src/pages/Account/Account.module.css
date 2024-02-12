@@ -125,3 +125,25 @@ a:hover {
 .shipping_returns:hover {
     font-weight: 700;
 }
+
+@media only screen and (max-width: 1024px) {
+    .inner {
+        grid-template-columns: repeat(1, 1fr);
+        padding-top: 42px;
+        padding-bottom: 40px;
+    }
+
+    .account_details {
+        grid-column:auto;
+    }
+    
+    .order_history {
+        margin-top: 84px;
+        grid-column:auto;
+        grid-column-start: 0;
+        grid-column-end: 0;
+    }
+
+
+
+}

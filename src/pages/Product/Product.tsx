@@ -9,10 +9,7 @@ import { addToFirebaseCart } from "../../redux/actions/cartActions";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
-
-
 const Product = () => {
-
     const dispatch = useAppDispatch()
     const isAuth = useAppSelector((state) => state.authReducer.isAuth)
     const isChat = useAppSelector((state) => state.chatReducer.isChat)
@@ -64,7 +61,7 @@ const Product = () => {
             <div className="container_images">
                 <div className={s.grid_container}>
                     <div>
-                        {selectedItem.images.map((i, index) => {
+                        {selectedItem.images.map((i: any, index: number) => {
                             return <div className={s.img_box} key={index}>
                                 <img src={i} alt="img" />
                             </div>
@@ -87,11 +84,11 @@ const Product = () => {
                                     </div>
                                     <div className={s.sizes}>
                                         <ul className={s.size_list}>
-                                            {selectedItem.sizes.map((i, index) => {
-                                                return <li 
-                                                onClick={setSelectedSizeHandle} 
-                                                className={i === selectedSize ? s.selected_size : null} 
-                                                key={index}
+                                            {selectedItem.sizes.map((i: any, index: number) => {
+                                                return <li
+                                                    onClick={setSelectedSizeHandle}
+                                                    className={i === selectedSize ? s.selected_size : ''}
+                                                    key={index}
                                                 >
                                                     {i}
                                                 </li>
@@ -124,7 +121,7 @@ const Product = () => {
                                                     </div>
                                                     <div>
                                                         <ul className={s.details_list}>
-                                                            {selectedItem.details.map((i, index) => {
+                                                            {selectedItem.details.map((i: any, index: number) => {
                                                                 if (index !== 0) {
                                                                     return <li className={s.details_item} key={index}>{i}</li>;
                                                                 }

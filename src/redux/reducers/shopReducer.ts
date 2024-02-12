@@ -1,9 +1,9 @@
 interface State {
-    products: [],
+    products: any[];
     isFetching: boolean;
     error: string | null;
-    selectedSize: string,
-    selectedItem: any
+    selectedSize: string;
+    selectedItem: any;
 }
 
 const initialState: State = {

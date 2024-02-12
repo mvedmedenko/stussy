@@ -1,9 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import s from "./Register.module.css"
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
 import { registerUser } from "../../../../redux/actions/authActions";
-
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { FormikHelpers } from "formik"
@@ -43,8 +42,8 @@ const validationSchema = Yup.object().shape({
 
 const Register: React.FC = () => {
 
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.authReducer.isAuth);
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.authReducer.isAuth);
     const navigate = useNavigate()
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
     const [formValues, setFormValues] = useState<FormData>(initialValues);

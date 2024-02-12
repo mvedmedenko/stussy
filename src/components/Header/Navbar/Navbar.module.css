@@ -47,3 +47,39 @@
 .item_box:hover img {
     transform: rotate(180deg);
 }
+
+@media only screen and (max-width: 1024px) {
+    .list {
+        display: block;
+        position: absolute;
+        top: 100px;
+        left: 0;
+    }
+
+    .item {
+        font-size: 24px;
+    }
+  }
+
+
+
+@media only screen and (max-width: 1400px) {
+    .nav {
+        margin-left: 80px;
+    }
+  }
+@media only screen and (min-width: 1400px) {
+    .nav {
+        margin-left: 60px;
+    }
+  }
+@media only screen and (min-width: 1500px) {
+    .nav {
+        margin-left: 20px;
+    }
+  }
+@media only screen and (min-width: 1550px) {
+    .nav {
+        margin-left: 0px;
+    }
+  }

@@ -36,7 +36,9 @@ export const stopRequestingStatusAction = () => ({
 
 
 export const addToLocalStorageCart = (selectedSize: string, newObj: any) => async (dispatch: any) => {
-  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartString = localStorage.getItem("cart");
+  let existingCart = cartString ? JSON.parse(cartString) : [];
+
 
   const newItem = { size: selectedSize, amount: 1, ...newObj };
   const existingItemIndex = existingCart.findIndex((item: any) => item.id === newItem.id);
@@ -80,8 +82,7 @@ export const addToFirebaseCart = (selectedSize: string, newObj: any, userId: str
 
     console.log('Product added to Firebase cart.');
     const getUpdatedFirebaseCart = dispatch(getFirebaseCart(userId))
-    console.log(getUpdatedFirebaseCart)
-    // dispatch(setCartDataAction(getUpdatedFirebaseCart))
+    dispatch(setCartDataAction(getUpdatedFirebaseCart))
     dispatch(stopRequestingStatusAction())
 
 
@@ -184,13 +185,16 @@ export const decrementFirebaseCartItem = (userId: string, itemId: string, itemSi
 };
 
 export const getLocalStorageCart = () => (dispatch: any) => {
-  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartString = localStorage.getItem("cart");
+  let existingCart = cartString ? JSON.parse(cartString) : [];
+
   dispatch(setCartDataFromLocalStorage(existingCart))
 }
 
 export const incrementLocalStorageCartItem = (itemId: string, itemSize: string) => (dispatch: any) => {
-  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-  let existingItem = existingCart.find((i) => i.id === itemId && i.size === itemSize);
+  const cartString = localStorage.getItem("cart");
+  let existingCart = cartString ? JSON.parse(cartString) : [];
+  let existingItem = existingCart.find((i: any) => i.id === itemId && i.size === itemSize);
 
   if (existingItem) {
     existingItem.amount += 1;
@@ -200,16 +204,17 @@ export const incrementLocalStorageCartItem = (itemId: string, itemSize: string) 
 };
 
 export const decrementLocalStorageCartItem = (itemId: string, itemSize: string) => (dispatch: any) => {
-  let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-  let existingItem = existingCart.find((i) => i.id === itemId && i.size === itemSize);
+  const cartString = localStorage.getItem("cart");
+  let existingCart = cartString ? JSON.parse(cartString) : [];
+  let existingItem = existingCart.find((i: any) => i.id === itemId && i.size === itemSize);
 
   if (existingItem) {
-    if(existingItem.amount > 1) {
+    if (existingItem.amount > 1) {
       existingItem.amount -= 1;
       localStorage.setItem("cart", JSON.stringify(existingCart));
       dispatch(getLocalStorageCart());
     } else {
-      const filteredCart = existingCart.filter((i) => i !== existingItem)
+      const filteredCart = existingCart.filter((i: any) => i !== existingItem)
       localStorage.setItem("cart", JSON.stringify(filteredCart));
       dispatch(getLocalStorageCart());
     }

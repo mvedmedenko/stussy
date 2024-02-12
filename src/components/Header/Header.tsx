@@ -15,6 +15,9 @@ import { closeSearch, openSearch } from "../../redux/actions/searchActions";
 import { closeFilter } from "../../redux/actions/filterActions";
 import Chaptersnav from "./Chaptersnav/Chaptersnav";
 import { setNavigationActiveList } from "../../redux/actions/headerActions";
+import searchIcon from "../../assets/images/search.svg"
+import cartIcon from "../../assets/images/cart.svg"
+import closeIcon from "../../assets/images/close.svg"
 
 const Header = () => {
 
@@ -30,6 +33,7 @@ const Header = () => {
     const dispatch = useAppDispatch()
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
     const [subtotalCartItems, setSubtotalCartItems] = useState<number>(0)
+    const [isMenu, setIsMenu] = useState<boolean>(false)
 
 
     useEffect(() => {
@@ -52,7 +56,7 @@ const Header = () => {
     useEffect(() => {
         const countCartItems = () => {
             if (cartItems.length > 0) {
-                const subtotal = cartItems.reduce((acc, item) => {
+                const subtotal = cartItems.reduce((acc: number, item: any) => {
                     return acc + item.amount
                 }, 0)
                 setSubtotalCartItems(subtotal)
@@ -65,12 +69,23 @@ const Header = () => {
 
 
     const bagHandler = () => {
+        if(isMenu) {
+            setIsMenu(false)
+        }
         if (!isBag) {
             dispatch(openBag())
         }
     }
 
-    const searchHandler = (text: string) => {
+    const menuHandler = () => {
+        setIsMenu(!isMenu)
+    }
+
+    const searchHandler = () => {
+        if(isMenu) {
+            setIsMenu(false)
+        }
+
         dispatch(openSearch())
 
         if (isFilter) {
@@ -85,12 +100,12 @@ const Header = () => {
     }
 
     return (
-        <header className={s.header}>
+        <header className={isMenu ? s.mobile_active : s.header}>
             <div className={s.inner}>
                 <div onClick={logoHandler} className={s.logo}>
                     <Logo />
                 </div>
-                <div className={s.navbar_wrapper}>
+                <div className={isMenu ? s.navbar_mobile : s.navbar_wrapper}>
                     <div className={s.container}>
                         <div className={s.navbar}>
                             <Navbar
@@ -103,20 +118,41 @@ const Header = () => {
                 </div>
                 <div className={s.rightside}>
                     <div className={s.search}>
-                        <div onClick={() => searchHandler("search")} className={isSearch ? s.active : ""}>SEARCH</div>
+                        <div onClick={searchHandler} className={isSearch ? s.active : ""}>
+                            <span className={s.search_text}>SEARCH</span>
+                            <span className={s.search_icon}><img width="20px" height="20px" src={searchIcon} alt="SEARCH" /></span>
+                        </div>
                     </div>
                     <div className={s.bag}>
-                        <div onClick={bagHandler} className={s.bag}>{subtotalCartItems > 0 ? `BAG (${subtotalCartItems})` : "BAG"}</div>
+                        <div onClick={bagHandler}>
+                            <span className={s.bag_text}>{subtotalCartItems > 0 ? `BAG (${subtotalCartItems})` : "BAG"}</span>
+                            <span className={s.bag_icon}>
+                                <img width="20px" height="20px" src={cartIcon} alt="CART" />
+                                {subtotalCartItems > 0 ? <div className={s.bag_amount}>{subtotalCartItems}</div> : ""}
+                            </span>
+                        </div>
+                    </div>
+                    <div className={s.burger}>
+                        {isMenu
+                            ?
+                                <div onClick={menuHandler} className={s.close}><img width="20px" height="20px" src={closeIcon} alt="X" /></div>
+                            :
+                            <div onClick={menuHandler}>
+                                <div className={s.burger_line}></div>
+                                <div className={s.burger_line}></div>
+                                <div className={s.burger_line}></div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
             <div className={s.bottom_list_wrapper}>
                 <div className={s.container}>
                     <div className={s.bottom_list}>
-                        {((mouseOnLink === null && navigationActiveList === "shop" && !isSearch) || mouseOnLink === "shop" 
-                        || (mouseOnLink === null && navigationActiveList === "main" && !isSearch)) && (
-                            <Shopnav />
-                        )}
+                        {((mouseOnLink === null && navigationActiveList === "shop" && !isSearch) || mouseOnLink === "shop"
+                            || (mouseOnLink === null && navigationActiveList === "main" && !isSearch)) && (
+                                <Shopnav />
+                            )}
 
                         {((mouseOnLink === null && navigationActiveList === "features" && !isSearch) || mouseOnLink === "features") && (
                             <Featuresnav />

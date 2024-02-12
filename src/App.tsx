@@ -9,7 +9,7 @@ import Login from './pages/Account/Auth/Login/Login';
 import PrivateRoutes from './utils/PrivateRoutes';
 import Account from './pages/Account/Account';
 import Register from './pages/Account/Auth/Register/Register';
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import Search from "./pages/Search/Search";
 import Accessibilitys from "./pages/Support/Accessibilitys/Accessibilitys";
 import Careers from "./pages/Support/Careers/Careers";
@@ -26,8 +26,8 @@ import Address from "./pages/Account/Address/Address";
 import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
-    const dispatch = useDispatch()
-    const isSearch = useSelector((state) => state.searchReducer.isSearch)
+    const dispatch = useAppDispatch()
+    const isSearch = useAppSelector((state) => state.searchReducer.isSearch)
 
     useEffect(() => {
         dispatch(checkAuthStatus())

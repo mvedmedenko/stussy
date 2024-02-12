@@ -1,8 +1,7 @@
 import { useEffect, useState, } from 'react';
 import s from "./Login.module.css"
-import { checkAuthStatus, loginUser } from '../../../../redux/actions/authActions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { loginUser } from '../../../../redux/actions/authActions';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
@@ -32,9 +31,9 @@ const validationSchema = Yup.object().shape({
 
 const Login: React.FC = () => {
 
-    const user = useSelector(state => state.authReducer.isAuth);
+    const user = useAppSelector(state => state.authReducer.isAuth);
     const navigate = useNavigate()
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [isForgetPassword, setIsForgetPassword] = useState<boolean>(false)
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
     const [fieldFocus, setFieldFocus] = useState<string>("");

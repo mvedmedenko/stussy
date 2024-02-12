@@ -56,3 +56,14 @@
     transition: .2s;
     transform: rotate(180deg);
 }
+
+@media only screen and (max-width: 1024px) {
+    .filter_box {
+        background-color: #fff;
+        padding-left: 20px;
+    }
+
+    .list {
+        padding-right: 80px;
+    }
+}

@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import s from "./Blog.module.css"
 import { featuresData } from "../featuresData";
-import { MouseEventHandler } from "react";
 import Error from "../../Error/Error";
 import { NavLink } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
@@ -29,9 +28,9 @@ const Blog = () => {
     const recommendation = featuresData.filter((item) => item.id !== id).slice(0, 4);
     const [isSubmited, setIsSubmited] = useState<boolean>(false)
 
-    const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
-        e.preventDefault();
-    };
+    // const onClickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+    //     e.preventDefault();
+    // };
 
     const handleSubmit = (value: FormData) => {
         console.log(value)

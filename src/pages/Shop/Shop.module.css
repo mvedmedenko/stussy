@@ -42,3 +42,53 @@
 .size_list li:hover {
     font-weight: 700;
 }
+
+@media only screen and (max-width: 1024px) {
+    .shop {
+        padding-bottom: 40px;
+    }
+
+    .grid_container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .shop {
+        padding-bottom: 40px;
+    }
+
+    .grid_container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media only screen and (max-width: 520px) {
+    .shop {
+        padding-bottom: 40px;
+    }
+
+    .grid_container {
+        grid-template-columns: auto;
+    }
+
+    .img_container {
+        max-width: 475px;
+        height: 418.75px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .img_container {
+        max-width: 475px;
+        height: 375px;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .img_container {
+        max-width: 475px;
+        height: 418.75px;
+    }
+}

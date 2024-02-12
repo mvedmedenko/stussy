@@ -6,7 +6,7 @@ import weibo from "../../../assets/images/social-media/weibo.svg"
 import vimeo from "../../../assets/images/social-media/vimeo.svg"
 import Newsletter from "./Newsletter/Newsletter";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../hooks/hooks";
 import { setNavigationActiveList } from "../../../redux/actions/headerActions";
 import { setAccountNavigationActiveList } from "../../../redux/actions/headerActions";
 
@@ -14,7 +14,7 @@ import { setAccountNavigationActiveList } from "../../../redux/actions/headerAct
 const Topfooter = () => {
 
     const [isNewsLetter, setIsNewsLetter] = useState<boolean>(false)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onClickHandler = (text: string) => {
         dispatch(setNavigationActiveList(text))

@@ -8,13 +8,16 @@ export const setAccountNavigationActiveListAction = (text: string) => ({
     payload: text,
   });  
 
-  export const setNavigationActiveList = (name: string, currentNavigationList: string) => async (dispatch: any) => {
+  export const setNavigationActiveList = (name: string) => async (dispatch: any) => {
     sessionStorage.setItem('currentList', name);
     const sessionList = sessionStorage.getItem('currentList');
+    console.log(sessionList)
     if (sessionList) {
-      if (sessionList !== currentNavigationList) {
+      if (sessionList) {
         dispatch(setNavigationActiveListAction(sessionList));
+        console.log("true")
       } else {
+        console.log("else")
         dispatch(setNavigationActiveListAction(name));
       }
     }

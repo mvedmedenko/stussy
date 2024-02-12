@@ -7,7 +7,7 @@ const Search = () => {
 
     const dispatch = useAppDispatch()
 
-    const onBagListener = (e: React.MouseEvent<HTMLDivElement>) => {
+    const onBagListener = () => {
         dispatch(closeSearch());
     };
 

@@ -39,7 +39,7 @@ export const setProductsAction = (products: any) => ({
     dispatch(setSelectedSizeAction(size))
   };
 
-  export const setSelectedItem = (item) => async (dispatch: any) => {
+  export const setSelectedItem = (item: any) => async (dispatch: any) => {
     const itemString = JSON.stringify(item)
     sessionStorage.setItem("selectedItem", itemString)
     dispatch(setSelectedItemAction(item))
@@ -65,8 +65,12 @@ export const setProductsAction = (products: any) => ({
   };
 
   export const getSelectedItem = () => async (dispatch: any) => {
-    const stringItem = sessionStorage.getItem("selectedItem")
-    const item = JSON.parse(stringItem)
-    console.log("works in actions")
-    dispatch(setSelectedItem(item))
-  }
+    const stringItem = sessionStorage.getItem("selectedItem");
+  
+    if (stringItem !== null) {
+      const item = JSON.parse(stringItem);
+      dispatch(setSelectedItem(item));
+    } else {
+      console.error("selectedItem is null");
+    }
+  };

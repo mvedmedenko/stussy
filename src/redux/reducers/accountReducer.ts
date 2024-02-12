@@ -1,5 +1,7 @@
+
+
 interface State {
-    addresses: any;
+    addresses: any[];
     error: null | string;
 }
 
@@ -8,7 +10,7 @@ const initialState: State = {
     error: null,
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case "GET_USER_ADDRESSES_SUCCESS":
             return {

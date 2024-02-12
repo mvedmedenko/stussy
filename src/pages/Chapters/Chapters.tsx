@@ -31,7 +31,7 @@ const Chapters: React.FC = () => {
                         </div>
                         <div className={s.city_box}>
                             <div className={s.grid_container}>
-                                {asiaRegionAmounts.map((i, index) => {
+                                {asiaRegionAmounts.map((index) => {
                                     return <div key={index}>
                                         <div className={s.city_title_box}>
                                             <div className={s.city_title}>
@@ -80,7 +80,7 @@ const Chapters: React.FC = () => {
                         </div>
                         <div className={s.city_box}>
                             <div className={s.grid_container}>
-                                {europeRegionAmounts.map((i, index) => {
+                                {europeRegionAmounts.map((index) => {
                                     return <div key={index}>
                                         <div className={s.city_title_box}>
                                             <div className={s.city_title}>
@@ -129,7 +129,7 @@ const Chapters: React.FC = () => {
                         </div>
                         <div className={s.city_box}>
                             <div className={s.grid_container}>
-                                {northAmericaRegionAmounts.map((i, index) => {
+                                {northAmericaRegionAmounts.map((index) => {
                                     return <div key={index}>
                                         <div className={s.city_title_box}>
                                             <div className={s.city_title}>
@@ -176,7 +176,7 @@ const Chapters: React.FC = () => {
                         </div>
                         <div className={s.city_box}>
                             <div className={s.grid_container}>
-                                {oceaniaRegionAmounts.map((i, index) => {
+                                {oceaniaRegionAmounts.map((index) => {
                                     return <div key={index}>
                                         <div className={s.city_title_box}>
                                             <div className={s.city_title}>
@@ -225,7 +225,7 @@ const Chapters: React.FC = () => {
                         </div>
                         <div className={s.city_box}>
                             <div className={s.grid_container}>
-                                {doverRegionAmounts.map((i, index) => {
+                                {doverRegionAmounts.map((index) => {
                                     return <div key={index}>
                                         <div className={s.city_title_box}>
                                             <div className={s.city_title}>

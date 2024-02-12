@@ -26,3 +26,15 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 1024px) {
+    .text {
+        display: none;
+    }
+
+    .item {
+        font-weight: 700;
+        font-size: 12px;
+    }
+}

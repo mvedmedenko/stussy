@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import s from "./Account.module.css"
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { closeChat, openChat } from "../../redux/actions/chatActions"
 import { setAccountNavigationActiveList } from "../../redux/actions/headerActions"
 import { useEffect } from "react"
@@ -8,10 +8,10 @@ import { setNavigationActiveList } from "../../redux/actions/headerActions"
 
 const Account = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const isChat = useSelector((state) => state.chatReducer.isChat)
-    const user = useSelector((state) => state.authReducer.user)
+    const isChat = useAppSelector((state) => state.chatReducer.isChat)
+    const user = useAppSelector((state) => state.authReducer.user)
 
     useEffect(() => {
         dispatch(setNavigationActiveList("account"))

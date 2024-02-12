@@ -81,11 +81,12 @@ const Address = () => {
         setFieldFocus(fieldName);
     };
 
+
     const handleSubmit = (values: FormData) => {
         setFormValues({ ...values, isDefault: formValues.isDefault })
         const updatedAddresses = { ...values, isDefault: formValues.isDefault }
-        if(userAddresses.length === 0) {
-            const defaultAddresses = {...values, isDefault: true}
+        if (userAddresses.length === 0) {
+            const defaultAddresses = { ...values, isDefault: true }
             dispatch(addNewUserAddress(userId, defaultAddresses))
         } else {
             dispatch(addNewUserAddress(userId, updatedAddresses))
@@ -96,8 +97,8 @@ const Address = () => {
 
     const addNewAddressHandler = () => {
         setIsAddingAddress(!isAddingAddress)
-        setFormValues({...initialValues})
-        if(isEditingAddress === true ) {
+        setFormValues({ ...initialValues })
+        if (isEditingAddress === true) {
             setIsAddingAddress(false)
         }
         setFormKey((prevKey) => prevKey + 1);
@@ -108,28 +109,27 @@ const Address = () => {
         setFormKey((prevKey) => prevKey + 1);
     }
 
-    const deleteUserAddressHandler = (addressToDelete) => {
+    const deleteUserAddressHandler = (addressToDelete: any) => {
         dispatch(deleteUserAddress(userId, addressToDelete))
         setFormValues(initialValues)
-        if(isEditingAddress) {
+        if (isEditingAddress) {
             setIsEditingAddress(false)
-        } else if(isAddingAddress) {
+        } else if (isAddingAddress) {
             setIsAddingAddress(false)
         }
         setFormKey((prevKey) => prevKey + 1);
-
     }
 
-    const editAddressHandler = (editingAddress) => {
-        setFormValues({...editingAddress, isDefault:false})
+    const editAddressHandler = (editingAddress: any) => {
+        setFormValues({ ...editingAddress, isDefault: false })
         setIsEditingAddress(true)
-        if(isAddingAddress === true ) {
+        if (isAddingAddress === true) {
             setIsAddingAddress(false)
         }
         setFormKey((prevKey) => prevKey + 1);
     }
 
-    const saveAddressChangesHandler = (values) => {
+    const saveAddressChangesHandler = (values: any) => {
         setFormValues({ ...values, isDefault: formValues.isDefault })
         const changedAddress = { ...values, isDefault: formValues.isDefault }
         dispatch(saveAddressChanges(userId, changedAddress))
@@ -161,7 +161,7 @@ const Address = () => {
                                     <div>No Saved Addresses</div>
                                 ) : (
                                     <div>
-                                        {userAddresses.map((i, index) => {
+                                        {userAddresses.map((i: any, index: number) => {
                                             return <div className={s.address} key={index}>
                                                 <div className={s.name_box}>
                                                     <div className={s.name}>{i.firstName + " " + i.lastName}</div>
@@ -186,9 +186,9 @@ const Address = () => {
                                                 <div className={s.country_box}>
                                                     <div>{i.country}</div>
                                                     <div className={s.default_btn}>
-                                                        {i.isDefault === true 
-                                                        ? <div className={s.default_text}>DEFAULT</div> 
-                                                        : <div onClick={() => setAddressAsDefaultHandler(i.id)}><button>SET AS DEFAULT</button></div>}
+                                                        {i.isDefault === true
+                                                            ? <div className={s.default_text}>DEFAULT</div>
+                                                            : <div onClick={() => setAddressAsDefaultHandler(i.id)}><button>SET AS DEFAULT</button></div>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +197,9 @@ const Address = () => {
                                 )}
                             </div>
                             <div onClick={addNewAddressHandler} className={s.button}>
-                                <button>ADD NEW ADDRESS</button>
+                                <button>
+                                    ADD NEW ADDRESS
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -337,8 +339,8 @@ const Address = () => {
                                         </label>
 
                                         <div className={s.btn_box}>
-                                            {isAddingAddress &&<button className={s.save_btn} type="submit" disabled={isSubmitting}>SAVE ADDRESS</button> }
-                                            {isEditingAddress && <button onClick={() => saveAddressChangesHandler(values)} className={s.save_btn}>SAVE CHANGES</button>}
+                                            {isAddingAddress && <button className={s.save_btn} type="submit" disabled={!isValidForm || isSubmitting}>SAVE ADDRESS</button>}
+                                            {isEditingAddress && <button onClick={() => saveAddressChangesHandler(values)} className={s.save_btn} disabled={!isValidForm}>SAVE CHANGES</button>}
 
                                             <button onClick={discardChangesHandler} className={s.discard_btn} type="button">
                                                 DISCARD CHANGES

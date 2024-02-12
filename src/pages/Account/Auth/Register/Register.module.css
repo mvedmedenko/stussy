@@ -1,6 +1,5 @@
 .inner {
   display: grid;
-  /* grid-template-columns: 450px 450px; */
   grid-template-columns: repeat(12, 1fr);;
   gap: 138px;
   padding-top: 31px;
@@ -179,4 +178,21 @@ input[type="checkbox"]:checked + .checkbox::after {
 
 .btn_box { 
   margin-top: 42px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .inner {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 84px;
+    padding-bottom: 40px;
+  }
+
+  .login_box {
+    grid-column: auto;
+  }
+  
+  .register_box {
+    grid-column: auto;
+  }
 }
