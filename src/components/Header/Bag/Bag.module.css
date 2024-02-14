@@ -159,6 +159,10 @@
     left: 0;
 }
 
+.continue_btn_box {
+    width: 100%;
+}
+
 .continue_btn {
     width: 330px;
     height: 45px;
@@ -177,6 +181,10 @@
 }
 
 .checkout_btn {
+    width: 100%;
+}
+
+.checkout_btn button {
     cursor: pointer;
     width: 330px;
     height: 45px;
@@ -255,6 +263,16 @@
     }
 
     .button_box {
+        width: 100%;
+        padding-left: 0;
+        height: auto;
+    }
+
+    .checkout_btn button{
+        width: 100%;
+    }
+
+    .continue_btn {
         width: 100%;
     }
 

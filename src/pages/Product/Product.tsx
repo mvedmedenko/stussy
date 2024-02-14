@@ -60,7 +60,7 @@ const Product = () => {
         <div className={s.product}>
             <div className="container_images">
                 <div className={s.grid_container}>
-                    <div>
+                    <div className={s.img_container}>
                         {selectedItem.images.map((i: any, index: number) => {
                             return <div className={s.img_box} key={index}>
                                 <img src={i} alt="img" />

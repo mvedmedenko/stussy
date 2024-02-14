@@ -17,8 +17,8 @@
 }
 
 .img_container {
-    max-width: 690px;
-    max-height: 862.5px;
+    width: 100%;
+    object-fit: fill;
     margin-top: 20px;
 }
 

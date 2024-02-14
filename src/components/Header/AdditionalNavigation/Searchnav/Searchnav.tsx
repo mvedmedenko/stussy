@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks"
 import s from "./Searchnav.module.css"
-import { closeSearch } from "../../../redux/actions/searchActions"
-import search from "../../../assets/images/search.svg"
-import close from "../../../assets/images/close.svg"
+import { closeSearch } from "../../../../redux/actions/searchActions"
+import search from "../../../../assets/images/search.svg"
+import close from "../../../../assets/images/close.svg"
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 

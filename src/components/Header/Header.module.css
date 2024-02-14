@@ -191,7 +191,7 @@
     }
 
     .mobile_active {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -205,7 +205,7 @@
     }
 
     .navbar_mobile {
-      display: block;
+      display: none;
     }
 
   }

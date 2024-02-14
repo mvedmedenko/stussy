@@ -196,3 +196,9 @@ input[type="checkbox"]:checked + .checkbox::after {
     grid-column: auto;
   }
 }
+
+@media only screen and (max-width: 394px) {
+  .checkbox_label {
+    font-size: 10px;
+  }
+}

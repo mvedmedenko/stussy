@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import s from "./Shopnav.module.css"
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { openFilter, closeFilter } from "../../../redux/actions/filterActions";
-import arrow from "../../../assets/images/arrow.svg"
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
+import { openFilter, closeFilter } from "../../../../redux/actions/filterActions";
+import arrow from "../../../../assets/images/arrow.svg"
 
 const Shopnav = () => {
 

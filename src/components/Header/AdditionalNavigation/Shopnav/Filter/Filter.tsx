@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
-import { closeFilter } from "../../../../redux/actions/filterActions"
+import { closeFilter } from "../../../../../redux/actions/filterActions"
 import s from "./Filter.module.css"
-import { useAppDispatch } from "../../../../hooks/hooks"
+import { useAppDispatch } from "../../../../../hooks/hooks"
 import { useState } from "react"
 import { Formik, Field, Form } from 'formik';
 

@@ -121,13 +121,13 @@ const Bag = () => {
                     </div>
                 </div>
                 <div className={s.button_box}>
-                    <div>
+                    <div className={s.continue_btn_box}>
                         <button onClick={continueShippingHandler} className={cartItems.length! > 0 ? s.continue_btn : s.continue_btn_black}>CONTINUE SHOPPING</button>
                     </div>
                     {cartItems.length > 0
                         ?
-                        <div>
-                            <NavLink to="/checkout"><button className={s.checkout_btn}>CHECKOUT</button></NavLink>
+                        <div className={s.checkout_btn}> 
+                            <NavLink to="/checkout"><button>CHECKOUT</button></NavLink>
                         </div>
                         : null
                     }

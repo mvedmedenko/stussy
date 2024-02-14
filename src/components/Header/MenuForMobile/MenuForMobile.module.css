@@ -1,0 +1,59 @@
+.dropdown {
+    padding: 21px 0;
+    border-top: 1px solid rgb(245, 245, 245);
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.dropdown:last-child {
+    border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.dropdown_title {
+    font-size: 12px;
+    text-align: left;
+}
+
+.subtitle_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.arrow {
+    transform: rotate(90deg);
+    margin-left: 5px;
+    transition: .2s;
+}
+
+
+.arrow_active {
+    transform: rotate(180deg);
+    transition: .2s;   
+    margin-left: 5px;
+}
+
+.list {
+    padding-top: 10px;
+}
+
+
+.item {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.list a {
+    display: block;
+}
+
+.currency_box {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,23 +1,24 @@
 import s from "./Header.module.css"
 import Logo from "./Logo/Logo";
 import Navbar from "./Navbar/Navbar";
-import Shopnav from "./Shopnav/Shopnav";
-import Featuresnav from "./Featuresnav/Featuresnav";
-import Supportnav from "./Supportnav/Supportnav";
+import Shopnav from "./AdditionalNavigation/Shopnav/Shopnav";
+import Featuresnav from "./AdditionalNavigation/Featuresnav/Featuresnav";
+import Supportnav from "./AdditionalNavigation/Supportnav/Supportnav";
 import { useEffect, useState } from "react";
-import Searchnav from "./Searchnav/Searchnav";
+import Searchnav from "./AdditionalNavigation/Searchnav/Searchnav";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import Accountnav from "./Accountnav/Accountnav";
+import Accountnav from "./AdditionalNavigation/Accountnav/Accountnav";
 import { getFirebaseCart, getLocalStorageCart, openBag } from "../../redux/actions/cartActions";
 import Bag from "./Bag/Bag";
-import Productnav from "./Productnav/Productnav";
+import Productnav from "./AdditionalNavigation/Productnav/Productnav";
 import { closeSearch, openSearch } from "../../redux/actions/searchActions";
 import { closeFilter } from "../../redux/actions/filterActions";
-import Chaptersnav from "./Chaptersnav/Chaptersnav";
+import Chaptersnav from "./AdditionalNavigation/Chaptersnav/Chaptersnav";
 import { setNavigationActiveList } from "../../redux/actions/headerActions";
 import searchIcon from "../../assets/images/search.svg"
 import cartIcon from "../../assets/images/cart.svg"
 import closeIcon from "../../assets/images/close.svg"
+import MenuForMibile from "./MenuForMobile/MenuForMobile";
 
 const Header = () => {
 
@@ -28,6 +29,7 @@ const Header = () => {
     const cartItems = useAppSelector((state) => state.cartReducer.items)
     const userId = useAppSelector((state) => state.authReducer.user.uid)
     const navigationActiveList = useAppSelector((state) => state.headerReducer.navigationActiveList)
+
 
 
     const dispatch = useAppDispatch()
@@ -69,7 +71,7 @@ const Header = () => {
 
 
     const bagHandler = () => {
-        if(isMenu) {
+        if (isMenu) {
             setIsMenu(false)
         }
         if (!isBag) {
@@ -82,7 +84,7 @@ const Header = () => {
     }
 
     const searchHandler = () => {
-        if(isMenu) {
+        if (isMenu) {
             setIsMenu(false)
         }
 
@@ -135,7 +137,7 @@ const Header = () => {
                     <div className={s.burger}>
                         {isMenu
                             ?
-                                <div onClick={menuHandler} className={s.close}><img width="20px" height="20px" src={closeIcon} alt="X" /></div>
+                            <div onClick={menuHandler} className={s.close}><img width="20px" height="20px" src={closeIcon} alt="X" /></div>
                             :
                             <div onClick={menuHandler}>
                                 <div className={s.burger_line}></div>
@@ -148,33 +150,37 @@ const Header = () => {
             </div>
             <div className={s.bottom_list_wrapper}>
                 <div className={s.container}>
-                    <div className={s.bottom_list}>
-                        {((mouseOnLink === null && navigationActiveList === "shop" && !isSearch) || mouseOnLink === "shop"
-                            || (mouseOnLink === null && navigationActiveList === "main" && !isSearch)) && (
-                                <Shopnav />
-                            )}
+                    {!isMenu
+                        &&
+                        <div className={s.bottom_list}>
+                            {((mouseOnLink === null && navigationActiveList === "shop" && !isSearch) || mouseOnLink === "shop"
+                                || (mouseOnLink === null && navigationActiveList === "main" && !isSearch)) && (
+                                    <Shopnav />
+                                )}
 
-                        {((mouseOnLink === null && navigationActiveList === "features" && !isSearch) || mouseOnLink === "features") && (
-                            <Featuresnav />
-                        )}
-                        {((mouseOnLink === null && navigationActiveList === "support" && !isSearch) || mouseOnLink === "support") && (
-                            <Supportnav />
-                        )}
-                        {((mouseOnLink === null && isSearch === true) || mouseOnLink === "search") && (
-                            <Searchnav />
-                        )}
-                        {((navigationActiveList === "chapters" && !isSearch)) && (
-                            <Chaptersnav />
-                        )}
-                        {((navigationActiveList === "account" && isAuth === true && !isSearch)) && (
-                            <Accountnav />
-                        )}
-                        {((navigationActiveList === "product" && !isSearch)) && (
-                            <Productnav />
-                        )}
-                    </div>
+                            {((mouseOnLink === null && navigationActiveList === "features" && !isSearch) || mouseOnLink === "features") && (
+                                <Featuresnav />
+                            )}
+                            {((mouseOnLink === null && navigationActiveList === "support" && !isSearch) || mouseOnLink === "support") && (
+                                <Supportnav />
+                            )}
+                            {((mouseOnLink === null && isSearch === true) || mouseOnLink === "search") && (
+                                <Searchnav />
+                            )}
+                            {((navigationActiveList === "chapters" && !isSearch)) && (
+                                <Chaptersnav />
+                            )}
+                            {((navigationActiveList === "account" && isAuth === true && !isSearch)) && (
+                                <Accountnav />
+                            )}
+                            {((navigationActiveList === "product" && !isSearch)) && (
+                                <Productnav />
+                            )}
+                        </div>
+                    }
                 </div>
             </div>
+            {isMenu && <MenuForMibile isMenu={isMenu} setIsMenu={setIsMenu}/>}
             {isBag ? <Bag /> : null}
         </header>
     );

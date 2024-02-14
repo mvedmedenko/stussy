@@ -3,7 +3,7 @@ import s from "./Shop.module.css"
 import { NavLink, useLocation } from 'react-router-dom';
 import { getProducts } from '../../redux/actions/shopActions';
 import { setSelectedSize } from '../../redux/actions/shopActions';
-import Filter from '../../components/Header/Shopnav/Filter/Filter';
+import Filter from '../../components/Header/AdditionalNavigation/Shopnav/Filter/Filter';
 import Loader from '../../utils/Loader/Loader';
 import { setNavigationActiveList } from '../../redux/actions/headerActions';
 import { setSelectedItem } from '../../redux/actions/shopActions';

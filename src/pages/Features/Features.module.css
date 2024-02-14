@@ -10,8 +10,8 @@
 }
 
 .img_container {
-    max-width: 335px;
-    height: 236.26px;
+    width: 100%;
+    object-fit: fill;
     transition: .2s
 }
 

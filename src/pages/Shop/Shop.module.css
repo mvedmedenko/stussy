@@ -11,8 +11,8 @@
 }
 
 .img_container {
-    max-width: 350px;
-    height: 418.75px;
+    width: 100%;
+    object-fit: fill;
 }
 
 .img_container img {
@@ -62,33 +62,4 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-}
-
-@media only screen and (max-width: 520px) {
-    .shop {
-        padding-bottom: 40px;
-    }
-
-    .grid_container {
-        grid-template-columns: auto;
-    }
-
-    .img_container {
-        max-width: 475px;
-        height: 418.75px;
-    }
-}
-
-@media only screen and (max-width: 520px) {
-    .img_container {
-        max-width: 475px;
-        height: 375px;
-    }
-}
-
-@media only screen and (max-width: 430px) {
-    .img_container {
-        max-width: 475px;
-        height: 418.75px;
-    }
 }

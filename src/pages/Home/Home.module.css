@@ -33,7 +33,7 @@
 
 }
 
-@media only screen and (min-height: 1000px) {
+@media only screen and (min-height: 1000px) and (max-height: 1199px) {
     .image_container {
         height: 980px;
     }

@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { logoutUser } from "../../../redux/actions/authActions";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
+import { logoutUser } from "../../../../redux/actions/authActions";
 import { NavLink } from "react-router-dom";
 import s from "./Accountnav.module.css"
-import { setAccountNavigationActiveList } from "../../../redux/actions/headerActions";
-import { setNavigationActiveList } from "../../../redux/actions/headerActions";
+import { setAccountNavigationActiveList } from "../../../../redux/actions/headerActions";
+import { setNavigationActiveList } from "../../../../redux/actions/headerActions";
 
 const Accountnav = () => {
 
