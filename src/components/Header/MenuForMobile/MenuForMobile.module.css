@@ -1,3 +1,12 @@
+.menu_for_mobile {
+    position: absolute;
+    top: 59px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
 .dropdown {
     padding: 21px 0;
     border-top: 1px solid rgb(245, 245, 245);

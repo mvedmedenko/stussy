@@ -72,7 +72,7 @@ const Bag = () => {
                 </div>
                 <div className={s.items_box}>
                     {objectsArray.map((item: any) => {
-                        return <div className={isRequesting ? s.item_disabled : s.item}>
+                        return <div key={item.id} className={isRequesting ? s.item_disabled : s.item}>
                             <div className={s.img}>
                                 <img width="175px" height="218px" src={item.firstImg} alt="" />
                             </div>

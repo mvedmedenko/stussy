@@ -99,6 +99,10 @@ const Header = () => {
         if (isSearch) {
             dispatch(closeSearch())
         }
+
+        if(isMenu) {
+            setIsMenu(false)
+        }
     }
 
     return (
