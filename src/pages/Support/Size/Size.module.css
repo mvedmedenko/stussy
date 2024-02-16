@@ -78,13 +78,8 @@
 }
 
 
-/* @media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .inner {
     padding-bottom: 40px;
   }
-
-  .size_gide_inner {
-    overflow-x: scroll;
-    white-space: nowrap;
-  }
-} */
+}
