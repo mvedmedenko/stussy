@@ -8,6 +8,11 @@ export const setAccountNavigationActiveListAction = (text: string) => ({
     payload: text,
   });  
 
+export const setIsMenuAction = (condition: boolean) => ({
+    type: 'SET_IS_MENU',
+    payload: condition,
+  });  
+
   export const setNavigationActiveList = (name: string) => async (dispatch: any) => {
     sessionStorage.setItem('currentList', name);
     const sessionList = sessionStorage.getItem('currentList');
@@ -23,3 +28,7 @@ export const setAccountNavigationActiveListAction = (text: string) => ({
   export const setAccountNavigationActiveList = (text: string) => async (dispatch: any) => {
     dispatch(setAccountNavigationActiveListAction(text))
   };
+
+  export const setIsMenu = (condition: boolean) =>  (dispatch: any) => {
+    dispatch(setIsMenuAction(condition))
+  }

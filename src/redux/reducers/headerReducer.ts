@@ -1,11 +1,13 @@
 interface State {
     navigationActiveList: string,
     accountNavigationActiveList: string
+    isMenu: boolean
 }
 
 const initialState: State = {
     navigationActiveList: "main",
-    accountNavigationActiveList: "account"
+    accountNavigationActiveList: "account",
+    isMenu: false,
 };
 
 const headerReducer = (state = initialState, action: any) => {
@@ -20,6 +22,11 @@ const headerReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 accountNavigationActiveList: action.payload,
+            };
+        case 'SET_IS_MENU':
+            return {
+                ...state,
+                isMenu: action.payload,
             };
 
         default:

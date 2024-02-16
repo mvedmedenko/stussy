@@ -19,6 +19,7 @@ import searchIcon from "../../assets/images/search.svg"
 import cartIcon from "../../assets/images/cart.svg"
 import closeIcon from "../../assets/images/close.svg"
 import MenuForMibile from "./MenuForMobile/MenuForMobile";
+import { setIsMenu } from "../../redux/actions/headerActions";
 
 const Header = () => {
 
@@ -28,6 +29,7 @@ const Header = () => {
     const isFilter = useAppSelector((state) => state.filterReducer.isFilter)
     const cartItems = useAppSelector((state) => state.cartReducer.items)
     const userId = useAppSelector((state) => state.authReducer.user.uid)
+    const isMenu = useAppSelector((state) => state.headerReducer.isMenu)
     const navigationActiveList = useAppSelector((state) => state.headerReducer.navigationActiveList)
 
 
@@ -35,7 +37,6 @@ const Header = () => {
     const dispatch = useAppDispatch()
     const [mouseOnLink, setMouseOnLink] = useState<string | null>(null)
     const [subtotalCartItems, setSubtotalCartItems] = useState<number>(0)
-    const [isMenu, setIsMenu] = useState<boolean>(false)
 
 
     useEffect(() => {
@@ -80,7 +81,7 @@ const Header = () => {
     }
 
     const menuHandler = () => {
-        setIsMenu(!isMenu)
+        dispatch(setIsMenu(!isMenu))
     }
 
     const searchHandler = () => {
@@ -185,7 +186,7 @@ const Header = () => {
                     }
                 </div>
             </div>
-            {isMenu && <MenuForMibile isMenu={isMenu} setIsMenu={setIsMenu}/>}
+            {isMenu && <MenuForMibile isMenu={isMenu} setIsMenu={menuHandler}/>}
             {isBag ? <Bag /> : null}
         </header>
     );

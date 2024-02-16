@@ -28,6 +28,8 @@ import Checkout from "./pages/Checkout/Checkout";
 function App() {
     const dispatch = useAppDispatch()
     const isSearch = useAppSelector((state) => state.searchReducer.isSearch)
+    const isBag = useAppSelector((state) => state.cartReducer.isBag)
+    const isMenu = useAppSelector((state) => state.headerReducer.isMenu)
 
     useEffect(() => {
         dispatch(checkAuthStatus())
@@ -37,43 +39,43 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className={s.inner}>
-                <div className={s.header}>
-                    <Header />
+                <div className={s.inner}>
+                    <div className={s.header}>
+                        <Header />
+                    </div>
+                    <div className={isBag || isMenu ? s.no_scroll : s.main}>
+                        {isSearch ? <Search /> : null}
+                        <Routes>
+                            <Route path="/stussy" element={<Home />} />
+                            <Route path="/collections/*" element={<Shop />} />
+                            <Route path="/blogs" element={<Features />} />
+                            <Route path="/account/login" element={<Login />} />
+                            <Route path="/account/register" element={<Register />} />
+                            <Route path="/pages/accessibilitys" element={<Accessibilitys />} />
+                            <Route path="/pages/careers" element={<Careers />} />
+                            <Route path="/pages/legal" element={<Legal />} />
+                            <Route path="/pages/size-guide" element={<Size />} />
+                            <Route path="/pages/shipping-returns" element={<Returns />} />
+                            <Route path="/pages/customer-support" element={<Customer />} />
+                            <Route path="/blogs/all" element={<Features />} />
+                            <Route path="/blogs/features/tagged/Collaborations" element={<Features />} />
+                            <Route path="/blogs/features/tagged/Collections" element={<Features />} />
+                            <Route path="/blogs/features/tagged/Features" element={<Features />} />
+                            <Route path="/blogs/features/tagged/Lookbooks" element={<Features />} />
+                            <Route path="/blogs/features/:id" element={<Blog />} />
+                            <Route path="/collections/all/products/:id" element={<Product />} />
+                            <Route path="/blogs/chapters" element={<Chapters />} />
+                            <Route path="/checkout" element={<Checkout />} />
+                            <Route element={<PrivateRoutes />}>
+                                <Route path="/account" element={<Account />} />
+                                <Route path="/account/addresses" element={<Address />} />
+                            </Route>
+                        </Routes>
+                    </div>
+                    <div className={s.footer}>
+                        <Footer />
+                    </div>
                 </div>
-                <div className={s.main}>
-                    {isSearch ? <Search /> : null}
-                    <Routes>
-                        <Route path="/stussy" element={<Home />} />
-                        <Route path="/collections/*" element={<Shop />} />
-                        <Route path="/blogs" element={<Features />} />
-                        <Route path="/account/login" element={<Login />} />
-                        <Route path="/account/register" element={<Register />} />
-                        <Route path="/pages/accessibilitys" element={<Accessibilitys />} />
-                        <Route path="/pages/careers" element={<Careers />} />
-                        <Route path="/pages/legal" element={<Legal />} />
-                        <Route path="/pages/size-guide" element={<Size />} />
-                        <Route path="/pages/shipping-returns" element={<Returns />} />
-                        <Route path="/pages/customer-support" element={<Customer />} />
-                        <Route path="/blogs/all" element={<Features />} />
-                        <Route path="/blogs/features/tagged/Collaborations" element={<Features />} />
-                        <Route path="/blogs/features/tagged/Collections" element={<Features />} />
-                        <Route path="/blogs/features/tagged/Features" element={<Features />} />
-                        <Route path="/blogs/features/tagged/Lookbooks" element={<Features />} />
-                        <Route path="/blogs/features/:id" element={<Blog />} />
-                        <Route path="/collections/all/products/:id" element={<Product />} />
-                        <Route path="/blogs/chapters" element={<Chapters />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                        <Route element={<PrivateRoutes />}>
-                            <Route path="/account" element={<Account />} />
-                            <Route path="/account/addresses" element={<Address />} />
-                        </Route>
-                    </Routes>
-                </div>
-                <div className={s.footer}>
-                    <Footer />
-                </div>
-            </div>
         </BrowserRouter>
     );
 }

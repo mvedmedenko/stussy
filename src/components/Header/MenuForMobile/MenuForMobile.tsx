@@ -8,7 +8,7 @@ import Country from "../../Footer/Bottomfooter/Country/Country"
 
 type PropsTypes = {
     isMenu: boolean
-    setIsMenu: (condition: boolean) => void
+    setIsMenu: () => void
 }
 
 
@@ -22,7 +22,7 @@ const MenuForMibile = (props: PropsTypes) => {
 
     const linkHandler = (text: string) => {
         dispatch(setNavigationActiveList(text))
-        props.setIsMenu(false)
+        props.setIsMenu()
     }
 
     const currencyHandler = () => {
