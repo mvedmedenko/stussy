@@ -44,6 +44,7 @@ const Register: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const user = useAppSelector(state => state.authReducer.isAuth);
+    const error = useAppSelector(state => state.authReducer.error)
     const navigate = useNavigate()
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
     const [formValues, setFormValues] = useState<FormData>(initialValues);
@@ -160,6 +161,7 @@ const Register: React.FC = () => {
                                         />
                                         <label className={`${s.label} ${fieldFocus !== "password" && values.password.length > 0 ? s.label_animated : ''} ${fieldFocus === 'password' ? s.only_focus : ''}`}>PASSWORD</label>
                                     </div>
+                                    {typeof error === "string" && <div className={s.error}>{error}</div>}
                                     <label className={s.checkbox_label}>
                                         <Field
                                             type="checkbox"

@@ -32,18 +32,19 @@ const validationSchema = Yup.object().shape({
 const Login: React.FC = () => {
 
     const user = useAppSelector(state => state.authReducer.isAuth);
+    const error = useAppSelector(state => state.authReducer.error)
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const [isForgetPassword, setIsForgetPassword] = useState<boolean>(false)
     const [isValidForm, setIsValidForm] = useState<boolean>(false);
     const [fieldFocus, setFieldFocus] = useState<string>("");
 
-    const handleFocus = (fieldName:string) => {
-      setFieldFocus(fieldName)
+    const handleFocus = (fieldName: string) => {
+        setFieldFocus(fieldName)
     };
-  
+
     const handleBlur = (fieldName: string) => {
-      setFieldFocus(fieldName);
+        setFieldFocus(fieldName);
     };
 
     const handleLogin = (values: FormData, { setSubmitting }: FormikHelpers<FormData>) => {
@@ -69,6 +70,13 @@ const Login: React.FC = () => {
 
     return (
         <div className={s.login}>
+            <div className={s.info_account}>
+            <span className={s.info_text}>To gain access, you can utilize the login credentials for authentication below.</span>
+                <div className={s.access_box}>
+                    <div><span>LOGIN:</span> test@gmail.com</div>
+                    <div><span>PASSWORD:</span> 12345678</div>
+                </div>
+            </div>
             <div className="container">
                 <div className={s.inner}>
                     <div className={s.login_box}>
@@ -128,8 +136,9 @@ const Login: React.FC = () => {
                                         />
                                         <label className={`${s.label} ${fieldFocus !== "password" && values.password.length > 0 ? s.label_animated : ''} ${fieldFocus === 'password' ? s.only_focus : ''}`}>PASSWORD</label>
                                     </div>
+                                    {typeof error === "string" && <div className={s.error}>{error}</div>}
                                     <div className={s.btn_box}>
-                                        <button 
+                                        <button
                                             type="submit"
                                             className={s.signin_btn}
                                             disabled={isSubmitting || !isValidForm}>

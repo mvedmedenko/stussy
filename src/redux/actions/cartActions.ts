@@ -70,8 +70,10 @@ export const addToFirebaseCart = (selectedSize: string, newObj: any, userId: str
     const newItem = { size: selectedSize, amount: 1, ...newObj };
 
     const existingItemKey = Object.keys(cartData).find(
-      (key) => cartData[key].productId === newItem.productId && cartData[key].size === newItem.size
+      (key) => cartData[key].id === newItem.productId && cartData[key].size === newItem.size
     );
+
+    console.log(existingItemKey)
 
     if (existingItemKey) {
       cartData[existingItemKey].amount += 1;
@@ -153,8 +155,6 @@ export const decrementFirebaseCartItem = (userId: string, itemId: string, itemSi
     const cartItemRef = ref(database, `carts/${userId}/items`);
     const cartItemSnapshot = await get(cartItemRef);
     const currentAmount = cartItemSnapshot.val();
-    console.log(currentAmount);
-    console.log(itemId);
 
     if (currentAmount !== null) {
       const itemKeys = Object.keys(currentAmount);
