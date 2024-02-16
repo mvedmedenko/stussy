@@ -250,7 +250,6 @@ export const setAddressAsDefault = (userId: string, addressId: string) => async 
             dispatch(setAddressAsDefaultSuccessAction(existingAddressDefaultTrue.id, addressId));
         } else {
             console.log('Existing default address not found');
-            // ...
         }
     } catch (error) {
         console.error('Error setting address as default:', error);

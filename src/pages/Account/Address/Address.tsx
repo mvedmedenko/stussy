@@ -121,7 +121,7 @@ const Address = () => {
     }
 
     const editAddressHandler = (editingAddress: any) => {
-        setFormValues({ ...editingAddress, isDefault: false })
+        setFormValues({ ...editingAddress })
         setIsEditingAddress(true)
         if (isAddingAddress === true) {
             setIsAddingAddress(false)
@@ -327,16 +327,19 @@ const Address = () => {
                                             </div>
                                         </div>
 
-                                        <label className={s.checkbox_label}>
-                                            <Field
-                                                type="checkbox"
-                                                name="isDefault"
-                                                onChange={handleCheckboxChange}
-                                                checked={formValues.isDefault}
-                                            />
-                                            <span className={s.checkbox}></span>
-                                            SET AS DEFAULT ADDRESS
-                                        </label>
+                                        {!isEditingAddress
+                                            &&
+                                            <label className={s.checkbox_label}>
+                                                <Field
+                                                    type="checkbox"
+                                                    name="isDefault"
+                                                    onChange={handleCheckboxChange}
+                                                    checked={formValues.isDefault}
+                                                />
+                                                <span className={s.checkbox}></span>
+                                                SET AS DEFAULT ADDRESS
+                                            </label>
+                                        }
 
                                         <div className={s.btn_box}>
                                             {isAddingAddress && <button className={s.save_btn} type="submit" disabled={!isValidForm || isSubmitting}>SAVE ADDRESS</button>}

@@ -14,7 +14,7 @@ const Logo = () => {
 
     return (
         <div onClick={() => onClickHandler("main")} className={s.logo}>
-            <NavLink to="/"><img alt="LOGO" src={logo} width="56px" height="56px"/></NavLink>
+            <NavLink to="/stussy"><img alt="LOGO" src={logo} width="56px" height="56px"/></NavLink>
         </div>
     );
 };

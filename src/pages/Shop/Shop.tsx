@@ -56,7 +56,7 @@ const Shop = () => {
             <div className="container_images">
                 <div className={s.grid_container}>
                     {products.map((i: any) => {
-                        if (i.collection === pathSplit[2] || pathSplit[2] === "all") {
+                        if (i.collection === pathSplit[2] || pathSplit[2] === "all" || pathSplit[2] === "new") {
                             return (
                                 <NavLink
                                     onMouseEnter={() => setItemHower(i.id)}

@@ -61,9 +61,10 @@
     .filter_box {
         background-color: #fff;
         padding-left: 20px;
+        margin-left: 80px;
     }
 
-    .list {
+    /* .list {
         padding-right: 80px;
-    }
+    } */
 }

@@ -44,7 +44,7 @@ function App() {
                 <div className={s.main}>
                     {isSearch ? <Search /> : null}
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/stussy" element={<Home />} />
                         <Route path="/collections/*" element={<Shop />} />
                         <Route path="/blogs" element={<Features />} />
                         <Route path="/account/login" element={<Login />} />
