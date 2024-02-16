@@ -68,12 +68,19 @@ button {
  } 
 
 
-
  select {
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
    background-color: #fff;
    border-radius: 0;
  }
 
  input {
+  border-radius: 0;
+ }
+
+ textarea {
   border-radius: 0;
  }
