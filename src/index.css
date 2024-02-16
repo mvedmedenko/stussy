@@ -49,6 +49,10 @@ li {
   margin: 0;
 }
 
+button {
+  color: #000;
+}
+
 .container_images {
     max-width: 1400px;
     height: 100%;
