@@ -250,7 +250,7 @@
 
     .img_box img {
         object-fit: contain;
-        width: 450px;
+        width: 350px;
     }
 
     .img_box:not(:last-child) {
@@ -282,6 +282,5 @@
 @media only screen and (min-width: 765px) and (max-width: 1025px) {
     .img_box img {
         object-fit: contain;
-        max-width: 450px;
     }
 }
