@@ -85,6 +85,6 @@ button {
   border-radius: 0;
  }
 
- input[search] {
+ input[type="search"] {
   background-color: #fff;
  }
