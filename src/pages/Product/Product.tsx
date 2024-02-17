@@ -16,6 +16,7 @@ const Product = () => {
     const userId = useAppSelector((state) => state.authReducer.user.uid)
     const selectedItem = useAppSelector((state) => state.shopReducer.selectedItem)
     const selectedSize = useAppSelector((state) => state.shopReducer.selectedSize)
+    const cartItems = useAppSelector((state) => state.cartReducer.items)
     const [isSelectedSizeEmpty, setIsSelectedSizeEmpty] = useState<boolean | null>(null)
     const [open, setOpen] = useState<string>("")
 
@@ -191,7 +192,7 @@ const Product = () => {
                                     <button>{isSelectedSizeEmpty ? "SELECT A SIZE" : "ADD TO BAG"}</button>
                                 </div>
                                 <div className={s.checkout_button}>
-                                    <NavLink to="/checkout"><button>CHECKOUT</button></NavLink>
+                                    <NavLink to="/checkout"><button disabled={cartItems < 1}>CHECKOUT</button></NavLink>
                                 </div>
                             </div>
                         </div>

@@ -14,8 +14,8 @@ interface FormData {
 }
 
 const initialValues: FormData = {
-    email: '',
-    password: '',
+    email: 'test@gmail.com',
+    password: '12345678',
 };
 
 const validationSchema = Yup.object().shape({
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const [isForgetPassword, setIsForgetPassword] = useState<boolean>(false)
-    const [isValidForm, setIsValidForm] = useState<boolean>(false);
+    const [isValidForm, setIsValidForm] = useState<boolean>(true);
     const [fieldFocus, setFieldFocus] = useState<string>("");
 
     const handleFocus = (fieldName: string) => {
@@ -70,13 +70,6 @@ const Login: React.FC = () => {
 
     return (
         <div className={s.login}>
-            <div className={s.info_account}>
-            <span className={s.info_text}>To gain access, you can utilize the login credentials for authentication below.</span>
-                <div className={s.access_box}>
-                    <div><span>LOGIN:</span> test@gmail.com</div>
-                    <div><span>PASSWORD:</span> 12345678</div>
-                </div>
-            </div>
             <div className="container">
                 <div className={s.inner}>
                     <div className={s.login_box}>

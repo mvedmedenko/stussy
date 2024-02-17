@@ -84,3 +84,7 @@ button {
  textarea {
   border-radius: 0;
  }
+
+ input[search] {
+  background-color: #fff;
+ }

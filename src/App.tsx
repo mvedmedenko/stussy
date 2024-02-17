@@ -30,6 +30,7 @@ function App() {
     const isSearch = useAppSelector((state) => state.searchReducer.isSearch)
     const isBag = useAppSelector((state) => state.cartReducer.isBag)
     const isMenu = useAppSelector((state) => state.headerReducer.isMenu)
+    const isFilter = useAppSelector((state) => state.filterReducer.isFilter)
 
     useEffect(() => {
         dispatch(checkAuthStatus())
@@ -43,7 +44,7 @@ function App() {
                     <div className={s.header}>
                         <Header />
                     </div>
-                    <div className={isBag || isMenu ? s.no_scroll : s.main}>
+                    <div className={isBag || isMenu || isFilter ? s.no_scroll : s.main}>
                         {isSearch ? <Search /> : null}
                         <Routes>
                             <Route path="/stussy" element={<Home />} />
