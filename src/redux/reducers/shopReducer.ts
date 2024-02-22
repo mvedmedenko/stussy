@@ -1,5 +1,7 @@
+import { ProductDetails } from "../../types/types";
+
 interface State {
-    products: any[];
+    products: ProductDetails[];
     isFetching: boolean;
     error: string | null;
     selectedSize: string;

@@ -1,7 +1,8 @@
+import { addressData } from "../../types/types";
 
 
 interface State {
-    addresses: any[];
+    addresses: addressData[];
     error: null | string;
 }
 

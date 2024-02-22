@@ -1,7 +1,9 @@
+import { ProductDetails } from "../../types/types";
+
 interface State {
     selectedSize: string,
     isBag: boolean
-    items: any
+    items: ProductDetails[]
     isRequesting: boolean
 }
 

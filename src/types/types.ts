@@ -11,3 +11,17 @@ export type addressData = {
     secondAddress: string
     stateOrProvince: string
 }
+
+export type ProductDetails = {
+    amount: number;
+    collection: string;
+    color: string;
+    details: string[];
+    firstImg: string;
+    id: string;
+    images: string[];
+    price: string;
+    secondImg: string;
+    size: string;
+    title: string;
+  };

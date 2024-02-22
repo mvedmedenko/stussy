@@ -2,7 +2,7 @@ import { database } from "../../lib/firebase/firebase"
 import { ref, push, get, remove, set, update } from "firebase/database";
 import { addressData } from "../../types/types";
 
-const getUserAddressesSuccessAction = (addresses: any[]) => ({
+const getUserAddressesSuccessAction = (addresses: any) => ({
     type: "GET_USER_ADDRESSES_SUCCESS",
     payload: addresses,
 });
