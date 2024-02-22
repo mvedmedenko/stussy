@@ -31,7 +31,6 @@ const MenuForMibile = (props: PropsTypes) => {
 
     return (
         <div className={s.menu_for_mobile}>
-            <div className="container">
                 <div className={s.dropdown} onClick={() => setOpen(open === "shop" ? "" : "shop")}>
                     <div className={s.subtitle_box}>
                         <h3 className={s.dropdown_title}>SHOP</h3>
@@ -119,7 +118,6 @@ const MenuForMibile = (props: PropsTypes) => {
                         <div>CHANGE</div>
                     </div>
                 </div>
-            </div>
             {isCurrency && <Country setIsCountry={setIsCurrency}/>}
         </div>
     )
